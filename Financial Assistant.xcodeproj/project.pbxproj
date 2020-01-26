@@ -80,6 +80,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		014916B723DD9D3B005D4C8F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		014916B823DD9D46005D4C8F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				01A58D7323DCADFA004F124C /* FirstViewController.swift */,
+				01A58D7523DCADFA004F124C /* SecondViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		014916B923DD9D56005D4C8F /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				01A58D7723DCADFA004F124C /* Main.storyboard */,
+				01A58D7F23DCADFC004F124C /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		014916BA23DD9D5F005D4C8F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		014916BB23DD9D6A005D4C8F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		014916BC23DD9D71005D4C8F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
+		014916BD23DD9D7E005D4C8F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				01A58D6F23DCADFA004F124C /* AppDelegate.swift */,
+				01A58D7123DCADFA004F124C /* SceneDelegate.swift */,
+				01A58D8223DCADFC004F124C /* Info.plist */,
+				01A58D7A23DCADFA004F124C /* Financial_Assistant.xcdatamodeld */,
+			);
+			name = "Support Files";
+			sourceTree = "<group>";
+		};
+		014916BE23DD9F25005D4C8F /* Storage Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Storage Manager";
+			sourceTree = "<group>";
+		};
 		01A58D6323DCADFA004F124C = {
 			isa = PBXGroup;
 			children = (
@@ -103,15 +167,15 @@
 		01A58D6E23DCADFA004F124C /* Financial Assistant */ = {
 			isa = PBXGroup;
 			children = (
-				01A58D6F23DCADFA004F124C /* AppDelegate.swift */,
-				01A58D7123DCADFA004F124C /* SceneDelegate.swift */,
-				01A58D7323DCADFA004F124C /* FirstViewController.swift */,
-				01A58D7523DCADFA004F124C /* SecondViewController.swift */,
-				01A58D7723DCADFA004F124C /* Main.storyboard */,
+				014916B723DD9D3B005D4C8F /* View */,
+				014916B923DD9D56005D4C8F /* Storyboards */,
+				014916B823DD9D46005D4C8F /* Controllers */,
+				014916BA23DD9D5F005D4C8F /* Model */,
+				014916BE23DD9F25005D4C8F /* Storage Manager */,
+				014916BB23DD9D6A005D4C8F /* Extensions */,
+				014916BC23DD9D71005D4C8F /* Fonts */,
+				014916BD23DD9D7E005D4C8F /* Support Files */,
 				01A58D7D23DCADFC004F124C /* Assets.xcassets */,
-				01A58D7F23DCADFC004F124C /* LaunchScreen.storyboard */,
-				01A58D8223DCADFC004F124C /* Info.plist */,
-				01A58D7A23DCADFA004F124C /* Financial_Assistant.xcdatamodeld */,
 			);
 			path = "Financial Assistant";
 			sourceTree = "<group>";
