@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  WalletVC.swift
 //  Financial Assistant
 //
 //  Created by Andrew on 1/25/20.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
+class WalletVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("On first")
+        print("On second")
     }
 
 

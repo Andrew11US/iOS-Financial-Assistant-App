@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  OverviewVC.swift
 //  Financial Assistant
 //
 //  Created by Andrew on 1/25/20.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class OverviewVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("On second")
+        print("On first")
     }
 
 
