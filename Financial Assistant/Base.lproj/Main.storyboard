@@ -144,11 +144,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pvb-Oe-7Qm">
+                                <rect key="frame" x="42" y="27" width="34" height="30"/>
+                                <state key="normal" title="back"/>
+                                <connections>
+                                    <action selector="backTapped:" destination="D4e-dq-OIH" eventType="touchUpInside" id="CLh-M9-SeQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="CfQ-JV-XSS" firstAttribute="centerY" secondItem="fC8-jT-yGc" secondAttribute="centerY" id="C9Y-cV-rbS"/>
+                            <constraint firstItem="Pvb-Oe-7Qm" firstAttribute="leading" secondItem="fC8-jT-yGc" secondAttribute="leadingMargin" constant="26" id="Lv2-zl-YgJ"/>
                             <constraint firstItem="CfQ-JV-XSS" firstAttribute="centerX" secondItem="fC8-jT-yGc" secondAttribute="centerX" id="ecC-rr-pQC"/>
+                            <constraint firstItem="Pvb-Oe-7Qm" firstAttribute="top" secondItem="fC8-jT-yGc" secondAttribute="topMargin" constant="27" id="ny7-a4-7M6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="e5o-Ne-LHd"/>
                     </view>
