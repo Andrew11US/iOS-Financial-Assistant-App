@@ -15,6 +15,8 @@
 		013C84C223F4AB220007B7EB /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84C123F4AB220007B7EB /* Enums.swift */; };
 		013C84C423F4AD770007B7EB /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84C323F4AD770007B7EB /* Factory.swift */; };
 		013C84C623F4AF600007B7EB /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84C523F4AF600007B7EB /* TestData.swift */; };
+		013C84C823F4B3C00007B7EB /* OverviewTransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84C723F4B3C00007B7EB /* OverviewTransactionCell.swift */; };
+		013C84CA23F4B3D20007B7EB /* TransactionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84C923F4B3D20007B7EB /* TransactionCell.swift */; };
 		01A58D7023DCADFA004F124C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A58D6F23DCADFA004F124C /* AppDelegate.swift */; };
 		01A58D7223DCADFA004F124C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A58D7123DCADFA004F124C /* SceneDelegate.swift */; };
 		01A58D7423DCADFA004F124C /* OverviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A58D7323DCADFA004F124C /* OverviewVC.swift */; };
@@ -57,6 +59,8 @@
 		013C84C123F4AB220007B7EB /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		013C84C323F4AD770007B7EB /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		013C84C523F4AF600007B7EB /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		013C84C723F4B3C00007B7EB /* OverviewTransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTransactionCell.swift; sourceTree = "<group>"; };
+		013C84C923F4B3D20007B7EB /* TransactionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCell.swift; sourceTree = "<group>"; };
 		01A58D6C23DCADFA004F124C /* Financial Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Financial Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01A58D6F23DCADFA004F124C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01A58D7123DCADFA004F124C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 		014916B723DD9D3B005D4C8F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				013C84C723F4B3C00007B7EB /* OverviewTransactionCell.swift */,
+				013C84C923F4B3D20007B7EB /* TransactionCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -368,8 +374,10 @@
 				013C84C423F4AD770007B7EB /* Factory.swift in Sources */,
 				01A58D7C23DCADFA004F124C /* Financial_Assistant.xcdatamodeld in Sources */,
 				01A58D7623DCADFA004F124C /* WalletVC.swift in Sources */,
+				013C84CA23F4B3D20007B7EB /* TransactionCell.swift in Sources */,
 				01A58D7423DCADFA004F124C /* OverviewVC.swift in Sources */,
 				013C84C023F4AA0D0007B7EB /* StorageManager.swift in Sources */,
+				013C84C823F4B3C00007B7EB /* OverviewTransactionCell.swift in Sources */,
 				013C84BA23F4A96C0007B7EB /* Wallet.swift in Sources */,
 				01D891D823EE1B9F0009FD5A /* PlanningVC.swift in Sources */,
 				013C84BC23F4A9A30007B7EB /* DataExtensions.swift in Sources */,
@@ -555,7 +563,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -575,7 +583,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
