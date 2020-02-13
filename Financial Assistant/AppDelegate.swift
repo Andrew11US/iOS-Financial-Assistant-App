@@ -65,6 +65,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
+    
+    // CoreData container for iOS 12 and earlier versions
+    lazy var persistentContainer2: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Financial_Assistant")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
 
     // MARK: - Core Data Saving support
 
@@ -84,7 +95,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         } else {
-            // Fallback on earlier versions
+            // iOS 12 and earlier versions support
+            let context = persistentContainer2.viewContext
+            if context.hasChanges {
+                do {
+                    try context.save()
+                } catch {
+                    let nserror = error as NSError
+                    fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
+            }
         }
 
     }

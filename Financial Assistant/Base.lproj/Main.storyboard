@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -8,12 +8,65 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Add TransactionVC-->
+        <scene sceneID="R6f-aX-cl4">
+            <objects>
+                <viewController id="2CM-xM-R8v" customClass="AddTransactionVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RvA-LA-O4P">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Wfd-Sh-NQ9">
+                                <rect key="frame" x="0.0" y="110" width="375" height="138"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IrM-5f-h76">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jvw-8q-Shr">
+                                        <rect key="frame" x="0.0" y="52" width="375" height="34"/>
+                                        <state key="normal" title="save"/>
+                                        <connections>
+                                            <action selector="saveWithSender:" destination="2CM-xM-R8v" eventType="touchUpInside" id="tFE-Gl-QJ4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QUX-BC-E60">
+                                        <rect key="frame" x="0.0" y="104" width="375" height="34"/>
+                                        <state key="normal" title="retrieve"/>
+                                        <connections>
+                                            <action selector="retrieveWithSender:" destination="2CM-xM-R8v" eventType="touchUpInside" id="ivs-5h-Vnt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Wfd-Sh-NQ9" firstAttribute="leading" secondItem="m3i-Za-f8n" secondAttribute="leading" id="3Ok-Io-IhK"/>
+                            <constraint firstItem="Wfd-Sh-NQ9" firstAttribute="centerX" secondItem="RvA-LA-O4P" secondAttribute="centerX" id="OW4-H2-8kQ"/>
+                            <constraint firstItem="m3i-Za-f8n" firstAttribute="trailing" secondItem="Wfd-Sh-NQ9" secondAttribute="trailing" id="jnq-To-Dqw"/>
+                            <constraint firstItem="Wfd-Sh-NQ9" firstAttribute="centerY" secondItem="RvA-LA-O4P" secondAttribute="centerY" constant="-200" id="ln5-ov-HLK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="m3i-Za-f8n"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="au3-Wl-ieU"/>
+                    <connections>
+                        <outlet property="retrieve" destination="QUX-BC-E60" id="fFu-wV-DHD"/>
+                        <outlet property="save" destination="Jvw-8q-Shr" id="Cy5-dY-iq8"/>
+                        <outlet property="textfield" destination="IrM-5f-h76" id="JsS-9f-EfT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zd5-DU-KNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="958" y="-777"/>
+        </scene>
         <!--Overview-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="OverviewVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Vd-8L-q59">
@@ -24,58 +77,60 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQz-91-SOe">
-                                <rect key="frame" x="288" y="30" width="57" height="30"/>
+                                <rect key="frame" x="288" y="74" width="57" height="30"/>
                                 <state key="normal" title="Settings">
                                     <color key="titleColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="D4e-dq-OIH" kind="popoverPresentation" popoverAnchorView="KQz-91-SOe" id="q9o-7p-2dQ">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <segue destination="D4e-dq-OIH" kind="show" id="q9o-7p-2dQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uho-03-i1c">
-                                <rect key="frame" x="133" y="568" width="109" height="30"/>
+                                <rect key="frame" x="117.66666666666669" y="679" width="140" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="109" id="4uv-fM-q7u"/>
+                                    <constraint firstAttribute="width" constant="140" id="4uv-fM-q7u"/>
                                     <constraint firstAttribute="height" constant="30" id="WQN-uL-gpi"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Add transaction"/>
+                                <connections>
+                                    <segue destination="2CM-xM-R8v" kind="presentation" modalPresentationStyle="automatic" id="oXJ-hm-Ono"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yu1-XK-x8j">
-                                <rect key="frame" x="16" y="35" width="137" height="41"/>
+                                <rect key="frame" x="16" y="64" width="137" height="40.666666666666657"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                 <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kc5-Ie-scs">
-                                <rect key="frame" x="16" y="158" width="343" height="402"/>
+                                <rect key="frame" x="16" y="158" width="343" height="513"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OverviewCell" id="lIX-ao-eTt" customClass="OverviewTransactionCell" customModule="Financial_Assistant" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="343" height="43"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lIX-ao-eTt" id="oaL-H2-Lqm">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="42.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="7uK-pG-97a">
-                                                    <rect key="frame" x="15" y="11" width="313" height="21"/>
+                                                    <rect key="frame" x="15" y="11.000000000000002" width="313" height="20.666666666666671"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmh-1O-4m2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="104.5" height="21"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="20.666666666666668"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ7-9e-mro">
-                                                            <rect key="frame" x="104.5" y="0.0" width="104" height="21"/>
+                                                            <rect key="frame" x="104.33333333333334" y="0.0" width="104.33333333333334" height="20.666666666666668"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgR-VW-vTI">
-                                                            <rect key="frame" x="208.5" y="0.0" width="104.5" height="21"/>
+                                                            <rect key="frame" x="208.66666666666666" y="0.0" width="104.33333333333334" height="20.666666666666668"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                             <nil key="highlightedColor"/>
@@ -109,7 +164,7 @@
                             <constraint firstItem="6Vd-8L-q59" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="PUZ-ac-Ctk"/>
                             <constraint firstItem="Uho-03-i1c" firstAttribute="top" secondItem="kc5-Ie-scs" secondAttribute="bottom" constant="8" id="RVm-Zx-wED"/>
                             <constraint firstItem="KQz-91-SOe" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="30" id="Vq5-3Q-Gvh"/>
-                            <constraint firstItem="yu1-XK-x8j" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="35" id="W9i-bB-Qnr"/>
+                            <constraint firstItem="yu1-XK-x8j" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" constant="20" id="W9i-bB-Qnr"/>
                             <constraint firstItem="yu1-XK-x8j" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" constant="16" id="XvO-oU-nji"/>
                             <constraint firstItem="kc5-Ie-scs" firstAttribute="top" secondItem="6Vd-8L-q59" secondAttribute="bottom" constant="8" id="YHr-jz-keN"/>
                             <constraint firstItem="PQr-Ze-W5v" firstAttribute="trailing" secondItem="kc5-Ie-scs" secondAttribute="trailing" constant="16" id="eKb-ng-aRp"/>
@@ -125,18 +180,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241378"/>
+            <point key="canvasLocation" x="958" y="0.0"/>
         </scene>
         <!--Transactions-->
         <scene sceneID="eOQ-W3-aQM">
             <objects>
                 <viewController id="Ucf-zc-7FT" customClass="TransactionsVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ios-zz-d0d">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Transactions" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="GfE-e0-RAg">
-                                <rect key="frame" x="90" y="312" width="195" height="43"/>
+                                <rect key="frame" x="90" y="384.66666666666669" width="195" height="43"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="highlightedColor"/>
@@ -154,18 +209,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uUs-JF-ysp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1884" y="0.0"/>
+            <point key="canvasLocation" x="2982" y="0.0"/>
         </scene>
         <!--PlanningVC-->
         <scene sceneID="weT-1F-Oo9">
             <objects>
                 <viewController id="5Um-Zf-qs4" customClass="PlanningVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U23-tF-ZXG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Planning" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vu3-Wz-iL8">
-                                <rect key="frame" x="121" y="312" width="133" height="43"/>
+                                <rect key="frame" x="121" y="384.66666666666669" width="133" height="43"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="highlightedColor"/>
@@ -181,18 +236,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pw4-aX-ps3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3926" y="0.0"/>
+            <point key="canvasLocation" x="5052" y="0.0"/>
         </scene>
         <!--StatisticsVC-->
         <scene sceneID="gMW-0I-plm">
             <objects>
                 <viewController id="HA4-aT-qIM" customClass="StatisticsVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vHZ-IA-gjd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Statistics" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="e4h-hO-LOk">
-                                <rect key="frame" x="116.5" y="312" width="142" height="43"/>
+                                <rect key="frame" x="116.66666666666669" y="384.66666666666669" width="142" height="43"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="highlightedColor"/>
@@ -208,18 +263,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bgw-uP-Qb1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2999" y="0.0"/>
+            <point key="canvasLocation" x="4004" y="0.0"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="PwN-aN-hkB">
             <objects>
                 <viewController id="D4e-dq-OIH" customClass="SettingsVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fC8-jT-yGc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="CfQ-JV-XSS">
-                                <rect key="frame" x="123.5" y="302" width="128" height="43"/>
+                                <rect key="frame" x="123.66666666666669" y="357.66666666666669" width="128" height="43"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="highlightedColor"/>
@@ -241,21 +296,22 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="e5o-Ne-LHd"/>
                     </view>
+                    <navigationItem key="navigationItem" id="0B3-dx-5Vo"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k71-Wo-1Bh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1884" y="-751"/>
+            <point key="canvasLocation" x="958" y="758"/>
         </scene>
         <!--Wallet-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="WalletVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Wallet" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zEq-FU-wV5">
-                                <rect key="frame" x="140" y="312" width="95" height="43"/>
+                                <rect key="frame" x="140" y="384.66666666666669" width="95" height="43"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="36"/>
                                 <nil key="highlightedColor"/>
@@ -272,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="360"/>
+            <point key="canvasLocation" x="2015" y="0.0"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
