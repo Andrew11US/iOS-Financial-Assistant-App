@@ -44,5 +44,18 @@ public struct StorageManager {
         }
         
     }
+    
+    func createUser(uid: String, data: Dictionary<String, String>) {
+        
+        let defaultData : [String: String] = [
+            "name" : "John Doe",
+            "wallets" : "no wallets",
+            "transactions" : "no transactions",
+            "statistics" : "unavailable",
+            "virtualVallets" : "no vWallets",
+        ]
+        
+        StorageManager.dbReference.child(uid).updateChildValues(defaultData) // change default!!!!
+    }
 
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9Bi-p0-1Co">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -330,10 +331,62 @@
             </objects>
             <point key="canvasLocation" x="2015" y="0.0"/>
         </scene>
+        <!--Sign InVC-->
+        <scene sceneID="BFv-ep-0MQ">
+            <objects>
+                <viewController id="9Bi-p0-1Co" customClass="SignInVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tXc-zV-edr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="v1b-Ah-vCV">
+                                <rect key="frame" x="36" y="347" width="303" height="118"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="V2B-F8-HzI">
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ITU-mE-Xa6">
+                                        <rect key="frame" x="0.0" y="42" width="303" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccS-zf-Inz">
+                                        <rect key="frame" x="0.0" y="84" width="303" height="34"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="signInBtnPressed:" destination="9Bi-p0-1Co" eventType="touchUpInside" id="VP5-Jq-DrQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="v1b-Ah-vCV" firstAttribute="centerX" secondItem="tXc-zV-edr" secondAttribute="centerX" id="HZy-1r-xX7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="v1b-Ah-vCV" secondAttribute="trailing" constant="20" id="QuH-ry-y8Z"/>
+                            <constraint firstItem="v1b-Ah-vCV" firstAttribute="leading" secondItem="tXc-zV-edr" secondAttribute="leadingMargin" constant="20" id="kJ7-AS-IVq"/>
+                            <constraint firstItem="v1b-Ah-vCV" firstAttribute="centerY" secondItem="tXc-zV-edr" secondAttribute="centerY" id="uFZ-OQ-1qn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="W4c-Ki-6zl"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="V2B-F8-HzI" id="5mA-ok-6D8"/>
+                        <outlet property="passwordTextField" destination="ITU-mE-Xa6" id="lBg-5u-n7F"/>
+                        <outlet property="signInBtn" destination="ccS-zf-Inz" id="qp2-oP-IUg"/>
+                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="toOverview" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ZkV-6L-UMn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0g0-hV-zdM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1063" y="0.0"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="xR7-OX-KLE"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
