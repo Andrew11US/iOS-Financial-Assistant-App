@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class Transaction: Codable {
+public struct Transaction: Codable {
     
     var id: String
     var name: String

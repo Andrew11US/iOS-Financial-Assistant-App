@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class Wallet: Codable {
+public struct Wallet: Codable {
     
     var name: String
     var type: String
