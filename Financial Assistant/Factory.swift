@@ -8,9 +8,7 @@
 
 import Foundation
 
-class Factory {
-    
-    init() {}
+public struct Factory {
     
     static let shared = Factory()
     

@@ -18,23 +18,21 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        Delete key and turn off auto login in
+        
+        // MARK: Deletes KEY for auto login if uncommented
 //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         
         // Auto Login if ID is found in Keychain
         if KeychainWrapper.standard.string(forKey: KEY_UID) != nil {
-            print("Key has been found in keychain, performing login in")
+            print("Key has been found in keychain! Loging in without credentials")
             DispatchQueue.main.async { () -> Void in
                 self.performSegue(withIdentifier: Segue.toOverview.rawValue, sender: nil)
             }
-            
         }
         
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
     }
-    
-    
     
     @IBAction func signInBtnPressed(_ sender: AnyObject) {
         
@@ -46,18 +44,12 @@ class SignInVC: UIViewController {
                 
                 if error == nil {
                     print("Email user authenticated with Firebase")
-                    let keychainResult = KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
-                    
-//                    print("Data saved to keychain: \(keychainResult)")
-//                    print(user.uid)
-                    
-                    
+                    KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
                     self.performSegue(withIdentifier: Segue.toOverview.rawValue, sender: nil)
                     
                 } else {
                     print("Unable to authenticate")
-                    
-                    self.showAlertWithTitle("Error", message: "E-mail or password is not correct")
+                    self.showAlertWithTitle("Ooops:(", message: "Looks like your email or password wasn't correct")
                 }
             })
         }
