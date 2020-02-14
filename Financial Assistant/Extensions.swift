@@ -45,6 +45,37 @@ extension Double {
     
 }
 
+// JSON Encoder encodes Class to JSON String
+extension Encodable {
+    var convertToString: String? {
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.outputFormatting = .prettyPrinted
+        do {
+            let jsonData = try jsonEncoder.encode(self)
+            return String(data: jsonData, encoding: .utf8)
+        } catch {
+            return nil
+        }
+    }
+}
+
+// Transaction decodable
+extension Decodable {
+    var convertToObject: Transaction? {
+        let jsonDecoder = JSONDecoder()
+        do {
+            if let data = self as? Data {
+                let object = try jsonDecoder.decode(Transaction.self, from: data)
+                return object
+            } else {
+                return nil
+            }
+        } catch {
+            return nil
+        }
+    }
+}
+
 // Adds wrapper to UIViewController to easily show alert
 public extension UIViewController {
     

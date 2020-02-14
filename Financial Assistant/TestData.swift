@@ -13,9 +13,7 @@ var wallets : [Wallet] = [
 ]
 
 var transactions : [Transaction] = [
-    Factory.shared.createTransaction(name: "Food", type: TransactionType.expense, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0]),
-    Factory.shared.createTransaction(name: "Food", type: TransactionType.expense, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0]),
-    Factory.shared.createTransaction(name: "Food", type: TransactionType.expense, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0])
+    Factory.shared.createTransaction(id: "x1x", name: "Food", type: TransactionType.expense.rawValue, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0])
 ]
 
-var last10 : [Transaction] = transactions
+//var last10 : [Transaction] = transactions

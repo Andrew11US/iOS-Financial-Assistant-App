@@ -31,5 +31,12 @@ class OverviewTransactionCell: UITableViewCell {
         self.name.text = transaction.name
         self.amount.text = "\(transaction.originalAmount) \(transaction.currencyCode)"
     }
+    
+    func configureCell(test: String) {
+        
+        self.date.text = test
+        self.name.text = test
+        self.amount.text = "$ 11.1"
+    }
 
 }

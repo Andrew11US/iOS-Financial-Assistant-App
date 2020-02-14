@@ -21,11 +21,14 @@ class AddTransactionVC: UIViewController {
     }
     
     @IBAction func save(sender: UIButton) {
-        StorageManager.shared.saveData(message: "Hello101")
+        StorageManager.shared.saveData()
     }
     
     @IBAction func retrieve(sender: UIButton) {
         StorageManager.shared.retrieveData()
+      
+//        let t = Factory.shared.createTransaction(id: "x1x", name: "Food", type: TransactionType.expense.rawValue, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0])
+//        print(t.convertToString ?? "xx")
     }
     
 

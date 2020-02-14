@@ -12,7 +12,7 @@ class OverviewVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var latestTransactions: [Transaction] = last10
+    var latestTransactions: [String] = ["x1", "x2", "x3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +37,8 @@ extension OverviewVC: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewCell", for: indexPath) as? OverviewTransactionCell {
             
-            let transaction = transactions[indexPath.row]
-            cell.configureCell(transaction: transaction)
+            let str = latestTransactions[indexPath.row]
+            cell.configureCell(test: str)
             
             return cell
         } else {

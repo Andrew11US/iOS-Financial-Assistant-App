@@ -19,7 +19,7 @@ class SignInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        Delete key and turn off auto login in
-        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+//        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         
         // Auto Login if ID is found in Keychain
         if KeychainWrapper.standard.string(forKey: KEY_UID) != nil {

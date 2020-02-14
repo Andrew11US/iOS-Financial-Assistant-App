@@ -14,10 +14,10 @@ class Factory {
     
     static let shared = Factory()
     
-    func createTransaction(name: String, type: TransactionType, category: String, originalAmount: Double, wallet: Wallet) -> Transaction {
-        return Transaction(name: name, type: type, category: category, originalAmount: originalAmount, wallet: wallet)
+    func createTransaction(id: String, name: String, type: String, category: String, originalAmount: Double, wallet: Wallet) -> Transaction {
+        return Transaction(id: id, name: name, type: type, category: category, originalAmount: originalAmount, wallet: wallet)
     }
-    
+//
     func createWallet(name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) -> Wallet {
         return Wallet(name: name, type: type, currencyCode: currencyCode, initialBalance: initialBalance, limit: limit)
     }

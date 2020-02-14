@@ -8,19 +8,21 @@
 
 import Foundation
 
-open class Transaction {
+open class Transaction: Codable {
     
-    var name: String
-    var type: TransactionType
-    var category: String
-    var currencyCode: String
-    var originalAmount: Double
-    var unifiedAmount: Double
-    var dateCreated: String
-    var walletName: String
-    var walletID: String
+    var id: String
+     var name: String
+     var type: String
+     var category: String
+     var currencyCode: String
+     var originalAmount: Double
+     var unifiedAmount: Double
+     var dateCreated: String
+     var walletName: String
+     var walletID: String
     
-    init(name: String, type: TransactionType, category: String, originalAmount: Double, wallet: Wallet) {
+    init(id: String, name: String, type: String, category: String, originalAmount: Double, wallet: Wallet) {
+        self.id = id
         self.name = name
         self.type = type
         self.category = category
@@ -33,4 +35,18 @@ open class Transaction {
         
         wallet.performTransaction(transaction: self)
     }
+    
+    init(uid: String, data: Dictionary<String, AnyObject>) {
+        self.id = uid
+        self.name = data["name"] as? String ?? "name"
+        self.type = data["type"] as? String ?? "type"
+        self.category = data["category"] as? String ?? "category"
+        self.currencyCode = data["currencyCode"] as? String ?? "currencyCode"
+        self.originalAmount = data["originalAmount"] as? Double ?? 0.0
+        self.unifiedAmount = data["unifiedAmount"] as? Double ?? 0.0
+        self.dateCreated = data["dateCreated"] as? String ?? "dateCreated"
+        self.walletName = data["walletName"] as? String ?? "_walletName"
+        self.walletID = data["walletID"] as? String ?? "walletID"
+    }
+    
 }
