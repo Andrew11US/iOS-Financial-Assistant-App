@@ -21,14 +21,11 @@ class AddTransactionVC: UIViewController {
     }
     
     @IBAction func save(sender: UIButton) {
-        
-        StorageManager().saveData(toEntity: "Wallets", value: "1123", forKey: "data")
-        StorageManager().saveData(toEntity: "Wallets", value: "textfield.text!", forKey: "data")
-        StorageManager().saveData(toEntity: "Wallets", value: "hgfj45", forKey: "data")
+        StorageManager.shared.saveData(message: "Hello101")
     }
     
     @IBAction func retrieve(sender: UIButton) {
-        StorageManager().getDataArray(fromEntity: "Wallets", key: "data")
+        StorageManager.shared.retrieveData()
     }
     
 

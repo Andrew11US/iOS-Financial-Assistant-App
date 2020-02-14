@@ -10,6 +10,7 @@ target 'Financial Assistant' do
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Facebook'
   pod 'FirebaseUI/OAuth'
+  pod 'SwiftKeychainWrapper'
 
   target 'Financial AssistantTests' do
     inherit! :search_paths
