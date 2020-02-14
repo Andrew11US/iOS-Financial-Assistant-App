@@ -95,7 +95,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Add transaction"/>
                                 <connections>
-                                    <segue destination="2CM-xM-R8v" kind="presentation" modalPresentationStyle="automatic" id="oXJ-hm-Ono"/>
+                                    <segue destination="2CM-xM-R8v" kind="show" id="oXJ-hm-Ono"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yu1-XK-x8j">
@@ -375,7 +375,7 @@
                         <outlet property="emailTextField" destination="V2B-F8-HzI" id="5mA-ok-6D8"/>
                         <outlet property="passwordTextField" destination="ITU-mE-Xa6" id="lBg-5u-n7F"/>
                         <outlet property="signInBtn" destination="ccS-zf-Inz" id="qp2-oP-IUg"/>
-                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="toOverview" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ZkV-6L-UMn"/>
+                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="toOverview" modalPresentationStyle="currentContext" id="ZkV-6L-UMn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0g0-hV-zdM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

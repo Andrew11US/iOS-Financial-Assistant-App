@@ -51,7 +51,7 @@ public struct StorageManager {
                 for snap in snapshot {
                     if let dict = snap.value as? Dictionary<String,AnyObject> {
                         let id = snap.key
-                        print(Transaction(uid: id, data: dict).convertToString ?? "zz")
+                        print(Transaction(id: id, data: dict).convertToString ?? "zz")
                     }
                 }
             }

@@ -11,15 +11,15 @@ import Foundation
 open class Transaction: Codable {
     
     var id: String
-     var name: String
-     var type: String
-     var category: String
-     var currencyCode: String
-     var originalAmount: Double
-     var unifiedAmount: Double
-     var dateCreated: String
-     var walletName: String
-     var walletID: String
+    var name: String
+    var type: String
+    var category: String
+    var currencyCode: String
+    var originalAmount: Double
+    var unifiedAmount: Double
+    var dateCreated: String
+    var walletName: String
+    var walletID: String
     
     init(id: String, name: String, type: String, category: String, originalAmount: Double, wallet: Wallet) {
         self.id = id
@@ -31,13 +31,12 @@ open class Transaction: Codable {
         self.unifiedAmount = originalAmount * 1 // calculate using fx-rate library
         self.dateCreated = Date().formattedString
         self.walletName = wallet.name
-        self.walletID = wallet.ID
-        
-        wallet.performTransaction(transaction: self)
+        self.walletID = wallet.id
     }
     
-    init(uid: String, data: Dictionary<String, AnyObject>) {
-        self.id = uid
+    // Initialize from DataSnapshot
+    init(id: String, data: Dictionary<String, AnyObject>) {
+        self.id = id
         self.name = data["name"] as? String ?? "name"
         self.type = data["type"] as? String ?? "type"
         self.category = data["category"] as? String ?? "category"

@@ -8,7 +8,7 @@
 
 import Foundation
 
-open class Wallet {
+open class Wallet: Codable {
     
     var name: String
     var type: String
@@ -16,33 +16,37 @@ open class Wallet {
     var balance: Double = 0.0
     var dateCreated: String
     var limit: Double = 0.0
-    var ID: String
+    var id: String
     
     init(name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) {
         self.name = name
         self.type = type
         self.currencyCode = currencyCode
         self.balance = initialBalance
-        self.dateCreated = Date().formattedString
         self.limit = limit
-        self.ID = "\(Date().formattedString)%\(name)@\(currencyCode)&\(limit)"
+        self.dateCreated = Date().formattedString
+        self.id = "\(Date().formattedString)%\(name)@\(currencyCode)&\(limit)"
     }
     
-    func performTransaction(transaction: Transaction) {
-        
-        if balance + transaction.originalAmount < limit {
-            print("Unable to perform transaction! Over the limit!")
-        } else {
-            balance += transaction.originalAmount
-        }
-        
-        print(balance)
+    // Initialize from DataSnapshot
+    init(id: String, data: Dictionary<String, AnyObject>) {
+        self.id = id
+        self.name = data["name"] as? String ?? "name"
+        self.type = data["type"] as? String ?? "type"
+        self.currencyCode = data["currencyCode"] as? String ?? "currencyCode"
+        self.balance = data["balance"] as? Double ?? 0.0
+        self.limit = data["limit"] as? Double ?? 0.0
+        self.dateCreated = data["dateCreated"] as? String ?? "dateCreated"
     }
     
-    func changeLimit(new: Double) {
-        self.limit = new
-        
-        print("New limit is: ", self.limit)
-    }
-    
+//    func performTransaction(transaction: Transaction) {
+//
+//        if balance + transaction.originalAmount < limit {
+//            print("Unable to perform transaction! Over the limit!")
+//        } else {
+//            balance += transaction.originalAmount
+//        }
+//
+//        print(balance)
+//    }
 }
