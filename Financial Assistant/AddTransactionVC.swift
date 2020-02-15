@@ -17,7 +17,7 @@ class AddTransactionVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+//        StorageManager.shared.getTransactions()
     }
     
     @IBAction func save(sender: UIButton) {
@@ -25,8 +25,10 @@ class AddTransactionVC: UIViewController {
     }
     
     @IBAction func retrieve(sender: UIButton) {
-        StorageManager.shared.retrieveData()
-      
+//        StorageManager.shared.retrieveData()
+//        for t in transactions {
+//            print(t.convertToString ?? "")
+//        }
 //        let t = Factory.shared.createTransaction(id: "x1x", name: "Food", type: TransactionType.expense.rawValue, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0])
 //        print(t.convertToString ?? "xx")
     }

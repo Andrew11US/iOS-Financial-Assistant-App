@@ -11,7 +11,7 @@ import Foundation
 // Stores data downloaded from persistent storage
 struct TemporaryData {
     
-    static let shared = TemporaryData()
+    static var shared = TemporaryData()
     
     var transactions : [Transaction] = []
     var wallets : [Wallet] = []

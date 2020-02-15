@@ -9,11 +9,11 @@
 import Foundation
 
 var wallets : [Wallet] = [
-    Factory.shared.createWallet(name: "Mastercard", type: "mastercard", currencyCode: "USD", initialBalance: 1000.00, limit: 0)
+//    Factory.shared.createWallet(name: "Mastercard", type: "mastercard", currencyCode: "USD", initialBalance: 1000.00, limit: 0)
 ]
 
 var transactions : [Transaction] = [
-    Factory.shared.createTransaction(id: "x1x", name: "Food", type: TransactionType.expense.rawValue, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0])
+//    Factory.shared.createTransaction(id: "x1x", name: "Food", type: TransactionType.expense.rawValue, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0])
 ]
 
 //var last10 : [Transaction] = transactions

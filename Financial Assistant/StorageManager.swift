@@ -44,6 +44,36 @@ public struct StorageManager {
             fireMsg.setValue(msg)
     }
     
+    func pushObject(to: String, data: [String:AnyObject]) {
+        let dbRef = userReference.child(to).childByAutoId()
+            dbRef.setValue(data)
+    }
+    
+    func getTransactions(_ completion: @escaping () -> Void) -> [Transaction] {
+//        var transactions : [Transaction] = []
+        // Remove duplicates
+        transactions.removeAll()
+        
+        userReference.child("transactions").observeSingleEvent(of: .value) { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    if let dict = snap.value as? Dictionary<String,AnyObject> {
+                        let id = snap.key
+                        let transaction = Transaction(id: id, data: dict)
+                        
+                        transactions.append(transaction)
+                        
+//                        print(Transaction(id: id, data: dict).convertToString ?? "zz")
+                    }
+                }
+            }
+            print(transactions.count)
+            completion()
+        }
+        
+        return transactions
+    }
+    
     func retrieveData() {
         
         userReference.child("transactions").observeSingleEvent(of: .value) { (snapshot) in

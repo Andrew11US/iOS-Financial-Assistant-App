@@ -19,6 +19,14 @@ class OverviewVC: UIViewController {
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        StorageManager.shared.getTransactions { self.tableView.reloadData() }
+//        tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.tableView.reloadData()
     }
 
 
@@ -26,7 +34,7 @@ class OverviewVC: UIViewController {
 
 extension OverviewVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return latestTransactions.count
+        return transactions.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,8 +45,8 @@ extension OverviewVC: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "OverviewCell", for: indexPath) as? OverviewTransactionCell {
             
-            let str = latestTransactions[indexPath.row]
-            cell.configureCell(test: str)
+            let transaction = transactions[indexPath.row]
+            cell.configureCell(transaction: transaction)
             
             return cell
         } else {

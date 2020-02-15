@@ -28,7 +28,7 @@ public struct Wallet: Codable {
         self.id = "\(Date().formattedString)%\(name)@\(currencyCode)&\(limit)"
     }
     
-    // Initialize from DataSnapshot
+    // Initialize from DataSnapshot: Dictionary<String, AnyObject>
     init(id: String, data: Dictionary<String, AnyObject>) {
         self.id = id
         self.name = data["name"] as? String ?? "name"
@@ -37,6 +37,19 @@ public struct Wallet: Codable {
         self.balance = data["balance"] as? Double ?? 0.0
         self.limit = data["limit"] as? Double ?? 0.0
         self.dateCreated = data["dateCreated"] as? String ?? "dateCreated"
+    }
+    
+    // Returns wallet like Dictionary<String, AnyObject>
+    func getDictionary() -> [String : AnyObject] {
+        return [
+            "id" : self.id,
+            "name" : self.name,
+            "type" : self.type,
+            "currencyCode" : self.currencyCode,
+            "balance" : self.balance,
+            "limit" : self.limit,
+            "dateCreated" : self.dateCreated,
+            ] as [String : AnyObject]
     }
     
 //    func performTransaction(transaction: Transaction) {

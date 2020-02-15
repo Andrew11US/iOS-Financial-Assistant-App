@@ -48,4 +48,20 @@ public struct Transaction: Codable {
         self.walletID = data["walletID"] as? String ?? "walletID"
     }
     
+    // Returns transaction like Dictionary<String, AnyObject>
+    func getDictionary() -> [String : AnyObject] {
+        return [
+            "id" : self.id,
+            "name" : self.name,
+            "type" : self.type,
+            "category" : self.category,
+            "currencyCode" : self.currencyCode,
+            "originalAmount" : self.originalAmount,
+            "unifiedAmount" : self.unifiedAmount,
+            "dateCreated" : self.dateCreated,
+            "walletName" : walletName,
+            "walletID" : self.walletID,
+            ] as [String : AnyObject]
+    }
+    
 }

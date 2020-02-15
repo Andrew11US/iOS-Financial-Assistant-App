@@ -12,4 +12,12 @@ public enum Segue: String {
     case toOverview
 }
 
+public enum FDChild: String {
+    case name
+    case transactions
+    case wallets
+    case virtualWallets
+    case statistics
+}
+
 
