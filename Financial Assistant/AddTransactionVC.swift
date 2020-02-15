@@ -25,6 +25,7 @@ class AddTransactionVC: UIViewController {
     var wallet = ""
     var date = ""
     var category = ""
+    var amount = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,15 +84,20 @@ class AddTransactionVC: UIViewController {
     @IBAction func addBtnTapped(_ sender: Any) {
         
         guard let name = nameTextField.text else { return }
-        guard let amount = amountTextField?.text else { return }
+        if let amount = amountTextField.text {
+            if let doubleValue = Double(amount) {
+                self.amount = doubleValue
+            }
+        }
         var type = TransactionType.income.rawValue
         if segmentControl.selectedSegmentIndex == 0 {
             type = TransactionType.income.rawValue
         } else {
             type = TransactionType.expense.rawValue
+            amount = -amount
         }
         
-        let transaction = Transaction(id: "INIT_ID", name: name, type: type, category: category, originalAmount: Double(amount)!, wallet: wallets[0])
+        let transaction = Transaction(id: "INIT_ID", name: name, type: type, category: category, originalAmount: amount, wallet: wallets[0])
 //        transaction.getDictionary()
         StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, data: transaction.getDictionary())
     }
