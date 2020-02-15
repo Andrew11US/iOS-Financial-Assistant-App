@@ -12,7 +12,7 @@ class OverviewVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var latestTransactions: [String] = ["x1", "x2", "x3"]
+//    var latestTransactions: [String] = ["x1", "x2", "x3"]
 
     override func viewDidLoad() {
         super.viewDidLoad()

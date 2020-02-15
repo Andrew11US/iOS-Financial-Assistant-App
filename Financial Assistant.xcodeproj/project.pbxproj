@@ -11,6 +11,7 @@
 		0104A03623F719AC00C52ED2 /* Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0104A03523F719AC00C52ED2 /* Segues.swift */; };
 		0106E87423F722C700429EBE /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106E87323F722C700429EBE /* GlobalData.swift */; };
 		0106E87623F7502500429EBE /* TemporaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106E87523F7502500429EBE /* TemporaryData.swift */; };
+		010713BF23F89E8100D2EA7F /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010713BE23F89E8100D2EA7F /* WalletCell.swift */; };
 		013C84B823F4A9620007B7EB /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84B723F4A9620007B7EB /* Transaction.swift */; };
 		013C84BA23F4A96C0007B7EB /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84B923F4A96C0007B7EB /* Wallet.swift */; };
 		013C84BC23F4A9A30007B7EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84BB23F4A9A30007B7EB /* Extensions.swift */; };
@@ -64,6 +65,7 @@
 		0104A03523F719AC00C52ED2 /* Segues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segues.swift; sourceTree = "<group>"; };
 		0106E87323F722C700429EBE /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		0106E87523F7502500429EBE /* TemporaryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryData.swift; sourceTree = "<group>"; };
+		010713BE23F89E8100D2EA7F /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
 		013C84B723F4A9620007B7EB /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		013C84B923F4A96C0007B7EB /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		013C84BB23F4A9A30007B7EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			children = (
 				013C84C723F4B3C00007B7EB /* OverviewTransactionCell.swift */,
 				013C84C923F4B3D20007B7EB /* TransactionCell.swift */,
+				010713BE23F89E8100D2EA7F /* WalletCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				013C84C623F4AF600007B7EB /* TestData.swift in Sources */,
 				013C84BE23F4A9F10007B7EB /* ExchangeManager.swift in Sources */,
 				013C84B823F4A9620007B7EB /* Transaction.swift in Sources */,
+				010713BF23F89E8100D2EA7F /* WalletCell.swift in Sources */,
 				01D891D423EE150D0009FD5A /* TransactionsVC.swift in Sources */,
 				01D891D623EE1B890009FD5A /* StatisticsVC.swift in Sources */,
 				0106E87623F7502500429EBE /* TemporaryData.swift in Sources */,
@@ -772,7 +776,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -793,7 +797,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

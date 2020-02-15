@@ -74,6 +74,29 @@ public struct StorageManager {
         return transactions
     }
     
+        func getWallets(_ completion: @escaping () -> Void) {
+    //        var transactions : [Transaction] = []
+            // Remove duplicates
+            wallets.removeAll()
+            
+            userReference.child("wallets").observeSingleEvent(of: .value) { (snapshot) in
+                if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                    for snap in snapshot {
+                        if let dict = snap.value as? Dictionary<String,AnyObject> {
+                            let id = snap.key
+                            let wallet = Wallet(id: id, data: dict)
+                            
+                            wallets.append(wallet)
+                            
+    //                        print(Transaction(id: id, data: dict).convertToString ?? "zz")
+                        }
+                    }
+                }
+                print(wallets.count)
+                completion()
+            }
+        }
+    
     func retrieveData() {
         
         userReference.child("transactions").observeSingleEvent(of: .value) { (snapshot) in

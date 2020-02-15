@@ -9,13 +9,46 @@
 import UIKit
 
 class WalletVC: UIViewController {
+    
+        @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("On second")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        StorageManager.shared.getWallets {
+            self.tableView.reloadData()
+        }
     }
 
 
+}
+
+extension WalletVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return wallets.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "WalletCell", for: indexPath) as? WalletCell {
+            
+            let wallet = wallets[indexPath.row]
+            cell.configureCell(wallet: wallet)
+            
+            return cell
+        } else {
+            
+            return UITableViewCell()
+        }
+    }
+    
+    
 }
 
