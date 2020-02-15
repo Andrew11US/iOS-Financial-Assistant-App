@@ -34,6 +34,14 @@ enum TransactionCategory {
         case internship
         case salary
         case other
+        
+        static func getArray() -> [String] {
+            var output : [String] = []
+            for i in TransactionCategory.Income.self.allCases {
+                output.append(i.rawValue)
+            }
+            return output
+        }
     }
 
     enum Expense: String, CaseIterable {
@@ -41,5 +49,13 @@ enum TransactionCategory {
         case study
         case bar
         case other
+        
+        static func getArray() -> [String] {
+            var output : [String] = []
+            for i in TransactionCategory.Expense.self.allCases {
+                output.append(i.rawValue)
+            }
+            return output
+        }
     }
 }
