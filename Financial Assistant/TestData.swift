@@ -9,7 +9,7 @@
 import Foundation
 
 var wallets : [Wallet] = [
-    Factory.shared.createWallet(name: "Mastercard", type: "mastercard", currencyCode: "USD", initialBalance: 1000.00, limit: 0)
+//    Factory.shared.createWallet(name: "Mastercard", type: "mastercard", currencyCode: "USD", initialBalance: 1000.00, limit: 0)
 ]
 
 var transactions : [Transaction] = [

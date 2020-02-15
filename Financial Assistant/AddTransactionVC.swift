@@ -22,7 +22,7 @@ class AddTransactionVC: UIViewController {
     
     var pickerData: [String] = []
     var currentBtn: String = ""
-    var wallet = ""
+    var wallet: Wallet?
     var date = ""
     var category = ""
     var amount = 0.0
@@ -54,11 +54,20 @@ class AddTransactionVC: UIViewController {
     }
     
     @IBAction func walletBtnTapped(_ sender: Any) {
+        pickerData = []
+        var walletStr: [String] = []
+        for w in wallets {
+            walletStr.append(w.name)
+        }
+        pickerData = walletStr
         self.pickerView.isHidden = false
+        pickerView.reloadAllComponents()
         currentBtn = "walletBtn"
     }
     
+    // Delete date picking <<<
     @IBAction func dateBtnTapped(_ sender: Any) {
+        pickerData = []
         self.pickerView.isHidden = false
         pickerData = ["Today", "Yesterday"]
         pickerView.reloadAllComponents()
@@ -66,7 +75,7 @@ class AddTransactionVC: UIViewController {
     }
     
     @IBAction func categoryeBtnTapped(_ sender: Any) {
-        
+       
         switch segmentControl.selectedSegmentIndex {
         case 0:
             pickerData = TransactionCategory.Income.getArray()
@@ -97,7 +106,7 @@ class AddTransactionVC: UIViewController {
             amount = -amount
         }
         
-        let transaction = Transaction(id: "INIT_ID", name: name, type: type, category: category, originalAmount: amount, wallet: wallets[0])
+        let transaction = Transaction(id: "INIT_ID", name: name, type: type, category: category, originalAmount: amount, wallet: wallet!)
 //        transaction.getDictionary()
         StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, data: transaction.getDictionary())
         transactions.append(transaction)
@@ -136,7 +145,7 @@ extension AddTransactionVC: UIPickerViewDelegate, UIPickerViewDataSource {
         switch currentBtn {
         case "walletBtn":
             walletBtn.setTitle(pickerData[row], for: .normal)
-            wallet = pickerData[row]
+            wallet = wallets[row]
             case "dateBtn":
             dateBtn.setTitle(pickerData[row], for: .normal)
             date = pickerData[row]
@@ -146,5 +155,6 @@ extension AddTransactionVC: UIPickerViewDelegate, UIPickerViewDataSource {
         default: break
         }
         pickerView.isHidden = true
+        pickerData.removeAll()
     }
 }

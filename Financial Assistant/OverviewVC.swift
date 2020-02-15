@@ -20,12 +20,17 @@ class OverviewVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         StorageManager.shared.getTransactions { self.tableView.reloadData() }
+        if wallets.count == 0 {
+            StorageManager.shared.getWallets {
+                print("wallets has been downloaded")
+            }
+        }
+        
 //        tableView.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         self.tableView.reloadData()
     }
 

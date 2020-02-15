@@ -181,6 +181,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <pickerView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oa0-kG-9N0">
+                                <rect key="frame" x="16" y="508" width="343" height="216"/>
+                            </pickerView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yB0-9N-b1V">
                                 <rect key="frame" x="20" y="20" width="335" height="468"/>
                                 <subviews>
@@ -287,9 +290,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <pickerView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oa0-kG-9N0">
-                                <rect key="frame" x="16" y="508" width="343" height="216"/>
-                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
