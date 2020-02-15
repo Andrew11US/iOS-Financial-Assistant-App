@@ -22,6 +22,12 @@ class WalletVC: UIViewController {
             self.tableView.reloadData()
         }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.tableView.reloadData()
+    }
 
 
 }

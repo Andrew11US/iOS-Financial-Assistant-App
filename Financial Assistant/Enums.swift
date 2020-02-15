@@ -24,6 +24,14 @@ enum WalletType: String, CaseIterable {
     case mastercard
     case cash
     case other
+    
+    static func getArray() -> [String] {
+        var output : [String] = []
+        for i in WalletType.self.allCases {
+            output.append(i.rawValue)
+        }
+        return output
+    }
 }
 
 // Nested Enum with Income and Expense sources
@@ -33,6 +41,7 @@ enum TransactionCategory {
         case business
         case internship
         case salary
+        case transfer
         case other
         
         static func getArray() -> [String] {

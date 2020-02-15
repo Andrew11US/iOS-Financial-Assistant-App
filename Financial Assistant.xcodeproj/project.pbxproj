@@ -12,6 +12,7 @@
 		0106E87423F722C700429EBE /* GlobalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106E87323F722C700429EBE /* GlobalData.swift */; };
 		0106E87623F7502500429EBE /* TemporaryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0106E87523F7502500429EBE /* TemporaryData.swift */; };
 		010713BF23F89E8100D2EA7F /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010713BE23F89E8100D2EA7F /* WalletCell.swift */; };
+		010713C123F8A41C00D2EA7F /* AddWalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010713C023F8A41C00D2EA7F /* AddWalletVC.swift */; };
 		013C84B823F4A9620007B7EB /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84B723F4A9620007B7EB /* Transaction.swift */; };
 		013C84BA23F4A96C0007B7EB /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84B923F4A96C0007B7EB /* Wallet.swift */; };
 		013C84BC23F4A9A30007B7EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013C84BB23F4A9A30007B7EB /* Extensions.swift */; };
@@ -66,6 +67,7 @@
 		0106E87323F722C700429EBE /* GlobalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalData.swift; sourceTree = "<group>"; };
 		0106E87523F7502500429EBE /* TemporaryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryData.swift; sourceTree = "<group>"; };
 		010713BE23F89E8100D2EA7F /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
+		010713C023F8A41C00D2EA7F /* AddWalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWalletVC.swift; sourceTree = "<group>"; };
 		013C84B723F4A9620007B7EB /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		013C84B923F4A96C0007B7EB /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		013C84BB23F4A9A30007B7EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				01D891D723EE1B9F0009FD5A /* PlanningVC.swift */,
 				01D891D923EE1BB00009FD5A /* SettingsVC.swift */,
 				0146E20823F5DBCB0076CC61 /* AddTransactionVC.swift */,
+				010713C023F8A41C00D2EA7F /* AddWalletVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				01A58D7423DCADFA004F124C /* OverviewVC.swift in Sources */,
 				0146E20923F5DBCB0076CC61 /* AddTransactionVC.swift in Sources */,
 				013C84C023F4AA0D0007B7EB /* StorageManager.swift in Sources */,
+				010713C123F8A41C00D2EA7F /* AddWalletVC.swift in Sources */,
 				013C84C823F4B3C00007B7EB /* OverviewTransactionCell.swift in Sources */,
 				013C84BA23F4A96C0007B7EB /* Wallet.swift in Sources */,
 				01D891D823EE1B9F0009FD5A /* PlanningVC.swift in Sources */,
@@ -776,7 +780,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -797,7 +801,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

@@ -147,6 +147,4 @@ extension AddTransactionVC: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         pickerView.isHidden = true
     }
-    
-    
 }
