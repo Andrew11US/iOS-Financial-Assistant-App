@@ -109,7 +109,7 @@ public struct StorageManager {
             "wallets" : "no wallets",
             "transactions" : "no transactions",
             "statistics" : "unavailable",
-            "virtualVallets" : "no vWallets",
+            "virtualWallets" : "no vWallets",
         ]
         
         StorageManager.dbReference.child(uid).updateChildValues(defaultData) // change default!!!!

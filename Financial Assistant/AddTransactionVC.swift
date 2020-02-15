@@ -100,6 +100,8 @@ class AddTransactionVC: UIViewController {
         let transaction = Transaction(id: "INIT_ID", name: name, type: type, category: category, originalAmount: amount, wallet: wallets[0])
 //        transaction.getDictionary()
         StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, data: transaction.getDictionary())
+        transactions.append(transaction)
+        dismiss(animated: true, completion: nil)
     }
     
     
