@@ -88,4 +88,17 @@ public extension UIViewController {
             self.present(alertVC, animated: true, completion: nil)
         }
     }
+    
+    internal func addSpinner(_ spinner: SpinnerViewController) {
+        addChild(spinner)
+        spinner.view.frame = view.frame
+        view.addSubview(spinner.view)
+        spinner.didMove(toParent: self)
+    }
+    
+    internal func removeSpinner(_ spinner: SpinnerViewController) {
+        spinner.willMove(toParent: nil)
+        spinner.view.removeFromSuperview()
+        spinner.removeFromParent()
+    }
 }

@@ -49,7 +49,7 @@ public struct StorageManager {
             dbRef.setValue(data)
     }
     
-    func getTransactions(_ completion: @escaping () -> Void) -> [Transaction] {
+    func getTransactions(_ completion: @escaping () -> Void) {
 //        var transactions : [Transaction] = []
         // Remove duplicates
         transactions.removeAll()
@@ -70,8 +70,6 @@ public struct StorageManager {
             print(transactions.count)
             completion()
         }
-        
-        return transactions
     }
     
         func getWallets(_ completion: @escaping () -> Void) {

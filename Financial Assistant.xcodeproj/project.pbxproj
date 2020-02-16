@@ -36,6 +36,7 @@
 		01A58D8C23DCADFC004F124C /* Financial_AssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A58D8B23DCADFC004F124C /* Financial_AssistantTests.swift */; };
 		01A58D9723DCADFC004F124C /* Financial_AssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A58D9623DCADFC004F124C /* Financial_AssistantUITests.swift */; };
 		01D3037923F9A4D500D5448C /* DetailTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3037823F9A4D500D5448C /* DetailTransactionVC.swift */; };
+		01D3037B23F9BD4000D5448C /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3037A23F9BD4000D5448C /* SpinnerViewController.swift */; };
 		01D891D423EE150D0009FD5A /* TransactionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D891D323EE150D0009FD5A /* TransactionsVC.swift */; };
 		01D891D623EE1B890009FD5A /* StatisticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D891D523EE1B890009FD5A /* StatisticsVC.swift */; };
 		01D891D823EE1B9F0009FD5A /* PlanningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D891D723EE1B9F0009FD5A /* PlanningVC.swift */; };
@@ -98,6 +99,7 @@
 		01A58D9623DCADFC004F124C /* Financial_AssistantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Financial_AssistantUITests.swift; sourceTree = "<group>"; };
 		01A58D9823DCADFC004F124C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01D3037823F9A4D500D5448C /* DetailTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionVC.swift; sourceTree = "<group>"; };
+		01D3037A23F9BD4000D5448C /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		01D891D323EE150D0009FD5A /* TransactionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsVC.swift; sourceTree = "<group>"; };
 		01D891D523EE1B890009FD5A /* StatisticsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsVC.swift; sourceTree = "<group>"; };
 		01D891D723EE1B9F0009FD5A /* PlanningVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningVC.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				013C84C723F4B3C00007B7EB /* OverviewTransactionCell.swift */,
 				013C84C923F4B3D20007B7EB /* TransactionCell.swift */,
 				010713BE23F89E8100D2EA7F /* WalletCell.swift */,
+				01D3037A23F9BD4000D5448C /* SpinnerViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				010713C123F8A41C00D2EA7F /* AddWalletVC.swift in Sources */,
 				013C84C823F4B3C00007B7EB /* OverviewTransactionCell.swift in Sources */,
 				013C84BA23F4A96C0007B7EB /* Wallet.swift in Sources */,
+				01D3037B23F9BD4000D5448C /* SpinnerViewController.swift in Sources */,
 				01D891D823EE1B9F0009FD5A /* PlanningVC.swift in Sources */,
 				01D3037923F9A4D500D5448C /* DetailTransactionVC.swift in Sources */,
 				013C84BC23F4A9A30007B7EB /* Extensions.swift in Sources */,
@@ -784,7 +788,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -805,7 +809,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

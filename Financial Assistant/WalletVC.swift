@@ -18,7 +18,13 @@ class WalletVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        StorageManager.shared.getWallets {
+        if wallets.count == 0 {
+            StorageManager.shared.getWallets {
+                self.tableView.reloadData()
+            }
+        }
+        
+        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
             self.tableView.reloadData()
         }
     }

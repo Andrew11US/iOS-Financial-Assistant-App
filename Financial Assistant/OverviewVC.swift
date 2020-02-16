@@ -11,27 +11,37 @@ import UIKit
 class OverviewVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-//    var latestTransactions: [String] = ["x1", "x2", "x3"]
+    let spinner = SpinnerViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addSpinner(spinner)
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        StorageManager.shared.getTransactions { self.tableView.reloadData() }
+        if transactions.count == 0 {
+            StorageManager.shared.getTransactions {
+                
+                self.removeSpinner(self.spinner)
+                self.tableView.reloadData()
+            }
+        }
+        
         if wallets.count == 0 {
             StorageManager.shared.getWallets {
                 print("wallets has been downloaded")
             }
         }
         
-//        tableView.reloadData()
+        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        self.tableView.reloadData()
+//        self.tableView.reloadData()
     }
 
 
