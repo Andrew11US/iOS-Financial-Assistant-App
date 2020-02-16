@@ -38,7 +38,7 @@ class TransactionCell: UITableViewCell {
         
         self.amount.text = "\(transaction.originalAmount) \(transaction.currencyCode)"
         // FIX: << Transaction can't be 0!!!
-        if transaction.originalAmount > 0 {
+        if transaction.originalAmount < 0 {
             self.amount.textColor = .systemRed
         } else {
             self.amount.textColor = .systemGreen

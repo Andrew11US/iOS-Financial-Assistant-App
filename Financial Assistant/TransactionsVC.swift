@@ -24,16 +24,15 @@ class TransactionsVC: UIViewController {
         self.tableView.reloadData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let destination = segue.destination as? DetailTransactionVC {
+              
+              if let trans = sender as? Transaction {
+                  destination.transaction = trans
+              }
+          }
     }
-    */
+    
 
 }
 
@@ -44,6 +43,10 @@ extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,6 +60,14 @@ extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let trans = transactions[indexPath.row]
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "DetailTransaction", sender: trans)
         }
     }
     
