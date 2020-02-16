@@ -14,8 +14,9 @@ public struct Wallet: Codable {
     var type: String
     var currencyCode: String
     var balance: Double = 0.0
-    var dateCreated: String
     var limit: Double = 0.0
+    var unifiedBalance: Double = 0.0
+    var dateCreated: String
     var id: String
     
     init(name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) {
@@ -24,6 +25,7 @@ public struct Wallet: Codable {
         self.currencyCode = currencyCode
         self.balance = initialBalance
         self.limit = limit
+        self.unifiedBalance = initialBalance * 1 // Calculate using library FX
         self.dateCreated = Date().formattedString
         self.id = "\(Date().formattedString)%\(name)@\(currencyCode)&\(limit)"
     }
@@ -36,6 +38,7 @@ public struct Wallet: Codable {
         self.currencyCode = data["currencyCode"] as? String ?? "currencyCode"
         self.balance = data["balance"] as? Double ?? 0.0
         self.limit = data["limit"] as? Double ?? 0.0
+        self.unifiedBalance = data["unifiedBalance"] as? Double ?? 0.0
         self.dateCreated = data["dateCreated"] as? String ?? "dateCreated"
     }
     
@@ -47,6 +50,7 @@ public struct Wallet: Codable {
             "type" : self.type,
             "currencyCode" : self.currencyCode,
             "balance" : self.balance,
+            "unifiedBalance" : self.unifiedBalance,
             "limit" : self.limit,
             "dateCreated" : self.dateCreated,
             ] as [String : AnyObject]
