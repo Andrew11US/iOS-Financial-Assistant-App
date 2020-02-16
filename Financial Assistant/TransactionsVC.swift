@@ -10,10 +10,18 @@ import UIKit
 
 class TransactionsVC: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.tableView.reloadData()
     }
     
 
@@ -27,4 +35,30 @@ class TransactionsVC: UIViewController {
     }
     */
 
+}
+
+extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return transactions.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as? TransactionCell {
+            
+            let transaction = transactions[indexPath.row]
+            cell.configureCell(transaction: transaction)
+            
+            return cell
+        } else {
+            
+            return UITableViewCell()
+        }
+    }
+    
+    
 }

@@ -10,6 +10,13 @@ import UIKit
 
 class TransactionCell: UITableViewCell {
 
+    @IBOutlet weak var walletLogo: UIImageView!
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var amount: UILabel!
+    @IBOutlet weak var category: UILabel!
+    @IBOutlet weak var walletName: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +26,23 @@ class TransactionCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func configureCell(transaction: Transaction) {
+        
+        self.walletLogo.image = UIImage(named: "FAIconTrans") // << Fix later!!!
+        self.date.text = transaction.dateCreated // << make reformatting!!!
+        self.name.text = transaction.name.capitalized
+        self.category.text = transaction.category.capitalized
+        self.walletName.text = transaction.walletName.capitalized
+        
+        self.amount.text = "\(transaction.originalAmount) \(transaction.currencyCode)"
+        // FIX: << Transaction can't be 0!!!
+        if transaction.originalAmount > 0 {
+            self.amount.textColor = .systemRed
+        } else {
+            self.amount.textColor = .systemGreen
+        }
     }
 
 }
