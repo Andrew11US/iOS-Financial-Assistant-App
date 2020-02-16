@@ -10,7 +10,8 @@ import UIKit
 
 class WalletVC: UIViewController {
     
-        @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
+    let spinner = SpinnerViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,12 @@ class WalletVC: UIViewController {
             }
         }
         
-        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
+        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childRemoved) {
+//            self.addSpinner(self.spinner)
+//            StorageManager.shared.getWallets {
+//                self.tableView.reloadData()
+//                self.removeSpinner(self.spinner)
+//            }
             self.tableView.reloadData()
         }
     }
@@ -33,6 +39,15 @@ class WalletVC: UIViewController {
         super.viewDidAppear(animated)
         
         self.tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? DetailWalletVC {
+            
+            if let wallet = sender as? (Wallet, Int) {
+                destination.wallet = wallet
+            }
+        }
     }
 
 
@@ -58,6 +73,14 @@ extension WalletVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let wallet = (wallets[indexPath.row], indexPath.row)
+        
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "DetailWallet", sender: wallet)
         }
     }
     

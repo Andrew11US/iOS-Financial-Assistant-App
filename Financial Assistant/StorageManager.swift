@@ -49,6 +49,11 @@ public struct StorageManager {
             dbRef.setValue(data)
     }
     
+    func updateObject(at: String, id: String, data: [String:AnyObject]) {
+        let dbRef = userReference.child(at).child(id)
+            dbRef.updateChildValues(data)
+    }
+    
     func getTransactions(_ completion: @escaping () -> Void) {
 //        var transactions : [Transaction] = []
         // Remove duplicates
@@ -96,7 +101,12 @@ public struct StorageManager {
         }
     
     func deleteObject(location: String, id: String) {
-        userReference.child(location).child(id).removeValue()
+        userReference.child(location).child(id).removeValue { (error, ref) in
+            if error != nil {
+                print("Error occured while trying to delete an object with \(id)")
+                print(error.debugDescription)
+            }
+        }
         print("value deleted for: ", id)
     }
     
