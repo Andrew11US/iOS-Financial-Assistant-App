@@ -21,15 +21,7 @@ class DetailTransactionVC: UIViewController {
     @IBOutlet weak var walletIdLbl: UILabel!
     @IBOutlet weak var deleteBtn: UIButton!
     
-    private var _transaction: Transaction!
-    
-    var transaction: Transaction {
-        get {
-            return _transaction
-        } set {
-            _transaction = newValue
-        }
-    }
+    var transaction: (Transaction, Int)!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,31 +29,22 @@ class DetailTransactionVC: UIViewController {
         showTransaction()
     }
     
-    @IBAction func deletBtnTapped(_ sender: Any) {
-        
+    @IBAction func deleteBtnTapped(_ sender: Any) {
+        StorageManager.shared.deleteObject(location: FDChild.transactions.rawValue, id: transaction.0.id)
+        transactions.remove(at: transaction.1)
+        dismiss(animated: true, completion: nil)
     }
     
     func showTransaction() {
-        self.idLbl.text = transaction.id
-        self.nameLbl.text = transaction.name
-        self.originalAmountLbl.text = "\(transaction.originalAmount) \(transaction.currencyCode)"
-        self.unifiedAmountLbl.text = "\(transaction.unifiedAmount) USD"
-        self.categoryLbl.text = transaction.category
-        self.currencyLbl.text = transaction.currencyCode
-        self.dateLbl.text = transaction.dateCreated
-        self.walletNameLbl.text = transaction.walletName
-        self.walletIdLbl.text = transaction.walletID
+        self.idLbl.text = transaction.0.id
+        self.nameLbl.text = transaction.0.name
+        self.originalAmountLbl.text = "\(transaction.0.originalAmount) \(transaction.0.currencyCode)"
+        self.unifiedAmountLbl.text = "\(transaction.0.unifiedAmount) USD"
+        self.categoryLbl.text = transaction.0.category
+        self.currencyLbl.text = transaction.0.currencyCode
+        self.dateLbl.text = transaction.0.dateCreated
+        self.walletNameLbl.text = transaction.0.walletName
+        self.walletIdLbl.text = transaction.0.walletID
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -97,6 +97,18 @@ public struct StorageManager {
             }
         }
     
+    func deleteObject(location: String, id: String) {
+        userReference.child(location).child(id).removeValue()
+        print("value deleted for: ", id)
+    }
+    
+    func listenForChanges(location: String, event: DataEventType, completion: @escaping () -> Void) {
+        userReference.child(location).observe( event) { (snapshot) in
+            print("db changed!")
+            completion()
+        }
+    }
+    
     func retrieveData() {
         
         userReference.child("transactions").observeSingleEvent(of: .value) { (snapshot) in

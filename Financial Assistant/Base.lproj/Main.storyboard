@@ -498,7 +498,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="deletBtnTapped:" destination="fw3-Rr-BPW" eventType="touchUpInside" id="wbH-wF-uU7"/>
+                                            <action selector="deleteBtnTapped:" destination="fw3-Rr-BPW" eventType="touchUpInside" id="OJs-z6-8KZ"/>
                                         </connections>
                                     </button>
                                 </subviews>

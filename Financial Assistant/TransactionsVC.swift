@@ -17,6 +17,11 @@ class TransactionsVC: UIViewController {
 
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childRemoved, completion: {
+            
+            self.tableView.reloadData()
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -26,11 +31,11 @@ class TransactionsVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailTransactionVC {
-              
-              if let trans = sender as? Transaction {
-                  destination.transaction = trans
-              }
-          }
+            
+            if let trans = sender as? (Transaction, Int) {
+                destination.transaction = trans
+            }
+        }
     }
     
 
@@ -64,7 +69,7 @@ extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let trans = transactions[indexPath.row]
+        let trans = (transactions[indexPath.row], indexPath.row)
         
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "DetailTransaction", sender: trans)
