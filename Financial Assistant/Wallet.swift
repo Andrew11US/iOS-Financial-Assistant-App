@@ -10,6 +10,7 @@ import Foundation
 
 public struct Wallet: Codable {
     
+    var id: String
     var name: String
     var type: String
     var currencyCode: String
@@ -17,9 +18,9 @@ public struct Wallet: Codable {
     var limit: Double = 0.0
     var unifiedBalance: Double = 0.0
     var dateCreated: String
-    var id: String
     
-    init(name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) {
+    init(id: String, name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) {
+        self.id = id
         self.name = name
         self.type = type
         self.currencyCode = currencyCode
@@ -27,7 +28,6 @@ public struct Wallet: Codable {
         self.limit = limit
         self.unifiedBalance = initialBalance * 1 // Calculate using library FX
         self.dateCreated = Date().formattedString
-        self.id = "\(Date().formattedString)%\(name)@\(currencyCode)&\(limit)"
     }
     
     // Initialize from DataSnapshot: Dictionary<String, AnyObject>

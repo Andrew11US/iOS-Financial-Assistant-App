@@ -31,7 +31,7 @@ class DetailWalletVC: UIViewController {
     
     @IBAction func deleteBtnTapped(_ sender: Any) {
         // << debug wallet removal !!!
-//        StorageManager.shared.deleteObject(location: FDChild.wallets.rawValue, id: wallet.0.id)
+        StorageManager.shared.deleteObject(location: FDChild.wallets.rawValue, id: wallet.0.id)
         wallets.remove(at: wallet.1)
         print(wallet.1)
         dismiss(animated: true, completion: nil)

@@ -16,8 +16,8 @@ public struct Factory {
         return Transaction(id: id, name: name, type: type, category: category, originalAmount: originalAmount, wallet: wallet)
     }
 //
-    func createWallet(name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) -> Wallet {
-        return Wallet(name: name, type: type, currencyCode: currencyCode, initialBalance: initialBalance, limit: limit)
+    func createWallet(id: String, name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) -> Wallet {
+        return Wallet(id: id, name: name, type: type, currencyCode: currencyCode, initialBalance: initialBalance, limit: limit)
     }
     
 }

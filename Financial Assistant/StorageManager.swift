@@ -44,14 +44,23 @@ public struct StorageManager {
             fireMsg.setValue(msg)
     }
     
-    func pushObject(to: String, data: [String:AnyObject]) {
-        let dbRef = userReference.child(to).childByAutoId()
+//    func pushObject(to: String, data: [String:AnyObject]) {
+//        let dbRef = userReference.child(to).childByAutoId()
+//            dbRef.setValue(data)
+//    }
+    
+    func pushObject(to: String, key: String, data: [String:AnyObject]) {
+        let dbRef = userReference.child(to).child(key)
             dbRef.setValue(data)
     }
     
     func updateObject(at: String, id: String, data: [String:AnyObject]) {
         let dbRef = userReference.child(at).child(id)
             dbRef.updateChildValues(data)
+    }
+    
+    func getAutoKey(at: String) -> String {
+        return userReference.child(at).childByAutoId().key ?? "INIT_KEY"
     }
     
     func getTransactions(_ completion: @escaping () -> Void) {

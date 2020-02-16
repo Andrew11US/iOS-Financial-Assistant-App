@@ -61,11 +61,13 @@ class AddWalletVC: UIViewController {
             }
         }
         
-        let wallet = Wallet(name: name, type: type, currencyCode: currency, initialBalance: balance, limit: limit)
+        let key = StorageManager.shared.getAutoKey(at: FDChild.wallets.rawValue)
+        
+        let wallet = Wallet(id: key, name: name, type: type, currencyCode: currency, initialBalance: balance, limit: limit)
         
 //        let transaction = Transaction(id: "INIT_ID", name: name, type: type, category: category, originalAmount: amount, wallet: wallets[0])
         //        transaction.getDictionary()
-        StorageManager.shared.pushObject(to: FDChild.wallets.rawValue, data: wallet.getDictionary())
+        StorageManager.shared.pushObject(to: FDChild.wallets.rawValue, key: key, data: wallet.getDictionary())
         wallets.append(wallet)
         dismiss(animated: true, completion: nil)
     }
