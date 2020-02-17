@@ -41,25 +41,38 @@ class AddWalletVC: UIViewController {
     }
     
     @IBAction func currencyBtnTapped(_ sender: Any) {
-//        let alert = UIAlertController(style: .actionSheet, message: "Select Currency")
-//        alert.addLocalePicker(type: .currency) { info in
-//            print(info?.currencyCode ?? "xxx")
-//            self.currency = info?.currencyCode ?? "USD"
-//        }
-//        alert.addAction(title: "OK", style: .cancel)
-//        alert.show()
+        self.pickerView.isHidden = false
+        pickerData = ["USD", "EUR", "UAH"]
+        pickerView.reloadAllComponents()
+        currentBtn = "currencyBtn"
         presentViewController(animated: true, completion: nil)
     }
     
     // Trying to present alertView
     private func presentViewController(animated: Bool, completion: (() -> Void)?) -> Void {
         
-        let alert = UIAlertController(style: .actionSheet, message: "Select Currency")
-        alert.addLocalePicker(type: .currency) { info in
-            print(info?.currencyCode ?? "xxx")
-            self.currency = info?.currencyCode ?? "USD"
+//        let alert = UIAlertController(style: .alert, message: "Select Currency")
+//        alert.addLocalePicker(type: .currency) { info in
+//            print(info?.currencyCode ?? "xxx")
+//            self.currency = info?.currencyCode ?? "USD"
+//        }
+//        alert.addAction(title: "OK", style: .cancel)
+//        alert.show()
+        
+        let alert = UIAlertController(style: .actionSheet, title: "Picker View", message: "Preferred Content Height")
+
+        let frameSizes: [CGFloat] = (150...400).map { CGFloat($0) }
+        let pickerViewValues: [[String]] = [frameSizes.map { Int($0).description }]
+        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: frameSizes.firstIndex(of: 216) ?? 0)
+
+        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { vc, picker, index, values in
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 1) {
+                    vc.preferredContentSize.height = frameSizes[index.row]
+                }
+            }
         }
-        alert.addAction(title: "OK", style: .cancel)
+        alert.addAction(title: "Done", style: .cancel)
         alert.show()
         
        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: animated, completion: completion)

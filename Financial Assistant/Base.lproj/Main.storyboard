@@ -9,6 +9,40 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Table View Controller-->
+        <scene sceneID="GhX-pP-SI0">
+            <objects>
+                <tableViewController id="QDj-UK-Koc" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zb3-rg-nWi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Category" id="QPo-Tt-IYa">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="BNs-gs-TJu">
+                                <rect key="frame" x="0.0" y="72" width="375" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BNs-gs-TJu" id="z5R-F8-q1r">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="QDj-UK-Koc" id="wuL-LJ-VXY"/>
+                            <outlet property="delegate" destination="QDj-UK-Koc" id="keP-fL-5hy"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="uG0-Ln-ycs"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uDk-p3-AUj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="958" y="-1525"/>
+        </scene>
         <!--Add TransactionVC-->
         <scene sceneID="R6f-aX-cl4">
             <objects>
@@ -72,6 +106,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="categoryeBtnTapped:" destination="2CM-xM-R8v" eventType="touchUpInside" id="Vde-i1-Jy5"/>
+                                                    <segue destination="QDj-UK-Koc" kind="show" id="noq-0b-k58"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1123,7 +1158,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Add wallet"/>
                                 <connections>
-                                    <segue destination="nSb-Z0-JbS" kind="show" id="pqf-F4-wP1"/>
+                                    <segue destination="nSb-Z0-JbS" kind="show" id="5oO-qy-IKR"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-HA-Txj">
