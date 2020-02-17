@@ -41,10 +41,28 @@ class AddWalletVC: UIViewController {
     }
     
     @IBAction func currencyBtnTapped(_ sender: Any) {
-                self.pickerView.isHidden = false
-                pickerData = ["USD", "PLN", "EUR", "UAH"]
-                pickerView.reloadAllComponents()
-                currentBtn = "currencyBtn"
+//        let alert = UIAlertController(style: .actionSheet, message: "Select Currency")
+//        alert.addLocalePicker(type: .currency) { info in
+//            print(info?.currencyCode ?? "xxx")
+//            self.currency = info?.currencyCode ?? "USD"
+//        }
+//        alert.addAction(title: "OK", style: .cancel)
+//        alert.show()
+        presentViewController(animated: true, completion: nil)
+    }
+    
+    // Trying to present alertView
+    private func presentViewController(animated: Bool, completion: (() -> Void)?) -> Void {
+        
+        let alert = UIAlertController(style: .actionSheet, message: "Select Currency")
+        alert.addLocalePicker(type: .currency) { info in
+            print(info?.currencyCode ?? "xxx")
+            self.currency = info?.currencyCode ?? "USD"
+        }
+        alert.addAction(title: "OK", style: .cancel)
+        alert.show()
+        
+       UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: animated, completion: completion)
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {

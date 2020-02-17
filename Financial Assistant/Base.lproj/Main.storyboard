@@ -1123,7 +1123,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Add wallet"/>
                                 <connections>
-                                    <segue destination="nSb-Z0-JbS" kind="show" id="D66-oc-u8g"/>
+                                    <segue destination="nSb-Z0-JbS" kind="show" id="pqf-F4-wP1"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-HA-Txj">
