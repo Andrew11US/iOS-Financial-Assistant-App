@@ -37,11 +37,15 @@
                             <outlet property="delegate" destination="QDj-UK-Koc" id="keP-fL-5hy"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Done" width="406.66666666666669" id="wjc-0r-2Dg"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="uG0-Ln-ycs"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uDk-p3-AUj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="958" y="-1525"/>
+            <point key="canvasLocation" x="958" y="-1524"/>
         </scene>
         <!--Add TransactionVC-->
         <scene sceneID="R6f-aX-cl4">
@@ -208,6 +212,44 @@
             </objects>
             <point key="canvasLocation" x="957.60000000000002" y="-777.33990147783254"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="fV8-Cq-iSt">
+            <objects>
+                <tableViewController id="N5E-I4-w6o" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kYi-S7-BUe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Currency" id="yur-np-VWL">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="bCB-C8-zz0">
+                                <rect key="frame" x="0.0" y="72" width="375" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bCB-C8-zz0" id="5Ec-1E-Lt6">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="N5E-I4-w6o" id="jVw-XT-0u7"/>
+                            <outlet property="delegate" destination="N5E-I4-w6o" id="8m3-vv-c4M"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems>
+                        <barButtonItem title="Done" width="405.66666666666669" id="9oj-IO-zgj"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="a1w-CO-lVX"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZbG-4d-Fhj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2014" y="-1524"/>
+        </scene>
         <!--Add WalletVC-->
         <scene sceneID="UKF-Ja-gUd">
             <objects>
@@ -276,6 +318,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="currencyBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="qFf-We-yzB"/>
+                                                    <segue destination="N5E-I4-w6o" kind="show" id="rW4-v2-7tr"/>
                                                 </connections>
                                             </button>
                                         </subviews>
