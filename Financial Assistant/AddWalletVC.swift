@@ -88,7 +88,8 @@ class AddWalletVC: UIViewController {
     
     // popView animations
     func animateUp(constraint: NSLayoutConstraint) {
-        constraint.constant = 600
+        // Optimized for iPhone SE 4-inch screen and Up
+        constraint.constant = 550
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
         }
