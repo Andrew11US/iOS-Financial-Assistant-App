@@ -143,7 +143,7 @@ extension AddWalletVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CurrencySelectCell", for: indexPath) as? CurrencySelectCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CurrencySelectionCell", for: indexPath) as? CurrencySelectionCell {
             
             let currency = currencies[indexPath.row]
             cell.configureCell(currency: currency)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CurrencySelectCell: UITableViewCell {
+class CurrencySelectionCell: UITableViewCell {
 
     @IBOutlet weak var currencyLbl: UILabel!
     

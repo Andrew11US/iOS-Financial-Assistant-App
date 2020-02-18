@@ -20,6 +20,18 @@ class AddTransactionVC: UIViewController {
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var currencyLbl: UILabel!
     
+    // Selection subViews
+    @IBOutlet weak var categoryTableView: UITableView!
+    @IBOutlet weak var walletTableView: UITableView!
+    @IBOutlet weak var categoryViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var categoryView: UIView!
+    @IBOutlet weak var walletViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var walletView: UIView!
+    
+    // Data for selection when customizing new transaction
+    private var categories = TransactionCategory.Income.getArray()
+//    var wallets = wallets
+    
     var pickerData: [String] = []
     var currentBtn: String = ""
     var wallet: Wallet?
@@ -74,20 +86,15 @@ class AddTransactionVC: UIViewController {
         currentBtn = "dateBtn"
     }
     
-    @IBAction func categoryeBtnTapped(_ sender: Any) {
-       
-        switch segmentControl.selectedSegmentIndex {
-        case 0:
-            pickerData = TransactionCategory.Income.getArray()
-        case 1:
-            pickerData = TransactionCategory.Expense.getArray()
-//        pickerData = TransactionCategory.Expense.getArray()
-        default:
-            pickerData = []
+    @IBAction func categoryBtnTapped(_ sender: Any) {
+       animateUp(constraint: categoryViewHeight)
+    }
+    
+    @IBAction func categorySelectedTapped(_ sender: Any) {
+       animateDown(constraint: categoryViewHeight)
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
+            self.categoryBtn.setTitle(self.category, for: .normal)
         }
-        pickerView.reloadAllComponents()
-        self.pickerView.isHidden = false
-        currentBtn = "categoryBtn"
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
@@ -115,18 +122,21 @@ class AddTransactionVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // popView animations
+    func animateUp(constraint: NSLayoutConstraint) {
+        // Optimized for iPhone SE 4-inch screen and Up
+        constraint.constant = 550
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
     }
-    */
+    
+    func animateDown(constraint: NSLayoutConstraint) {
+        constraint.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
 
 }
 
@@ -158,5 +168,36 @@ extension AddTransactionVC: UIPickerViewDelegate, UIPickerViewDataSource {
         }
         pickerView.isHidden = true
         pickerData.removeAll()
+    }
+}
+
+extension AddTransactionVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        self.category = categories[indexPath.row]
+        print("Selected category: ", category)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CategorySelectionCell", for: indexPath) as? CategorySelectionCell {
+            
+            let category = categories[indexPath.row]
+            cell.configureCell(category: category)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 }
