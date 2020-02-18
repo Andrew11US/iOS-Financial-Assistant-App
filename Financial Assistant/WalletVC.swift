@@ -25,7 +25,7 @@ class WalletVC: UIViewController {
             }
         }
         
-        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childRemoved) {
+        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childChanged) {
 //            self.addSpinner(self.spinner)
 //            StorageManager.shared.getWallets {
 //                self.tableView.reloadData()

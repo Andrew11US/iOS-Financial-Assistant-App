@@ -17,22 +17,28 @@ class AddWalletVC: UIViewController {
     @IBOutlet weak var currencyBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
+    // Pullup view to present currency picker in better way
+    @IBOutlet weak var popViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var popView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     var pickerData: [String] = []
     var currentBtn: String = ""
     var balance = 0.0
     var limit = 0.0
     var type = ""
-    var currency = ""
+    private var currency = ""
     
+    var currencies = ["USD", "EUR", "PLN", "UAH"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
+        self.popView.layer.cornerRadius = 15.0
     }
-    
+  
     @IBAction func typeBtnTapped(_ sender: Any) {
         self.pickerView.isHidden = false
         pickerData = WalletType.getArray()
@@ -41,41 +47,14 @@ class AddWalletVC: UIViewController {
     }
     
     @IBAction func currencyBtnTapped(_ sender: Any) {
-        self.pickerView.isHidden = false
-        pickerData = ["USD", "EUR", "UAH"]
-        pickerView.reloadAllComponents()
-        currentBtn = "currencyBtn"
-        presentViewController(animated: true, completion: nil)
+        animateViewUp()
     }
     
-    // Trying to present alertView
-    private func presentViewController(animated: Bool, completion: (() -> Void)?) -> Void {
-        
-//        let alert = UIAlertController(style: .alert, message: "Select Currency")
-//        alert.addLocalePicker(type: .currency) { info in
-//            print(info?.currencyCode ?? "xxx")
-//            self.currency = info?.currencyCode ?? "USD"
-//        }
-//        alert.addAction(title: "OK", style: .cancel)
-//        alert.show()
-        
-        let alert = UIAlertController(style: .actionSheet, title: "Picker View", message: "Preferred Content Height")
-
-        let frameSizes: [CGFloat] = (150...400).map { CGFloat($0) }
-        let pickerViewValues: [[String]] = [frameSizes.map { Int($0).description }]
-        let pickerViewSelectedValue: PickerViewViewController.Index = (column: 0, row: frameSizes.firstIndex(of: 216) ?? 0)
-
-        alert.addPickerView(values: pickerViewValues, initialSelection: pickerViewSelectedValue) { vc, picker, index, values in
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 1) {
-                    vc.preferredContentSize.height = frameSizes[index.row]
-                }
-            }
+    @IBAction func doneBtnTapped(_ sender: Any) {
+        animateViewDown()
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
+            self.currencyBtn.setTitle(self.currency, for: .normal)
         }
-        alert.addAction(title: "Done", style: .cancel)
-        alert.show()
-        
-       UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: animated, completion: completion)
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
@@ -103,16 +82,20 @@ class AddWalletVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    // popView animations
+    func animateViewUp() {
+        popViewHeight.constant = 600
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    func animateViewDown() {
+        popViewHeight.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
     
 }
 
@@ -140,5 +123,42 @@ extension AddWalletVC: UIPickerViewDelegate, UIPickerViewDataSource {
         default: break
         }
         pickerView.isHidden = true
+    }
+}
+
+extension AddWalletVC: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return currencies.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        currency = currencies[indexPath.row]
+        print(currency)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        //        selected = "none"
+        //        print(selected)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CurrencySelectCell", for: indexPath) as? CurrencySelectCell {
+            
+            let currency = currencies[indexPath.row]
+            cell.configureCell(currency: currency)
+            
+            return cell
+            
+        } else {
+            return UITableViewCell()
+        }
     }
 }
