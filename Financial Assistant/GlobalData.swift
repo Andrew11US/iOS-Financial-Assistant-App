@@ -10,3 +10,5 @@ import Foundation
 
 // SwiftKeychainWrapper KEY
 let KEY_UID = "uid"
+
+let defaults = UserDefaults.standard

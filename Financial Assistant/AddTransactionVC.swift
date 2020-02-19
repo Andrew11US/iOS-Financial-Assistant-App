@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class AddTransactionVC: UIViewController {
     
@@ -30,26 +31,34 @@ class AddTransactionVC: UIViewController {
     
     // Data for selection when customizing new transaction
     private var categories = TransactionCategory.Income.getArray()
-//    var wallets = wallets
     
-    var pickerData: [String] = []
-    var currentBtn: String = ""
-    var wallet: Wallet?
-    var date = ""
-    var category = ""
-    var amount = 0.0
+    private var wallet: (Wallet?, Int?)
+    private var selectedWallet = 0
+    private var date = ""
+    private var category = ""
+    private var amount = 0.0
+    private var unifiedAmount = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.pickerView.delegate = self
-        self.pickerView.dataSource = self
+        self.amountTextField.delegate = self
+        self.nameTextField.delegate = self
     }
     
     @IBAction func segmentControlChanged(_ sender: Any) {
         print("Segment index: ", segmentControl.selectedSegmentIndex)
         category = "Select Category"
         categorySelectedTapped((Any).self)
+    }
+    
+    @IBAction func amountTextFieldEdited(_ sender: Any) {
+        if let amountStr = amountTextField.text {
+            if let amountDouble = Double(amountStr) {
+                self.amount = amountDouble
+                print("Amount set: ", amount)
+            }
+        }
     }
     
     @IBAction func walletBtnTapped(_ sender: Any) {
@@ -67,18 +76,24 @@ class AddTransactionVC: UIViewController {
     
     @IBAction func walletSelectedTapped(_ sender: Any) {
        animateDown(constraint: walletViewHeight)
+        if wallet.0 == nil {
+            wallet.0 = wallets[0]
+        }
+        guard let wallet = wallet.0 else { return }
+
+        
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
-            self.walletBtn.setTitle(self.wallet?.name.capitalized, for: .normal)
+            self.walletBtn.setTitle(wallet.name.capitalized, for: .normal)
+            NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
+                self.unifiedAmount = self.amount * coff
+                print("Unified: ", self.unifiedAmount, "USD")
+            }
         }
     }
     
     // Delete date picking <<<
     @IBAction func dateBtnTapped(_ sender: Any) {
-        pickerData = []
-        self.pickerView.isHidden = false
-        pickerData = ["Today", "Yesterday"]
-        pickerView.reloadAllComponents()
-        currentBtn = "dateBtn"
+        
     }
     
     @IBAction func categoryBtnTapped(_ sender: Any) {
@@ -101,6 +116,7 @@ class AddTransactionVC: UIViewController {
     @IBAction func addBtnTapped(_ sender: Any) {
         
         guard let name = nameTextField.text else { return }
+        guard var wallet = wallet.0 else { return }
         if let amount = amountTextField.text {
             if let doubleValue = Double(amount) {
                 self.amount = doubleValue
@@ -116,10 +132,23 @@ class AddTransactionVC: UIViewController {
         
         let key = StorageManager.shared.getAutoKey(at: FDChild.transactions.rawValue)
         
-        let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, wallet: wallet!)
+        let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, unifiedAmount: unifiedAmount, wallet: wallet)
 //        transaction.getDictionary()
         StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
         transactions.append(transaction)
+        wallet.balance += transaction.originalAmount
+        print("Wallet new balance: ", wallet.balance)
+        NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
+            
+            wallet.unifiedBalance = wallet.balance * coff
+            print("New unified balance: ", wallet.unifiedBalance)
+            
+            StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.id, data: wallet.getDictionary())
+            
+//            wallets[self.wallet.1] = wallet
+            
+        }
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -139,37 +168,6 @@ class AddTransactionVC: UIViewController {
         }
     }
 
-}
-
-extension AddTransactionVC: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        pickerData[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        switch currentBtn {
-        case "walletBtn":
-            walletBtn.setTitle(pickerData[row], for: .normal)
-            wallet = wallets[row]
-            case "dateBtn":
-            dateBtn.setTitle(pickerData[row], for: .normal)
-            date = pickerData[row]
-            case "categoryBtn":
-            categoryBtn.setTitle(pickerData[row], for: .normal)
-            category = pickerData[row]
-        default: break
-        }
-        pickerView.isHidden = true
-        pickerData.removeAll()
-    }
 }
 
 extension AddTransactionVC: UITableViewDelegate, UITableViewDataSource {
@@ -214,8 +212,10 @@ extension AddTransactionVC: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.cellForItem(at: indexPath)?.layer.borderWidth = 5.0
         collectionView.cellForItem(at: indexPath)?.layer.borderColor = UIColor.systemRed.cgColor
-        self.wallet = wallets[indexPath.row]
-        print("Selected wallet: ", wallet?.id ?? "no selection")
+        print(indexPath.row)
+        wallet.0 = wallets[indexPath.row]
+        wallet.1 = indexPath.row
+        print("Selected wallet: ", wallet.0?.id ?? "")
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -233,7 +233,16 @@ extension AddTransactionVC: UICollectionViewDelegate, UICollectionViewDataSource
             return UICollectionViewCell()
         }
     }
-    
-    
+}
 
+extension AddTransactionVC: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        self.walletBtn.endEditing(true)
+    }
+    override func resignFirstResponder() -> Bool {
+        self.amountTextField.resignFirstResponder()
+        self.nameTextField.resignFirstResponder()
+        return true
+    }
 }

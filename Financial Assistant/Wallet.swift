@@ -19,14 +19,14 @@ public struct Wallet: Codable {
     var unifiedBalance: Double = 0.0
     var dateCreated: String
     
-    init(id: String, name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) {
+    init(id: String, name: String, type: String, currencyCode: String, balance: Double, unifiedBalance: Double, limit: Double) {
         self.id = id
         self.name = name
         self.type = type
         self.currencyCode = currencyCode
-        self.balance = initialBalance
+        self.balance = balance
         self.limit = limit
-        self.unifiedBalance = initialBalance * 1 // Calculate using library FX
+        self.unifiedBalance = unifiedBalance
         self.dateCreated = Date().formattedString
     }
     

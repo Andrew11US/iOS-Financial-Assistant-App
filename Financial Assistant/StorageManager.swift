@@ -11,6 +11,7 @@ import Firebase
 import FirebaseDatabase
 import SwiftKeychainWrapper
 import Foundation
+import CoreData
 
 public struct StorageManager {
     
@@ -153,6 +154,140 @@ public struct StorageManager {
 //            }
 //        }
 //    }
+    
+    public func saveToCoreData(toEntity: String, value: [String:Double], forKey: String) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if #available(iOS 13.0, *) {
+            let context = appDelegate.persistentContainer.viewContext
+            let newObject = NSEntityDescription.insertNewObject(forEntityName: toEntity, into: context)
+            
+            newObject.setValue(value, forKey: forKey)
+            
+            do {
+                try context.save()
+                print("Saved to CoreData ", toEntity)
+                
+            } catch {
+                print("Error occured when saving data")
+                print("\(error.localizedDescription)")
+            }
+        } else {
+            let context = appDelegate.persistentContainer2.viewContext
+            let newObject = NSEntityDescription.insertNewObject(forEntityName: toEntity, into: context)
+            
+            newObject.setValue(value, forKey: forKey)
+            
+            do {
+                try context.save()
+                print("Saved to CoreData < iOS 13 ", toEntity)
+                
+            } catch {
+                print("Error occured when saving data")
+                print("\(error.localizedDescription)")
+            }
+        }
+
+    }
+    
+    public func getFromCoreData(fromEntity: String, key: String) -> [String:Double]? {
+        
+        var output : [String:Double] = [:]
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if #available(iOS 13.0, *) {
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: fromEntity)
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let results = try context.fetch(request)
+                
+                if results.count > 0 {
+                    for result in results as! [NSManagedObject] {
+                        
+                        if let value = result.value(forKey: key) {
+                            print(value)
+                            output = value as! Dictionary<String,Double>
+                        }
+                    }
+                    return output
+                }
+                
+            } catch {
+                print("Error loading data from Core Data")
+                print("\(error.localizedDescription)")
+            }
+            return nil
+        } else {
+            let context = appDelegate.persistentContainer2.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: fromEntity)
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let results = try context.fetch(request)
+                
+                if results.count > 0 {
+                    for result in results as! [NSManagedObject] {
+                        
+                        if let value = result.value(forKey: key) {
+                            print(value)
+                            if let dict = value as? [String:Double] {
+                                print(dict)
+                            }
+                            output = value as! [String:Double]
+                        }
+                    }
+                    return output
+                }
+                
+            } catch {
+                print("Error loading data from Core Data")
+                print("\(error.localizedDescription)")
+            }
+            return nil
+        }
+    }
+    
+    public func deleteInCoreData(entity: String) {
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if #available(iOS 13.0, *) {
+            let context = appDelegate.persistentContainer.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let results = try context.fetch(request)
+                
+                if results.count > 0 {
+                    for object in results as! [NSManagedObject] {
+                        context.delete(object)
+                    }
+                }
+            } catch {
+                print("Error loading data from Core Data")
+                print("\(error.localizedDescription)")
+            }
+        } else {
+            let context = appDelegate.persistentContainer2.viewContext
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+            request.returnsObjectsAsFaults = false
+            
+            do {
+                let results = try context.fetch(request)
+                
+                if results.count > 0 {
+                    for object in results as! [NSManagedObject] {
+                        context.delete(object)
+                    }
+                }
+            } catch {
+                print("Error loading data from Core Data")
+                print("\(error.localizedDescription)")
+            }
+        }
+
+    }
     
     func createUser(uid: String, data: Dictionary<String, String>) {
         

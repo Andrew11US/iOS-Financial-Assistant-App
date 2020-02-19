@@ -28,6 +28,7 @@
 		015C501E23FCAB4F006A09F7 /* WalletSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015C501D23FCAB4F006A09F7 /* WalletSelectionCell.swift */; };
 		0165347F23F6E87E00776770 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0165347E23F6E87E00776770 /* GoogleService-Info.plist */; };
 		017E848423FBFD5600850C7C /* CurrencySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */; };
+		018B2FFB23FD86A30006F9B1 /* NetworkWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */; };
 		019F476D23FB3624004CB77D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F471E23FB3623004CB77D /* Array+Extensions.swift */; };
 		019F476E23FB3624004CB77D /* UISegmentedControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F471F23FB3623004CB77D /* UISegmentedControl+Extensions.swift */; };
 		019F476F23FB3624004CB77D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F472023FB3623004CB77D /* UIImageView+Extensions.swift */; };
@@ -142,6 +143,7 @@
 		015C501D23FCAB4F006A09F7 /* WalletSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSelectionCell.swift; sourceTree = "<group>"; };
 		0165347E23F6E87E00776770 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionCell.swift; sourceTree = "<group>"; };
+		018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWrapper.swift; sourceTree = "<group>"; };
 		019F471E23FB3623004CB77D /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		019F471F23FB3623004CB77D /* UISegmentedControl+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Extensions.swift"; sourceTree = "<group>"; };
 		019F472023FB3623004CB77D /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				013C84C123F4AB220007B7EB /* Enums.swift */,
 				013C84C523F4AF600007B7EB /* TestData.swift */,
 				0106E87523F7502500429EBE /* TemporaryData.swift */,
+				018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1038,6 +1041,7 @@
 				019F478523FB3624004CB77D /* CurrencyCell.swift in Sources */,
 				013C84BC23F4A9A30007B7EB /* Extensions.swift in Sources */,
 				019F477A23FB3624004CB77D /* Optional+Extensions.swift in Sources */,
+				018B2FFB23FD86A30006F9B1 /* NetworkWrapper.swift in Sources */,
 				017E848423FBFD5600850C7C /* CurrencySelectionCell.swift in Sources */,
 				013C84C223F4AB220007B7EB /* Enums.swift in Sources */,
 				015C501C23FCA1CF006A09F7 /* CategorySelectionCell.swift in Sources */,
@@ -1248,7 +1252,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1269,7 +1273,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 41;
+				CURRENT_PROJECT_VERSION = 42;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

@@ -21,14 +21,14 @@ public struct Transaction: Codable {
     var walletName: String
     var walletID: String
     
-    init(id: String, name: String, type: String, category: String, originalAmount: Double, wallet: Wallet) {
+    init(id: String, name: String, type: String, category: String, originalAmount: Double, unifiedAmount: Double, wallet: Wallet) {
         self.id = id
         self.name = name
         self.type = type
         self.category = category
         self.currencyCode = wallet.currencyCode
         self.originalAmount = originalAmount
-        self.unifiedAmount = originalAmount * 1 // calculate using fx-rate library
+        self.unifiedAmount = unifiedAmount
         self.dateCreated = Date().formattedString
         self.walletName = wallet.name
         self.walletID = wallet.id

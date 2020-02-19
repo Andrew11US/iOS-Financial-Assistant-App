@@ -8,16 +8,17 @@
 
 import Foundation
 
-public struct Factory {
-    
-    static let shared = Factory()
-    
-    func createTransaction(id: String, name: String, type: String, category: String, originalAmount: Double, wallet: Wallet) -> Transaction {
-        return Transaction(id: id, name: name, type: type, category: category, originalAmount: originalAmount, wallet: wallet)
-    }
+// MARK: Factory has been disabled: use case not found
+//public struct Factory {
 //
-    func createWallet(id: String, name: String, type: String, currencyCode: String, initialBalance: Double, limit: Double) -> Wallet {
-        return Wallet(id: id, name: name, type: type, currencyCode: currencyCode, initialBalance: initialBalance, limit: limit)
-    }
-    
-}
+//    static let shared = Factory()
+//
+//    func createTransaction(id: String, name: String, type: String, category: String, originalAmount: Double, unifiedAmount: Double, wallet: Wallet) -> Transaction {
+//        return Transaction(id: id, name: name, type: type, category: category, originalAmount: originalAmount, unifiedAmount: unifiedAmount, wallet: wallet)
+//    }
+//
+//    func createWallet(id: String, name: String, type: String, currencyCode: String, initialBalance: Double, unified: Double, limit: Double) -> Wallet {
+//        return Wallet(id: id, name: name, type: type, currencyCode: currencyCode, initialBalance: initialBalance, unifiedBalance: unified, limit: limit)
+//    }
+//
+//}

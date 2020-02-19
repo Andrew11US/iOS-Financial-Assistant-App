@@ -39,6 +39,21 @@ class OverviewVC: UIViewController {
         StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
             self.tableView.reloadData()
         }
+        
+//        ExchangeManager.downloadData(url: "https://www.freeforexapi.com/api/live?pairs=USDUAH") { out in
+//            print("Completed!", out)
+//        }
+        
+        NetworkWrapper.getRates(pair: (from: "UA", to: "USD")) { out in
+            print(out)
+        }
+        
+        defaults.set("USD", forKey: "UnifiedCurrency")
+        
+        // MARK: CoreData stuff to save and retrieve cached rates in order to decrease API calls count
+//        StorageManager.shared.saveToCoreData(toEntity: "Rates", value: 25.30, forKey: "rate")
+//        print(StorageManager.shared.getFromCoreData(fromEntity: "Rates", key: "rate"))
+//        StorageManager.shared.deleteInCoreData(entity: "Rates")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,14 +79,11 @@ extension OverviewVC: UITableViewDelegate, UITableViewDataSource {
             
             let transaction = transactions[indexPath.row]
             cell.configureCell(transaction: transaction)
-            
             return cell
-        } else {
             
+        } else {
             return UITableViewCell()
         }
     }
-    
-    
 }
 
