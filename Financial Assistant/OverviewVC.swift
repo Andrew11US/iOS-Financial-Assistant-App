@@ -23,6 +23,7 @@ class OverviewVC: UIViewController {
         if transactions.count == 0 {
             StorageManager.shared.getTransactions {
                 
+                transactions = transactions.sorted { $0.dateCreated > $1.dateCreated }
                 self.removeSpinner(self.spinner)
                 self.tableView.reloadData()
             }
@@ -30,6 +31,7 @@ class OverviewVC: UIViewController {
         
         if wallets.count == 0 {
             StorageManager.shared.getWallets {
+                wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
                 print("wallets has been downloaded")
             }
         }
