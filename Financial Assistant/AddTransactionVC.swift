@@ -121,10 +121,14 @@ class AddTransactionVC: UIViewController {
     @IBAction func addBtnTapped(_ sender: Any) {
         
         guard let name = nameTextField.text else { return }
-        guard var wallet = wallet.0 else { return }
+        guard var wallet = self.wallet.0 else { return }
+        guard let walletIndex = self.wallet.1 else { return }
+ 
         if let amount = amountTextField.text {
-            if let doubleValue = Double(amount) {
+            if let doubleValue = Double(amount), doubleValue != 0.0 {
                 self.amount = doubleValue
+            } else {
+                return
             }
         }
         var type = TransactionType.income.rawValue
@@ -152,17 +156,9 @@ class AddTransactionVC: UIViewController {
         StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
         StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.id, data: wallet.getDictionary())
         
-        wallets[self.wallet.1!] = wallet
+        wallets[walletIndex] = wallet
         
-        
-                        
-                        
-        
-
-        
-
-        
-            self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     // popView animations
