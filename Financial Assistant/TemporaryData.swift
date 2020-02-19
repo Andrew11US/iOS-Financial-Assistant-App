@@ -8,12 +8,7 @@
 
 import Foundation
 
-// Stores data downloaded from persistent storage
-struct TemporaryData {
-    
-    static var shared = TemporaryData()
-    
-    var transactions : [Transaction] = []
-    var wallets : [Wallet] = []
-//    var virtuaWallets : [VirtualWallet] = []
-}
+// Stores temporary data downloaded from persistent storage and used for current session
+var wallets : [Wallet] = []
+var transactions : [Transaction] = []
+var exchangeRates : [String: Double] = [:]

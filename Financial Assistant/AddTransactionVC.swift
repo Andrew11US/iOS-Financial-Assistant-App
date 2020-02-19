@@ -38,6 +38,7 @@ class AddTransactionVC: UIViewController {
     private var category = ""
     private var amount = 0.0
     private var unifiedAmount = 0.0
+    private var tempRate: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,9 @@ class AddTransactionVC: UIViewController {
         if let amountStr = amountTextField.text {
             if let amountDouble = Double(amountStr) {
                 self.amount = amountDouble
+                if tempRate != 0.0 {
+                    unifiedAmount = amount * tempRate
+                }
                 print("Amount set: ", amount)
             }
         }
@@ -87,6 +91,7 @@ class AddTransactionVC: UIViewController {
             NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
                 self.unifiedAmount = self.amount * coff
                 print("Unified: ", self.unifiedAmount, "USD")
+                self.tempRate = coff
             }
         }
     }
@@ -134,22 +139,30 @@ class AddTransactionVC: UIViewController {
         
         let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, unifiedAmount: unifiedAmount, wallet: wallet)
 //        transaction.getDictionary()
-        StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
+
         transactions.append(transaction)
         wallet.balance += transaction.originalAmount
         print("Wallet new balance: ", wallet.balance)
-        NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
-            
-            wallet.unifiedBalance = wallet.balance * coff
-            print("New unified balance: ", wallet.unifiedBalance)
-            
-            StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.id, data: wallet.getDictionary())
-            
-//            wallets[self.wallet.1] = wallet
-            
-        }
         
-        dismiss(animated: true, completion: nil)
+            
+                
+        wallet.unifiedBalance = wallet.balance * tempRate
+        print("New unified balance: ", wallet.unifiedBalance)
+        
+        StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
+        StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.id, data: wallet.getDictionary())
+        
+        wallets[self.wallet.1!] = wallet
+        
+        
+                        
+                        
+        
+
+        
+
+        
+            self.dismiss(animated: true, completion: nil)
     }
     
     // popView animations
