@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -69,7 +70,7 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mv-xT-Kpl">
                                                 <rect key="frame" x="84.666666666666657" y="0.0" width="258.33333333333337" height="60"/>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" title="Select Category"/>
                                                 <connections>
                                                     <action selector="categoryBtnTapped:" destination="2CM-xM-R8v" eventType="touchUpInside" id="6IN-7T-iLp"/>
                                                 </connections>
@@ -87,7 +88,7 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fv8-oB-iIY">
                                                 <rect key="frame" x="64.333333333333343" y="0.0" width="278.66666666666663" height="60"/>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" title="Select Wallet"/>
                                                 <connections>
                                                     <action selector="walletBtnTapped:" destination="2CM-xM-R8v" eventType="touchUpInside" id="UnL-HP-FlA"/>
                                                 </connections>
@@ -144,6 +145,79 @@
                             <pickerView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UFs-SM-48Y">
                                 <rect key="frame" x="16" y="508" width="343" height="216"/>
                             </pickerView>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="swE-et-aKb">
+                                <rect key="frame" x="0.0" y="224" width="375" height="500"/>
+                                <subviews>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="svy-LZ-vxe">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="M9G-Pv-TfL">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="450"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5ex-Gc-YKD">
+                                                    <size key="itemSize" width="139" height="117"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WalletSelectionCell" id="4S2-7T-JZo" customClass="WalletSelectionCell" customModule="Financial_Assistant" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="139" height="117"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="x1d-yW-btI">
+                                                            <rect key="frame" x="0.0" y="0.0" width="139" height="117"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NKt-Gt-5dv">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="139" height="117"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="NKt-Gt-5dv" firstAttribute="top" secondItem="x1d-yW-btI" secondAttribute="top" id="2Ll-Kn-2Fq"/>
+                                                                <constraint firstAttribute="trailing" secondItem="NKt-Gt-5dv" secondAttribute="trailing" id="FXQ-Nc-ihv"/>
+                                                                <constraint firstItem="NKt-Gt-5dv" firstAttribute="leading" secondItem="x1d-yW-btI" secondAttribute="leading" id="Y0G-0O-F7m"/>
+                                                                <constraint firstAttribute="bottom" secondItem="NKt-Gt-5dv" secondAttribute="bottom" id="axs-vt-3Xy"/>
+                                                            </constraints>
+                                                        </collectionViewCellContentView>
+                                                        <size key="customSize" width="139" height="117"/>
+                                                        <connections>
+                                                            <outlet property="nameLbl" destination="NKt-Gt-5dv" id="VxR-eL-Uau"/>
+                                                        </connections>
+                                                    </collectionViewCell>
+                                                </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="2CM-xM-R8v" id="uay-mJ-BdP"/>
+                                                    <outlet property="delegate" destination="2CM-xM-R8v" id="t2B-J0-ya3"/>
+                                                </connections>
+                                            </collectionView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pt6-pZ-fiK">
+                                                <rect key="frame" x="0.0" y="450" width="375" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="DJ4-Sq-gb9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <state key="normal" title="Done">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="walletSelectedTapped:" destination="2CM-xM-R8v" eventType="touchUpInside" id="Foz-RW-bLS"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="svy-LZ-vxe" firstAttribute="top" secondItem="swE-et-aKb" secondAttribute="top" id="8hB-ZI-WGV"/>
+                                    <constraint firstItem="svy-LZ-vxe" firstAttribute="leading" secondItem="swE-et-aKb" secondAttribute="leading" id="MRp-hl-vXR"/>
+                                    <constraint firstAttribute="bottom" secondItem="svy-LZ-vxe" secondAttribute="bottom" id="cAB-lU-mRB"/>
+                                    <constraint firstAttribute="height" constant="500" id="ePR-Mr-nNK"/>
+                                    <constraint firstAttribute="trailing" secondItem="svy-LZ-vxe" secondAttribute="trailing" id="phB-Ha-Fwl"/>
+                                </constraints>
+                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Urd-SY-qqC">
                                 <rect key="frame" x="0.0" y="724" width="375" height="0.0"/>
                                 <subviews>
@@ -159,17 +233,17 @@
                                                     <textInputTraits key="textInputTraits" textContentType="country-name"/>
                                                 </searchBar>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategorySelectionCell" id="12m-qg-zRc" customClass="CategorySelectionCell" customModule="Financial_Assistant" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CategorySelectionCell" id="12m-qg-zRc" customClass="CategorySelectionCell" customModule="Financial_Assistant" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="12m-qg-zRc" id="wWI-60-V0j">
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="K3X-no-Vbf">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="K3X-no-Vbf">
                                                                     <rect key="frame" x="15" y="11" width="345" height="22"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b75-4q-be0">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b75-4q-be0">
                                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="22"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
@@ -206,7 +280,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="categorySelectedTapped:" destination="2CM-xM-R8v" eventType="touchUpInside" id="HBR-1i-maY"/>
-                                                    <action selector="currencySelectedBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="qB2-zK-PLs"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -226,13 +299,16 @@
                         <constraints>
                             <constraint firstItem="HGJ-Cm-n7P" firstAttribute="leading" secondItem="RvA-LA-O4P" secondAttribute="leadingMargin" id="05A-6M-fUf"/>
                             <constraint firstAttribute="bottomMargin" secondItem="UFs-SM-48Y" secondAttribute="bottom" id="19M-zD-7VG"/>
+                            <constraint firstItem="swE-et-aKb" firstAttribute="leading" secondItem="RvA-LA-O4P" secondAttribute="leading" id="40b-Z9-Gjx"/>
                             <constraint firstItem="m3i-Za-f8n" firstAttribute="bottom" secondItem="Urd-SY-qqC" secondAttribute="bottom" id="57I-43-1pR"/>
                             <constraint firstItem="HGJ-Cm-n7P" firstAttribute="top" secondItem="RvA-LA-O4P" secondAttribute="topMargin" constant="20" id="Bee-d0-OSO"/>
+                            <constraint firstItem="m3i-Za-f8n" firstAttribute="bottom" secondItem="swE-et-aKb" secondAttribute="bottom" id="ftl-hW-ZtT"/>
                             <constraint firstAttribute="trailing" secondItem="Urd-SY-qqC" secondAttribute="trailing" id="gaM-BY-jm2"/>
                             <constraint firstItem="UFs-SM-48Y" firstAttribute="leading" secondItem="RvA-LA-O4P" secondAttribute="leadingMargin" id="h4Y-w0-DLs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HGJ-Cm-n7P" secondAttribute="trailing" id="mv3-pq-g5R"/>
                             <constraint firstItem="Urd-SY-qqC" firstAttribute="leading" secondItem="RvA-LA-O4P" secondAttribute="leading" id="njF-Ke-b6k"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UFs-SM-48Y" secondAttribute="trailing" id="rLe-0X-Oha"/>
+                            <constraint firstAttribute="trailing" secondItem="swE-et-aKb" secondAttribute="trailing" id="uxA-kd-QuH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m3i-Za-f8n"/>
                     </view>
@@ -250,6 +326,9 @@
                         <outlet property="pickerView" destination="UFs-SM-48Y" id="aI5-3y-K4s"/>
                         <outlet property="segmentControl" destination="J5D-uW-Hu1" id="NhG-JM-AD1"/>
                         <outlet property="walletBtn" destination="Fv8-oB-iIY" id="jUi-uI-dxa"/>
+                        <outlet property="walletCollectionView" destination="M9G-Pv-TfL" id="fNz-LC-pwL"/>
+                        <outlet property="walletView" destination="swE-et-aKb" id="fQC-1u-t8N"/>
+                        <outlet property="walletViewHeight" destination="ePR-Mr-nNK" id="OMG-JP-xCw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zd5-DU-KNM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -424,7 +503,7 @@
                                                     <textInputTraits key="textInputTraits" textContentType="country-name"/>
                                                 </searchBar>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrencySelectionCell" id="LSq-hj-MVt" customClass="CurrencySelectionCell" customModule="Financial_Assistant" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CurrencySelectionCell" id="LSq-hj-MVt" customClass="CurrencySelectionCell" customModule="Financial_Assistant" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LSq-hj-MVt" id="ope-CN-0ZK">

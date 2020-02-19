@@ -22,7 +22,7 @@ class AddTransactionVC: UIViewController {
     
     // Selection subViews
     @IBOutlet weak var categoryTableView: UITableView!
-    @IBOutlet weak var walletTableView: UITableView!
+    @IBOutlet weak var walletCollectionView: UICollectionView!
     @IBOutlet weak var categoryViewHeight: NSLayoutConstraint!
     @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var walletViewHeight: NSLayoutConstraint!
@@ -44,37 +44,32 @@ class AddTransactionVC: UIViewController {
         
         self.pickerView.delegate = self
         self.pickerView.dataSource = self
-
-//        StorageManager.shared.getTransactions()
-    }
-    
-    @IBAction func save(sender: UIButton) {
-        StorageManager.shared.saveData()
-    }
-    
-    @IBAction func retrieve(sender: UIButton) {
-//        StorageManager.shared.retrieveData()
-//        for t in transactions {
-//            print(t.convertToString ?? "")
-//        }
-//        let t = Factory.shared.createTransaction(id: "x1x", name: "Food", type: TransactionType.expense.rawValue, category: TransactionCategory.Expense.groceries.rawValue, originalAmount: -123.23, wallet: wallets[0])
-//        print(t.convertToString ?? "xx")
     }
     
     @IBAction func segmentControlChanged(_ sender: Any) {
-        print(segmentControl.selectedSegmentIndex)
+        print("Segment index: ", segmentControl.selectedSegmentIndex)
+        category = "Select Category"
+        categorySelectedTapped((Any).self)
     }
     
     @IBAction func walletBtnTapped(_ sender: Any) {
-        pickerData = []
-        var walletStr: [String] = []
-        for w in wallets {
-            walletStr.append(w.name)
+//        pickerData = []
+//        var walletStr: [String] = []
+//        for w in wallets {
+//            walletStr.append(w.name)
+//        }
+//        pickerData = walletStr
+//        self.pickerView.isHidden = false
+//        pickerView.reloadAllComponents()
+//        currentBtn = "walletBtn"
+        animateUp(constraint: walletViewHeight)
+    }
+    
+    @IBAction func walletSelectedTapped(_ sender: Any) {
+       animateDown(constraint: walletViewHeight)
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
+            self.walletBtn.setTitle(self.wallet?.name.capitalized, for: .normal)
         }
-        pickerData = walletStr
-        self.pickerView.isHidden = false
-        pickerView.reloadAllComponents()
-        currentBtn = "walletBtn"
     }
     
     // Delete date picking <<<
@@ -87,13 +82,19 @@ class AddTransactionVC: UIViewController {
     }
     
     @IBAction func categoryBtnTapped(_ sender: Any) {
+        if segmentControl.selectedSegmentIndex == 0 {
+            categories = TransactionCategory.Income.getArray()
+        } else {
+            categories = TransactionCategory.Expense.getArray()
+        }
+        categoryTableView.reloadData()
        animateUp(constraint: categoryViewHeight)
     }
     
     @IBAction func categorySelectedTapped(_ sender: Any) {
        animateDown(constraint: categoryViewHeight)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
-            self.categoryBtn.setTitle(self.category, for: .normal)
+            self.categoryBtn.setTitle(self.category.capitalized, for: .normal)
         }
     }
     
@@ -193,11 +194,46 @@ extension AddTransactionVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CategorySelectionCell", for: indexPath) as? CategorySelectionCell {
             
-            let category = categories[indexPath.row]
+            let category = categories[indexPath.row].capitalized
             cell.configureCell(category: category)
             return cell
         } else {
             return UITableViewCell()
         }
     }
+}
+
+extension AddTransactionVC: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return wallets.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(at: indexPath)?.layer.borderWidth = 5.0
+        collectionView.cellForItem(at: indexPath)?.layer.borderColor = UIColor.systemRed.cgColor
+        self.wallet = wallets[indexPath.row]
+        print("Selected wallet: ", wallet?.id ?? "no selection")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        collectionView.cellForItem(at: indexPath)?.layer.borderWidth = 0
+        collectionView.cellForItem(at: indexPath)?.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WalletSelectionCell", for: indexPath) as? WalletSelectionCell {
+            
+            let wallet = wallets[indexPath.row].name.capitalized // <<< to be changed!!!
+            cell.configureCell(wallet: wallet)
+            return cell
+        } else {
+            return UICollectionViewCell()
+        }
+    }
+    
+    
+
 }
