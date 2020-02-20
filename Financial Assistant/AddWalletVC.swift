@@ -42,22 +42,22 @@ class AddWalletVC: UIViewController {
     }
   
     @IBAction func typeBtnTapped(_ sender: Any) {
-        animateUp(constraint: typeViewHeight)
+        animateUp(view: typeView, constraint: typeViewHeight)
     }
     
     @IBAction func currencyBtnTapped(_ sender: Any) {
-        animateUp(constraint: currencyViewHeight)
+        animateUp(view: currencyView, constraint: currencyViewHeight)
     }
     
     @IBAction func currencySelectedBtnTapped(_ sender: Any) {
-        animateDown(constraint: currencyViewHeight)
+        animateDown(view: currencyView, constraint: currencyViewHeight)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.currencyBtn.setTitle(self.currency, for: .normal)
         }
     }
     
     @IBAction func typeSelectedBtnTapped(_ sender: Any) {
-        animateDown(constraint: typeViewHeight)
+        animateDown(view: typeView, constraint: typeViewHeight)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.typeBtn.setTitle(self.type.capitalized, for: .normal)
         }
@@ -90,18 +90,20 @@ class AddWalletVC: UIViewController {
     }
     
     // popView animations
-    func animateUp(constraint: NSLayoutConstraint) {
+    func animateUp(view: UIView, constraint: NSLayoutConstraint) {
         // Optimized for iPhone SE 4-inch screen and Up
         constraint.constant = 550
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
+            view.superview?.subviews[0].isUserInteractionEnabled = false
         }
     }
     
-    func animateDown(constraint: NSLayoutConstraint) {
+    func animateDown(view: UIView, constraint: NSLayoutConstraint) {
         constraint.constant = 0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
+            view.superview?.subviews[0].isUserInteractionEnabled = true
         }
     }
     

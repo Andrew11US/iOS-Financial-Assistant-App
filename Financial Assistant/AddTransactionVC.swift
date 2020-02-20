@@ -75,11 +75,11 @@ class AddTransactionVC: UIViewController {
 //        self.pickerView.isHidden = false
 //        pickerView.reloadAllComponents()
 //        currentBtn = "walletBtn"
-        animateUp(constraint: walletViewHeight)
+        animateUp(view: walletView, constraint: walletViewHeight)
     }
     
     @IBAction func walletSelectedTapped(_ sender: Any) {
-       animateDown(constraint: walletViewHeight)
+        animateDown(view: walletView, constraint: walletViewHeight)
         if wallet.0 == nil {
             wallet.0 = wallets[0]
         }
@@ -108,11 +108,12 @@ class AddTransactionVC: UIViewController {
             categories = TransactionCategory.Expense.getArray()
         }
         categoryTableView.reloadData()
-       animateUp(constraint: categoryViewHeight)
+        animateUp(view: categoryView, constraint: categoryViewHeight)
+        categoryView.superview?.subviews[0].isUserInteractionEnabled = false
     }
     
     @IBAction func categorySelectedTapped(_ sender: Any) {
-       animateDown(constraint: categoryViewHeight)
+        animateDown(view: categoryView, constraint: categoryViewHeight)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.categoryBtn.setTitle(self.category.capitalized, for: .normal)
         }
@@ -162,18 +163,21 @@ class AddTransactionVC: UIViewController {
     }
     
     // popView animations
-    func animateUp(constraint: NSLayoutConstraint) {
+    func animateUp(view: UIView, constraint: NSLayoutConstraint) {
         // Optimized for iPhone SE 4-inch screen and Up
         constraint.constant = 550
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
+            view.superview?.subviews[0].isUserInteractionEnabled = false
+//            view.superview?.layer.backgroundColor = UIColor(red: 12, green: 12, blue: 12, transparency: 0.9).cgColor
         }
     }
     
-    func animateDown(constraint: NSLayoutConstraint) {
+    func animateDown(view: UIView, constraint: NSLayoutConstraint) {
         constraint.constant = 0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
+            view.superview?.subviews[0].isUserInteractionEnabled = true
         }
     }
 

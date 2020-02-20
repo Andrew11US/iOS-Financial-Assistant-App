@@ -44,7 +44,7 @@ class DetailTransactionVC: UIViewController {
         self.unifiedAmountLbl.text = "\(transaction.0.unifiedAmount) \(unifiedCurrencyCode)"
         self.categoryLbl.text = transaction.0.category
         self.currencyLbl.text = transaction.0.currencyCode
-        self.unifiedAmountLbl.text = unifiedCurrencyCode
+        self.currencyLbl.text = unifiedCurrencyCode
         self.dateLbl.text = transaction.0.dateCreated
         self.walletNameLbl.text = transaction.0.walletName
         self.walletIdLbl.text = transaction.0.walletID
