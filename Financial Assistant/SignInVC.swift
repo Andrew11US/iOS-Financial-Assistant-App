@@ -16,6 +16,8 @@ class SignInVC: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInBtn: UIButton!
     
+    let spinner = SpinnerViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +26,7 @@ class SignInVC: UIViewController {
         
         // Auto Login if ID is found in Keychain
         if KeychainWrapper.standard.string(forKey: KEY_UID) != nil {
-            print("Key has been found in keychain! Loging in without credentials")
+            print("Key has been found in keychain!")
             DispatchQueue.main.async { () -> Void in
                 self.performSegue(withIdentifier: Segue.toOverview.rawValue, sender: nil)
             }
@@ -36,33 +38,30 @@ class SignInVC: UIViewController {
     
     @IBAction func signInBtnPressed(_ sender: AnyObject) {
         
-        // Sign in using E-mail and Password
-        if let email = emailTextField.text, let pwd = passwordTextField.text {
-            Auth.auth().signIn(withEmail: email, password: pwd, completion: { (data, error) in
-                
-                guard let user = data?.user else { return }
-                
-                if error == nil {
-                    print("Email user authenticated with Firebase")
-                    KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
-                    self.performSegue(withIdentifier: Segue.toOverview.rawValue, sender: nil)
-                    
-                } else {
-                    print("Unable to authenticate")
-                    self.showAlertWithTitle("Ooops:(", message: "Looks like your email or password wasn't correct")
-                }
-            })
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        
+        addSpinner(spinner)
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            if let err = error {
+                print(err.localizedDescription)
+                self.removeSpinner(self.spinner)
+            } else {
+                guard let user = user?.user else { return }
+                print("Succesfully authenticated for: ", user.uid)
+                KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
+                self.performSegue(withIdentifier: Segue.toOverview.rawValue, sender: nil)
+                self.removeSpinner(self.spinner)
+            }
         }
         
         self.view.endEditing(true)
     }
     
-    // Getting transactions before switching to destination VC
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        StorageManager.shared.getTransactions {}
+        
      }
-     
-    
 }
 
 extension SignInVC: UITextFieldDelegate {

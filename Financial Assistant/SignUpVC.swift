@@ -22,7 +22,9 @@ class SignUpVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        self.emailTextField.delegate = self
+        self.passwordTextField.delegate = self
+        self.confirmPassTextField.delegate = self
     }
     
     @IBAction func signUpBtnPressed(_ sender: AnyObject) {
@@ -34,37 +36,36 @@ class SignUpVC: UIViewController {
         if password == confirmation {
             addSpinner(spinner)
             
-            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-                guard error != nil else {
-                    print("User has already been created! ", user?.user.email ?? "")
-                    self.removeSpinner(self.spinner)
-                    return
-                }
-            }
-            
             Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
                 if let err = error {
-                    print("User has not been created due to error: ", err.localizedDescription)
+                    print(err.localizedDescription)
+                    self.removeSpinner(self.spinner)
                 } else {
                     guard let user = user?.user else { return }
                     print("New user has been succesfully created: ", user.uid)
                     StorageManager.shared.createUser(uid: user.uid)
                     KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
+                    self.removeSpinner(self.spinner)
                     self.performSegue(withIdentifier: Segue.signedUp.rawValue, sender: nil)
                 }
             }
         }
+        self.view.endEditing(true)
+    }
+
+}
+
+extension SignUpVC: UITextFieldDelegate {
+    // Dismiss keyboard function
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // Dismiss when return btn pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        confirmPassTextField.resignFirstResponder()
+        return true
     }
-    */
-
 }

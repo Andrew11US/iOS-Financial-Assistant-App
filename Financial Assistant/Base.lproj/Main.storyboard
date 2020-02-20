@@ -1596,7 +1596,7 @@
                         <outlet property="emailTextField" destination="yen-Da-cC8" id="Byz-Hs-LcN"/>
                         <outlet property="passwordTextField" destination="ZTB-gV-wz8" id="rL9-rf-jUf"/>
                         <outlet property="signUpBtn" destination="53H-OZ-Ich" id="FRT-dp-G6e"/>
-                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="signedUp" modalPresentationStyle="fullScreen" id="Y49-cP-V9x"/>
+                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="signedUp" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="Y49-cP-V9x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c2r-Vo-DNo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
