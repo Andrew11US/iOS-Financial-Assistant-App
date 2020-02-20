@@ -38,7 +38,6 @@ class TransactionsVC: UIViewController {
         }
     }
     
-
 }
 
 extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
@@ -60,10 +59,8 @@ extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
             
             let transaction = transactions[indexPath.row]
             cell.configureCell(transaction: transaction)
-            
             return cell
         } else {
-            
             return UITableViewCell()
         }
     }
@@ -75,6 +72,4 @@ extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
             self.performSegue(withIdentifier: "DetailTransaction", sender: trans)
         }
     }
-    
-    
 }

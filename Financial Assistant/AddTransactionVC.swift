@@ -66,15 +66,6 @@ class AddTransactionVC: UIViewController {
     }
     
     @IBAction func walletBtnTapped(_ sender: Any) {
-//        pickerData = []
-//        var walletStr: [String] = []
-//        for w in wallets {
-//            walletStr.append(w.name)
-//        }
-//        pickerData = walletStr
-//        self.pickerView.isHidden = false
-//        pickerView.reloadAllComponents()
-//        currentBtn = "walletBtn"
         animateUp(view: walletView, constraint: walletViewHeight)
     }
     
@@ -169,7 +160,8 @@ class AddTransactionVC: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
             view.superview?.subviews[0].isUserInteractionEnabled = false
-//            view.superview?.layer.backgroundColor = UIColor(red: 12, green: 12, blue: 12, transparency: 0.9).cgColor
+            // TODO: gray out underlying layers when popUp is active
+//            view.superview?.layer.backgroundColor = UIColor(red: 12, green: 12, blue: 12, transparency: 1).cgColor
         }
     }
     
