@@ -98,6 +98,8 @@
 		01D891D623EE1B890009FD5A /* StatisticsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D891D523EE1B890009FD5A /* StatisticsVC.swift */; };
 		01D891D823EE1B9F0009FD5A /* PlanningVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D891D723EE1B9F0009FD5A /* PlanningVC.swift */; };
 		01D891DA23EE1BB00009FD5A /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D891D923EE1BB00009FD5A /* SettingsVC.swift */; };
+		01EFF24923FF3881006DC21B /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EFF24823FF3881006DC21B /* SignUpVC.swift */; };
+		01EFF24B23FF3897006DC21B /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EFF24A23FF3897006DC21B /* ResetPasswordVC.swift */; };
 		2AF39AAA13126845F8E1AA52 /* Pods_Financial_Assistant_Financial_AssistantUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9068C0C598984CC8E5D7C2D3 /* Pods_Financial_Assistant_Financial_AssistantUITests.framework */; };
 		419A7304580E49D33DC63C4F /* Pods_Financial_AssistantTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D32A3B623323BDFC53972DF6 /* Pods_Financial_AssistantTests.framework */; };
 		64D1080FF5680F6319FE028B /* Pods_Financial_Assistant.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 064357AD4F8FFA20CB940FDD /* Pods_Financial_Assistant.framework */; };
@@ -218,6 +220,8 @@
 		01D891D523EE1B890009FD5A /* StatisticsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsVC.swift; sourceTree = "<group>"; };
 		01D891D723EE1B9F0009FD5A /* PlanningVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanningVC.swift; sourceTree = "<group>"; };
 		01D891D923EE1BB00009FD5A /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		01EFF24823FF3881006DC21B /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		01EFF24A23FF3897006DC21B /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		064357AD4F8FFA20CB940FDD /* Pods_Financial_Assistant.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Financial_Assistant.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		08900C8C6FEE549447528E83 /* Pods-Financial Assistant.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Financial Assistant.debug.xcconfig"; path = "Target Support Files/Pods-Financial Assistant/Pods-Financial Assistant.debug.xcconfig"; sourceTree = "<group>"; };
 		114DCD98F2004057D96EA491 /* Pods-Financial AssistantTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Financial AssistantTests.debug.xcconfig"; path = "Target Support Files/Pods-Financial AssistantTests/Pods-Financial AssistantTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -275,6 +279,8 @@
 			isa = PBXGroup;
 			children = (
 				0104A03323F717FA00C52ED2 /* SignInVC.swift */,
+				01EFF24823FF3881006DC21B /* SignUpVC.swift */,
+				01EFF24A23FF3897006DC21B /* ResetPasswordVC.swift */,
 				01A58D7323DCADFA004F124C /* OverviewVC.swift */,
 				01A58D7523DCADFA004F124C /* WalletVC.swift */,
 				01D891D323EE150D0009FD5A /* TransactionsVC.swift */,
@@ -1023,6 +1029,7 @@
 				019F479D23FB3624004CB77D /* Label.swift in Sources */,
 				019F477823FB3624004CB77D /* UIApplication+Extensions.swift in Sources */,
 				01D3037B23F9BD4000D5448C /* SpinnerViewController.swift in Sources */,
+				01EFF24923FF3881006DC21B /* SignUpVC.swift in Sources */,
 				019F478B23FB3624004CB77D /* LocationSearchResultsViewController.swift in Sources */,
 				01D891D823EE1B9F0009FD5A /* PlanningVC.swift in Sources */,
 				019F477723FB3624004CB77D /* UISearchBar+Extensions.swift in Sources */,
@@ -1036,6 +1043,7 @@
 				015C501E23FCAB4F006A09F7 /* WalletSelectionCell.swift in Sources */,
 				019F478623FB3624004CB77D /* CountryCell.swift in Sources */,
 				019F478523FB3624004CB77D /* CurrencyCell.swift in Sources */,
+				01EFF24B23FF3897006DC21B /* ResetPasswordVC.swift in Sources */,
 				013C84BC23F4A9A30007B7EB /* Extensions.swift in Sources */,
 				019F477A23FB3624004CB77D /* Optional+Extensions.swift in Sources */,
 				018B2FFB23FD86A30006F9B1 /* NetworkWrapper.swift in Sources */,
@@ -1248,7 +1256,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 48;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1269,7 +1277,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 47;
+				CURRENT_PROJECT_VERSION = 48;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

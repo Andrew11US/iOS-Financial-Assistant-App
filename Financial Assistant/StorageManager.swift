@@ -289,17 +289,19 @@ public struct StorageManager {
 
     }
     
-    func createUser(uid: String, data: Dictionary<String, String>) {
+    func createUser(uid: String) {
         
-        let defaultData : [String: String] = [
+        let data : [String: String] = [
             "name" : "John Doe",
             "wallets" : "no wallets",
             "transactions" : "no transactions",
             "statistics" : "unavailable",
             "virtualWallets" : "no vWallets",
+            "dateCreated" : Date().formattedString,
+            "uid" : uid
         ]
         
-        StorageManager.dbReference.child(uid).updateChildValues(defaultData) // change default!!!!
+        StorageManager.dbReference.child(uid).updateChildValues(data)
     }
 
 }

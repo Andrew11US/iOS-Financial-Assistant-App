@@ -10,6 +10,7 @@ import Foundation
 
 public enum Segue: String {
     case toOverview
+    case signedUp
 }
 
 public enum FDChild: String {
