@@ -79,9 +79,10 @@ class AddWalletVC: UIViewController {
         }
         
         let unifiedBalance = 1.0
+        let unifiedCurrencyCode = defaults.string(forKey: "UnifiedCurrencyCode") ?? "USD"
         
         let key = StorageManager.shared.getAutoKey(at: FDChild.wallets.rawValue)
-        let wallet = Wallet(id: key, name: name, type: type, currencyCode: currency, balance: balance, unifiedBalance: unifiedBalance, limit: limit)
+        let wallet = Wallet(id: key, name: name, type: type, currencyCode: currency, unifiedCurrencyCode: unifiedCurrencyCode, balance: balance, unifiedBalance: unifiedBalance, limit: limit)
     
         StorageManager.shared.pushObject(to: FDChild.wallets.rawValue, key: key, data: wallet.getDictionary())
         wallets.append(wallet)

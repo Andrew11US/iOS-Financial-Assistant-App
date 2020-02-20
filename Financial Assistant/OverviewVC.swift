@@ -41,7 +41,8 @@ class OverviewVC: UIViewController {
         }
         
 //        defaults.set("USD", forKey: "UnifiedCurrency")
-        print(defaults.string(forKey: "UnifiedCurrency"))
+//        defaults.removeObject(forKey: "UnifiedCurrency")
+//        print(defaults.string(forKey: "UnifiedCurrencyCode"))
         // MARK: CoreData stuff to save and retrieve cached rates in order to decrease API calls count
 //        StorageManager.shared.saveToCoreData(toEntity: "Rates", value: 25.30, forKey: "rate")
 //        print(StorageManager.shared.getFromCoreData(fromEntity: "Rates", key: "rate"))

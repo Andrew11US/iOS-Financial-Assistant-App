@@ -16,12 +16,14 @@ class DetailTransactionVC: UIViewController {
     @IBOutlet weak var unifiedAmountLbl: UILabel!
     @IBOutlet weak var categoryLbl: UILabel!
     @IBOutlet weak var currencyLbl: UILabel!
+    @IBOutlet weak var unufiedcurrencyLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var walletNameLbl: UILabel!
     @IBOutlet weak var walletIdLbl: UILabel!
     @IBOutlet weak var deleteBtn: UIButton!
     
     var transaction: (Transaction, Int)!
+    let unifiedCurrencyCode = defaults.string(forKey: "UnifiedCurrencyCode") ?? "USD"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,9 +41,10 @@ class DetailTransactionVC: UIViewController {
         self.idLbl.text = transaction.0.id
         self.nameLbl.text = transaction.0.name
         self.originalAmountLbl.text = "\(transaction.0.originalAmount) \(transaction.0.currencyCode)"
-        self.unifiedAmountLbl.text = "\(transaction.0.unifiedAmount) USD"
+        self.unifiedAmountLbl.text = "\(transaction.0.unifiedAmount) \(unifiedCurrencyCode)"
         self.categoryLbl.text = transaction.0.category
         self.currencyLbl.text = transaction.0.currencyCode
+        self.unifiedAmountLbl.text = unifiedCurrencyCode
         self.dateLbl.text = transaction.0.dateCreated
         self.walletNameLbl.text = transaction.0.walletName
         self.walletIdLbl.text = transaction.0.walletID

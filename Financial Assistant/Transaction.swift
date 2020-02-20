@@ -15,6 +15,7 @@ public struct Transaction: Codable {
     var type: String
     var category: String
     var currencyCode: String
+    var unifiedCurrencyCode: String
     var originalAmount: Double
     var unifiedAmount: Double
     var dateCreated: String
@@ -27,8 +28,10 @@ public struct Transaction: Codable {
         self.type = type
         self.category = category
         self.currencyCode = wallet.currencyCode
+        self.unifiedCurrencyCode = defaults.string(forKey: "UnifiedCurrencyCode") ?? "USD"
         self.originalAmount = originalAmount
         self.unifiedAmount = unifiedAmount
+        self.unifiedCurrencyCode = wallet.unifiedCurrencyCode
         self.dateCreated = Date().formattedString
         self.walletName = wallet.name
         self.walletID = wallet.id
@@ -41,6 +44,7 @@ public struct Transaction: Codable {
         self.type = data["type"] as? String ?? "type"
         self.category = data["category"] as? String ?? "category"
         self.currencyCode = data["currencyCode"] as? String ?? "currencyCode"
+        self.unifiedCurrencyCode = data["unifiedCurrencyCode"] as? String ?? "unifiedCurrencyCode"
         self.originalAmount = data["originalAmount"] as? Double ?? 0.0
         self.unifiedAmount = data["unifiedAmount"] as? Double ?? 0.0
         self.dateCreated = data["dateCreated"] as? String ?? "dateCreated"
@@ -56,6 +60,7 @@ public struct Transaction: Codable {
             "type" : self.type,
             "category" : self.category,
             "currencyCode" : self.currencyCode,
+            "unifiedCurrencyCode" : self.unifiedCurrencyCode,
             "originalAmount" : self.originalAmount,
             "unifiedAmount" : self.unifiedAmount,
             "dateCreated" : self.dateCreated,
