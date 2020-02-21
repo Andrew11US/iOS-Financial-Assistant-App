@@ -82,7 +82,7 @@ public struct StorageManager {
                     }
                 }
             }
-            print(transactions.count)
+            print("Transactions: ", transactions.count)
             completion()
         }
     }
@@ -105,7 +105,7 @@ public struct StorageManager {
                         }
                     }
                 }
-                print(wallets.count)
+                print("Wallets: ", wallets.count)
                 completion()
             }
         }
@@ -308,7 +308,7 @@ public struct StorageManager {
     func saveUserOffline(uid: String, name: String = "John Doe") {
         let dict : [String: String] = [
             "name" : name,
-            "dateCreated" : Date().formattedString,
+            "latestLogin" : Date().formattedString,
             "uid" : uid
         ]
         defaults.set(dict, forKey: "CurrentUser")

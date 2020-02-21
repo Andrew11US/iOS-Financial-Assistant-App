@@ -14,10 +14,8 @@ class AddTransactionVC: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var walletBtn: UIButton!
-    @IBOutlet weak var dateBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var categoryBtn: UIButton!
-    @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var currencyLbl: UILabel!
     
@@ -76,7 +74,6 @@ class AddTransactionVC: UIViewController {
         }
         guard let wallet = wallet.0 else { return }
 
-        
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.walletBtn.setTitle(wallet.name.capitalized, for: .normal)
             NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
@@ -85,11 +82,6 @@ class AddTransactionVC: UIViewController {
                 self.tempRate = coff
             }
         }
-    }
-    
-    // Delete date picking <<<
-    @IBAction func dateBtnTapped(_ sender: Any) {
-        
     }
     
     @IBAction func categoryBtnTapped(_ sender: Any) {
@@ -160,8 +152,6 @@ class AddTransactionVC: UIViewController {
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
             view.superview?.subviews[0].isUserInteractionEnabled = false
-            // TODO: gray out underlying layers when popUp is active
-//            view.superview?.layer.backgroundColor = UIColor(red: 12, green: 12, blue: 12, transparency: 1).cgColor
         }
     }
     

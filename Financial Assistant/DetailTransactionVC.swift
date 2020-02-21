@@ -16,7 +16,7 @@ class DetailTransactionVC: UIViewController {
     @IBOutlet weak var unifiedAmountLbl: UILabel!
     @IBOutlet weak var categoryLbl: UILabel!
     @IBOutlet weak var currencyLbl: UILabel!
-    @IBOutlet weak var unufiedcurrencyLbl: UILabel!
+    @IBOutlet weak var unufiedCurrencyLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var walletNameLbl: UILabel!
     @IBOutlet weak var walletIdLbl: UILabel!
@@ -44,7 +44,7 @@ class DetailTransactionVC: UIViewController {
         self.unifiedAmountLbl.text = "\(transaction.0.unifiedAmount) \(unifiedCurrencyCode)"
         self.categoryLbl.text = transaction.0.category
         self.currencyLbl.text = transaction.0.currencyCode
-        self.currencyLbl.text = unifiedCurrencyCode
+        self.unufiedCurrencyLbl.text = unifiedCurrencyCode
         self.dateLbl.text = transaction.0.dateCreated
         self.walletNameLbl.text = transaction.0.walletName
         self.walletIdLbl.text = transaction.0.walletID

@@ -18,10 +18,9 @@ class TransactionsVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childRemoved, completion: {
-            
+        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
             self.tableView.reloadData()
-        })
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

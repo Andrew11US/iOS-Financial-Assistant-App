@@ -19,18 +19,7 @@ class WalletVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-//        if wallets.count == 0 {
-//            StorageManager.shared.getWallets {
-//                self.tableView.reloadData()
-//            }
-//        }
-        
         StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childChanged) {
-//            self.addSpinner(self.spinner)
-//            StorageManager.shared.getWallets {
-//                self.tableView.reloadData()
-//                self.removeSpinner(self.spinner)
-//            }
             self.tableView.reloadData()
         }
     }
@@ -50,7 +39,6 @@ class WalletVC: UIViewController {
         }
     }
 
-
 }
 
 extension WalletVC: UITableViewDelegate, UITableViewDataSource {
@@ -68,22 +56,17 @@ extension WalletVC: UITableViewDelegate, UITableViewDataSource {
             
             let wallet = wallets[indexPath.row]
             cell.configureCell(wallet: wallet)
-            
             return cell
         } else {
-            
             return UITableViewCell()
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let wallet = (wallets[indexPath.row], indexPath.row)
-        
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "DetailWallet", sender: wallet)
         }
     }
-    
-    
 }
 

@@ -22,7 +22,7 @@ class SignInVC: UIViewController {
         super.viewDidLoad()
         
         // MARK: Deletes KEY for auto login if uncommented
-        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+//        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         
         // Auto Login if ID is found in Keychain
         if KeychainWrapper.standard.string(forKey: KEY_UID) != nil {

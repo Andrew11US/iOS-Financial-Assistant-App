@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HGJ-Cm-n7P">
-                                <rect key="frame" x="16" y="20" width="343" height="536"/>
+                                <rect key="frame" x="16" y="20" width="343" height="468"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a transaction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBH-wx-jQv">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="60"/>
@@ -98,26 +98,8 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Iic-zy-we6">
-                                        <rect key="frame" x="0.0" y="340" width="343" height="60"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BnQ-xn-yx7">
-                                                <rect key="frame" x="0.0" y="0.0" width="36" height="60"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v21-Jg-RcR">
-                                                <rect key="frame" x="55" y="0.0" width="288" height="60"/>
-                                                <state key="normal" title="Today"/>
-                                                <connections>
-                                                    <action selector="dateBtnTapped:" destination="2CM-xM-R8v" eventType="touchUpInside" id="p7y-l1-gzL"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="V6U-hc-iT1">
-                                        <rect key="frame" x="0.0" y="408" width="343" height="60"/>
+                                        <rect key="frame" x="0.0" y="340" width="343" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1J-CT-xZd">
                                                 <rect key="frame" x="0.0" y="0.0" width="136" height="60"/>
@@ -133,7 +115,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIm-1G-qfF">
-                                        <rect key="frame" x="0.0" y="476" width="343" height="60"/>
+                                        <rect key="frame" x="0.0" y="408" width="343" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="weQ-yW-PYS"/>
                                         </constraints>
@@ -318,7 +300,6 @@
                         <outlet property="categoryView" destination="Urd-SY-qqC" id="qC6-rt-KCJ"/>
                         <outlet property="categoryViewHeight" destination="ivP-8s-5Q7" id="eFW-ZW-E7A"/>
                         <outlet property="currencyLbl" destination="XSr-Cc-BwB" id="amI-kH-xXE"/>
-                        <outlet property="dateBtn" destination="v21-Jg-RcR" id="1Q1-y4-5ke"/>
                         <outlet property="nameTextField" destination="86N-sT-H8u" id="FQR-0I-rc8"/>
                         <outlet property="segmentControl" destination="J5D-uW-Hu1" id="NhG-JM-AD1"/>
                         <outlet property="walletBtn" destination="Fv8-oB-iIY" id="jUi-uI-dxa"/>
@@ -818,7 +799,7 @@
                         <outlet property="nameLbl" destination="SAp-xi-ofR" id="MBh-ji-Fg6"/>
                         <outlet property="originalAmountLbl" destination="StY-bW-Vhd" id="HlM-a8-otl"/>
                         <outlet property="unifiedAmountLbl" destination="sJR-0w-na2" id="wo6-kY-dih"/>
-                        <outlet property="unufiedcurrencyLbl" destination="OAR-oE-RBM" id="pjS-PJ-dL1"/>
+                        <outlet property="unufiedCurrencyLbl" destination="OAR-oE-RBM" id="6Xi-hQ-vTP"/>
                         <outlet property="walletIdLbl" destination="MGM-MT-sqh" id="toi-fk-1tl"/>
                         <outlet property="walletNameLbl" destination="Kae-jz-IxD" id="Oly-nq-q4e"/>
                     </connections>
