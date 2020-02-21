@@ -1138,12 +1138,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="CfQ-JV-XSS">
-                                <rect key="frame" x="123.66666666666669" y="357.66666666666669" width="128" height="43"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pvb-Oe-7Qm">
                                 <rect key="frame" x="42" y="27" width="34" height="30"/>
                                 <state key="normal" title="back"/>
@@ -1151,17 +1145,29 @@
                                     <action selector="backTapped:" destination="D4e-dq-OIH" eventType="touchUpInside" id="CLh-M9-SeQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9EV-o9-IhE">
+                                <rect key="frame" x="276" y="27" width="55" height="30"/>
+                                <state key="normal" title="sign out">
+                                    <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="signOutTapped:" destination="D4e-dq-OIH" eventType="touchUpInside" id="W2q-aB-3Q5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="CfQ-JV-XSS" firstAttribute="centerY" secondItem="fC8-jT-yGc" secondAttribute="centerY" id="C9Y-cV-rbS"/>
                             <constraint firstItem="Pvb-Oe-7Qm" firstAttribute="leading" secondItem="fC8-jT-yGc" secondAttribute="leadingMargin" constant="26" id="Lv2-zl-YgJ"/>
-                            <constraint firstItem="CfQ-JV-XSS" firstAttribute="centerX" secondItem="fC8-jT-yGc" secondAttribute="centerX" id="ecC-rr-pQC"/>
+                            <constraint firstItem="e5o-Ne-LHd" firstAttribute="trailing" secondItem="9EV-o9-IhE" secondAttribute="trailing" constant="44" id="Wr6-yM-ZtK"/>
                             <constraint firstItem="Pvb-Oe-7Qm" firstAttribute="top" secondItem="fC8-jT-yGc" secondAttribute="topMargin" constant="27" id="ny7-a4-7M6"/>
+                            <constraint firstItem="9EV-o9-IhE" firstAttribute="top" secondItem="e5o-Ne-LHd" secondAttribute="top" constant="27" id="qRl-wO-wco"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="e5o-Ne-LHd"/>
                     </view>
                     <navigationItem key="navigationItem" id="0B3-dx-5Vo"/>
+                    <connections>
+                        <segue destination="9Bi-p0-1Co" kind="presentation" identifier="signedOut" modalPresentationStyle="fullScreen" id="AkC-tH-E2E"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k71-Wo-1Bh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1515,11 +1521,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="W4c-Ki-6zl"/>
                     </view>
+                    <navigationItem key="navigationItem" id="1Ne-fo-oii"/>
                     <connections>
                         <outlet property="emailTextField" destination="V2B-F8-HzI" id="5mA-ok-6D8"/>
                         <outlet property="passwordTextField" destination="ITU-mE-Xa6" id="lBg-5u-n7F"/>
                         <outlet property="signInBtn" destination="ccS-zf-Inz" id="qp2-oP-IUg"/>
-                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="toOverview" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ZkV-6L-UMn"/>
+                        <segue destination="49e-Tb-3d3" kind="presentation" identifier="signedIn" modalPresentationStyle="fullScreen" modalTransitionStyle="crossDissolve" id="ZkV-6L-UMn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0g0-hV-zdM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1656,6 +1663,6 @@
         <image name="star.fill" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y49-cP-V9x"/>
+        <segue reference="ZkV-6L-UMn"/>
     </inferredMetricsTieBreakers>
 </document>

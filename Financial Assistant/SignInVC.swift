@@ -21,6 +21,13 @@ class SignInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.yellow, UIColor.green]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 20, y: 20)
+        view.layer.addSublayer(gradient)
+        
         // MARK: Deletes KEY for auto login if uncommented
 //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         
@@ -28,7 +35,7 @@ class SignInVC: UIViewController {
         if KeychainWrapper.standard.string(forKey: KEY_UID) != nil {
             print("Key has been found in keychain!")
             DispatchQueue.main.async { () -> Void in
-                self.performSegue(withIdentifier: Segue.toOverview.rawValue, sender: nil)
+                self.performSegue(withIdentifier: Segue.signedIn.rawValue, sender: nil)
             }
         }
         
@@ -53,7 +60,7 @@ class SignInVC: UIViewController {
                 print("Succesfully authenticated for: ", user.uid)
                 KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
                 StorageManager.shared.setUserCache(uid: user.uid)
-                self.performSegue(withIdentifier: Segue.toOverview.rawValue, sender: nil)
+                self.performSegue(withIdentifier: Segue.signedIn.rawValue, sender: nil)
                 self.removeSpinner(self.spinner)
             }
         }

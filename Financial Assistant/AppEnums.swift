@@ -9,8 +9,9 @@
 import Foundation
 
 public enum Segue: String {
-    case toOverview
+    case signedIn
     case signedUp
+    case signedOut
 }
 
 public enum FDChild: String {
