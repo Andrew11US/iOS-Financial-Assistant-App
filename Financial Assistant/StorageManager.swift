@@ -303,5 +303,27 @@ public struct StorageManager {
         
         StorageManager.dbReference.child(uid).updateChildValues(data)
     }
+    
+    // Save user data to defaults to use offline
+    func saveUserOffline(uid: String, name: String = "John Doe") {
+        let dict : [String: String] = [
+            "name" : name,
+            "dateCreated" : Date().formattedString,
+            "uid" : uid
+        ]
+        defaults.set(dict, forKey: "CurrentUser")
+    }
+    
+    func getUserOffline() -> [String:String]? {
+        let dict = defaults.dictionary(forKey: "CurrentUser")
+        if let data = dict as? Dictionary<String,String> {
+            return data
+        }
+        return nil
+    }
+    
+    func removeUserOffline() {
+        defaults.removeObject(forKey: "CurrentUser")
+    }
 
 }
