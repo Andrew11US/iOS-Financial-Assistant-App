@@ -21,13 +21,6 @@ class SignInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let gradient = CAGradientLayer()
-        gradient.frame = view.bounds
-        gradient.colors = [UIColor.yellow, UIColor.green]
-        gradient.startPoint = CGPoint(x: 0, y: 0)
-        gradient.endPoint = CGPoint(x: 20, y: 20)
-        view.layer.addSublayer(gradient)
-        
         // MARK: Deletes KEY for auto login if uncommented
 //        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
         

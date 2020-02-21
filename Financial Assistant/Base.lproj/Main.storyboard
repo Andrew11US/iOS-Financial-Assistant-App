@@ -397,17 +397,24 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kQC-62-K5D">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kQC-62-K5D">
                                         <rect key="frame" x="0.0" y="340" width="335" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="initial balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsH-Ob-UI6">
-                                                <rect key="frame" x="0.0" y="0.0" width="104" height="60"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="106.33333333333333" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a74-K3-Om9">
+                                                <rect key="frame" x="114.33333333333334" y="0.0" width="106.33333333333334" height="60"/>
+                                                <state key="normal" title="+"/>
+                                                <connections>
+                                                    <action selector="signBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="PoG-Yg-hlq"/>
+                                                </connections>
+                                            </button>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1,000.00" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q5K-M9-bd2" customClass="CurrencyTextField" customModule="Financial_Assistant" customModuleProvider="target">
-                                                <rect key="frame" x="112" y="0.0" width="223" height="60"/>
+                                                <rect key="frame" x="228.66666666666666" y="0.0" width="106.33333333333334" height="60"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
@@ -566,6 +573,7 @@
                         <outlet property="limitTextField" destination="m2E-R6-xxK" id="FLz-Q3-F7y"/>
                         <outlet property="nameTextField" destination="jiD-nQ-1IK" id="qvB-zJ-adA"/>
                         <outlet property="pickerView" destination="gFo-1a-vut" id="dQo-3Z-y1b"/>
+                        <outlet property="signBtn" destination="a74-K3-Om9" id="qrH-qg-jlf"/>
                         <outlet property="tableView" destination="6BW-gV-Egq" id="S74-G9-gWM"/>
                         <outlet property="typeBtn" destination="Tba-XP-wq7" id="VzT-yF-dmf"/>
                         <outlet property="typeView" destination="fhB-ka-JeU" id="i17-b5-bHo"/>
@@ -854,7 +862,7 @@
                                 <rect key="frame" x="16" y="158" width="343" height="513"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OverviewCell" id="lIX-ao-eTt" customClass="OverviewTransactionCell" customModule="Financial_Assistant" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="OverviewCell" id="lIX-ao-eTt" customClass="OverviewTransactionCell" customModule="Financial_Assistant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="343" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lIX-ao-eTt" id="oaL-H2-Lqm">
@@ -867,19 +875,19 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kmh-1O-4m2">
                                                             <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="20.666666666666668"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQ7-9e-mro">
                                                             <rect key="frame" x="104.33333333333334" y="0.0" width="104.33333333333334" height="20.666666666666668"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgR-VW-vTI">
                                                             <rect key="frame" x="208.66666666666666" y="0.0" width="104.33333333333334" height="20.666666666666668"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                            <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -892,7 +900,6 @@
                                                 <constraint firstItem="7uK-pG-97a" firstAttribute="leading" secondItem="oaL-H2-Lqm" secondAttribute="leadingMargin" id="SU0-7R-sj3"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="amount" destination="lgR-VW-vTI" id="xDj-93-EWa"/>
                                             <outlet property="date" destination="Kmh-1O-4m2" id="fXh-5b-FHO"/>
@@ -1396,7 +1403,7 @@
                                 <rect key="frame" x="0.0" y="158" width="375" height="513"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WalletCell" id="gE6-y6-CRK" customClass="WalletCell" customModule="Financial_Assistant" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WalletCell" id="gE6-y6-CRK" customClass="WalletCell" customModule="Financial_Assistant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="42.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gE6-y6-CRK" id="vwI-6Z-FXX">

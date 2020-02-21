@@ -16,6 +16,7 @@ class AddWalletVC: UIViewController {
     @IBOutlet weak var typeBtn: UIButton!
     @IBOutlet weak var currencyBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
+    @IBOutlet weak var signBtn: UIButton!
     
     // Pullup view to present currency picker in better way
     @IBOutlet weak var currencyViewHeight: NSLayoutConstraint!
@@ -32,6 +33,7 @@ class AddWalletVC: UIViewController {
     private var balance = 0.0
     private var unifiedBalance = 0.0
     private var limit = 0.0
+    private var sign = true
     private var type = WalletType.getArray()[0]
     private var currency = Locale.current.currencyCode ?? "USD"
     private var unifiedCurrencyCode = StorageManager.shared.getUserCache().code
@@ -39,8 +41,8 @@ class AddWalletVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.currencyView.layer.cornerRadius = 15.0
-//        self.typeView.layer.cornerRadius = 15.0
+        self.currencyView.layer.cornerRadius = 15.0
+        self.typeView.layer.cornerRadius = 15.0
     }
   
     @IBAction func typeBtnTapped(_ sender: Any) {
@@ -69,6 +71,29 @@ class AddWalletVC: UIViewController {
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.typeBtn.setTitle(self.type.capitalized, for: .normal)
         }
+    }
+    
+    @IBAction func balanceTextFieldEdited(_ sender: Any) {
+        if let balance = initialBalanceTextField.text {
+            if let doubleValue = Double(balance) {
+                self.balance = doubleValue
+            }
+        }
+    }
+    
+    @IBAction func limitTextFieldEdited(_ sender: Any) {
+        
+    }
+    
+    @IBAction func signBtnTapped(_ sender: Any) {
+        if sign {
+            sign = false
+            signBtn.setTitle("-", for: .normal)
+        } else {
+            sign = true
+            signBtn.setTitle("+", for: .normal)
+        }
+//        sign = sign == true ? false : true
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
