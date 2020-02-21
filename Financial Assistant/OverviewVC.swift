@@ -36,9 +36,11 @@ class OverviewVC: UIViewController {
             }
         }
         
-        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
-            self.tableView.reloadData()
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(notification:)), name: .didUpdateTransactions, object: nil)
+        
+//        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
+//            self.tableView.reloadData()
+//        }
         
 //        defaults.set("USD", forKey: "UnifiedCurrency")
 //        defaults.removeObject(forKey: "UnifiedCurrency")
@@ -52,6 +54,11 @@ class OverviewVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
 //        self.tableView.reloadData()
+    }
+    
+    @objc func handleNotification(notification: Notification) {
+        print("Received: ", notification.name.rawValue)
+        self.tableView.reloadData()
     }
 
 

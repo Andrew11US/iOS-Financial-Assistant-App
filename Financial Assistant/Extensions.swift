@@ -76,6 +76,12 @@ extension Decodable {
     }
 }
 
+// Notification extension that adds new names for custom notifications to pass data back between ViewControllers
+extension Notification.Name {
+    static let didUpdateTransactions = Notification.Name(rawValue: "didUpdateTransactions")
+    static let didUpdateWallets = Notification.Name(rawValue: "didUpdateWallets")
+}
+
 // Adds wrapper to UIViewController to easily show alert
 public extension UIViewController {
     
@@ -100,5 +106,10 @@ public extension UIViewController {
         spinner.willMove(toParent: nil)
         spinner.view.removeFromSuperview()
         spinner.removeFromParent()
+    }
+    
+    internal func createNotification(name: Notification.Name) {
+        let notification = Notification(name: name)
+        NotificationCenter.default.post(notification)
     }
 }

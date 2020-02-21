@@ -142,6 +142,7 @@ class AddTransactionVC: UIViewController {
         
         wallets[walletIndex] = wallet
         
+        self.createNotification(name: .didUpdateTransactions)
         self.dismiss(animated: true, completion: nil)
     }
     
