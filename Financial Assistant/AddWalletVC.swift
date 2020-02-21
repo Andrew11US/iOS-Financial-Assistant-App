@@ -10,8 +10,8 @@ import UIKit
 
 class AddWalletVC: UIViewController {
     
-    @IBOutlet weak var nameTextField: CurrencyTextField!
-    @IBOutlet weak var initialBalanceTextField: CurrencyTextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var balanceTextField: UITextField!
     @IBOutlet weak var limitTextField: UITextField!
     @IBOutlet weak var typeBtn: UIButton!
     @IBOutlet weak var currencyBtn: UIButton!
@@ -27,20 +27,23 @@ class AddWalletVC: UIViewController {
     @IBOutlet weak var pickerView: UIPickerView!
     
     // Data to choose when customizing a Wallet
-    var currencies = ["USD", "EUR", "PLN", "UAH"]
     var types = WalletType.getArray()
     
+    private var name = ""
     private var balance = 0.0
     private var unifiedBalance = 0.0
     private var limit = 0.0
     private var sign = true
-    private var type = WalletType.getArray()[0]
-    private var currency = Locale.current.currencyCode ?? "USD"
+    private var type = ""
+    private var currency = ""
     private var unifiedCurrencyCode = StorageManager.shared.getUserCache().code
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.nameTextField.delegate = self
+        self.balanceTextField.delegate = self
+        self.limitTextField.delegate = self
         self.currencyView.layer.cornerRadius = 15.0
         self.typeView.layer.cornerRadius = 15.0
     }
@@ -73,47 +76,85 @@ class AddWalletVC: UIViewController {
         }
     }
     
+    @IBAction func nameTextFieldEdited(_ sender: Any) {
+        if let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty {
+            self.name = name
+            print("Name set: ", name)
+            showBadInput(bad: false, view: nameTextField)
+        } else {
+            self.name = ""
+            print("Name bad input!")
+            showBadInput(bad: true, view: nameTextField)
+        }
+    }
+    
     @IBAction func balanceTextFieldEdited(_ sender: Any) {
-        if let balance = initialBalanceTextField.text {
+        if let balance = balanceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !balance.isEmpty {
             if let doubleValue = Double(balance) {
-                self.balance = doubleValue
+                if sign {
+                    self.balance = Double(round(doubleValue*100)/100)
+                } else {
+                    self.balance = Double(round(-doubleValue*100)/100)
+                }
+                print("Balance set: ", self.balance)
+                self.balanceTextField.text = String(format: "%.2f", doubleValue)
+                showBadInput(bad: false, view: balanceTextField)
+            } else {
+                self.balance = 0.0
+                print("Balance bad input!")
+                showBadInput(bad: true, view: balanceTextField)
             }
+        } else {
+            self.balance = 0.0
+            print("Balance bad input!")
+            showBadInput(bad: true, view: balanceTextField)
         }
     }
     
     @IBAction func limitTextFieldEdited(_ sender: Any) {
-        
+        if let limit = limitTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !limit.isEmpty {
+            if let doubleValue = Double(limit) {
+                self.limit = Double(round(-doubleValue*100)/100)
+                print("Limit set: ", self.limit)
+                self.limitTextField.text = String(format: "%.2f", doubleValue)
+                showBadInput(bad: false, view: limitTextField)
+            } else {
+                self.limit = 0.0
+                print("Limit bad input!")
+                showBadInput(bad: true, view: limitTextField)
+            }
+        } else {
+            self.limit = 0.0
+            print("Limit bad input!")
+            showBadInput(bad: true, view: limitTextField)
+        }
     }
     
     @IBAction func signBtnTapped(_ sender: Any) {
+        self.view.endEditing(true)
         if sign {
             sign = false
+            self.balance = -balance
             signBtn.setTitle("-", for: .normal)
+            signBtn.setTitleColor(.red, for: .normal)
         } else {
             sign = true
+            self.balance = -balance
             signBtn.setTitle("+", for: .normal)
+            signBtn.setTitleColor(.green, for: .normal)
         }
-//        sign = sign == true ? false : true
+        print("Balance sign: ", balance)
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
-        
-        guard let name = nameTextField.text else { return }
-        
-        if let balance = initialBalanceTextField.text {
-            if let doubleValue = Double(balance) {
-                self.balance = doubleValue
-            }
-        }
-        if let limit = limitTextField.text {
-            if let doubleValue = Double(limit) {
-                self.limit = -doubleValue
-            }
-        }
-        
-
-            
-
+        if name.isEmpty {
+            print("Name is empty")
+            showBadInput(bad: true, view: nameTextField)
+        } else if type.isEmpty {
+            print("Type has not been selected!")
+        } else if currency.isEmpty {
+            print("Currency has not been selected!")
+        } else {
         
         let key = StorageManager.shared.getAutoKey(at: FDChild.wallets.rawValue)
         let wallet = Wallet(id: key, name: name, type: type, currencyCode: currency, unifiedCurrencyCode: unifiedCurrencyCode, balance: balance, unifiedBalance: unifiedBalance, limit: limit)
@@ -123,6 +164,7 @@ class AddWalletVC: UIViewController {
 
         self.createNotification(name: .didUpdateWallets)
         dismiss(animated: true, completion: nil)
+        }
     }
     
     // popView animations
@@ -134,12 +176,22 @@ class AddWalletVC: UIViewController {
             view.superview?.subviews[0].isUserInteractionEnabled = false
         }
     }
-    
-    func animateDown(view: UIView, constraint: NSLayoutConstraint) {
+
+   func animateDown(view: UIView, constraint: NSLayoutConstraint) {
         constraint.constant = 0
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
             view.superview?.subviews[0].isUserInteractionEnabled = true
+        }
+    }
+    
+    func showBadInput(bad: Bool, view: UIView) {
+        if bad {
+            view.layer.borderWidth = 2.0
+            view.layer.borderColor = UIColor.red.cgColor
+        } else {
+            view.layer.borderWidth = 0
+            view.layer.borderColor = UIColor.clear.cgColor
         }
     }
     
@@ -175,7 +227,7 @@ extension AddWalletVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        currency = currencies[indexPath.row]
+        currency = currencies[indexPath.row][0..<3]
         print("Selected currency: ", currency)
     }
     
@@ -192,5 +244,20 @@ extension AddWalletVC: UITableViewDelegate, UITableViewDataSource {
         } else {
             return UITableViewCell()
         }
+    }
+}
+
+extension AddWalletVC: UITextFieldDelegate {
+    // Dismiss keyboard function
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // Dismiss when return btn pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameTextField.resignFirstResponder()
+        balanceTextField.resignFirstResponder()
+        limitTextField.resignFirstResponder()
+        return true
     }
 }

@@ -34,8 +34,8 @@ import Foundation
     }
     
     func initTextField(){
-        self.keyboardType = UIKeyboardType.decimalPad
-        currencyFormatter.numberStyle = .decimal
+        self.keyboardType = UIKeyboardType.numberPad
+        currencyFormatter.numberStyle = .none
         currencyFormatter.minimumFractionDigits = 2
         currencyFormatter.maximumFractionDigits = 2
         setAmount(defaultValue)
