@@ -17,12 +17,11 @@ class OverviewVC: UIViewController {
         super.viewDidLoad()
         
         addSpinner(spinner)
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
         if transactions.count == 0 {
             StorageManager.shared.getTransactions {
-                
                 transactions = transactions.sorted { $0.dateCreated > $1.dateCreated }
                 self.removeSpinner(self.spinner)
                 self.tableView.reloadData()
@@ -32,35 +31,17 @@ class OverviewVC: UIViewController {
         if wallets.count == 0 {
             StorageManager.shared.getWallets {
                 wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
-//                print("wallets has been downloaded")
             }
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(notification:)), name: .didUpdateTransactions, object: nil)
-        
-//        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
-//            self.tableView.reloadData()
-//        }
-        
-//        defaults.set("USD", forKey: "UnifiedCurrency")
-//        defaults.removeObject(forKey: "UnifiedCurrency")
-//        print(defaults.string(forKey: "UnifiedCurrencyCode"))
-        // MARK: CoreData stuff to save and retrieve cached rates in order to decrease API calls count
-//        StorageManager.shared.saveToCoreData(toEntity: "Rates", value: 25.30, forKey: "rate")
-//        print(StorageManager.shared.getFromCoreData(fromEntity: "Rates", key: "rate"))
-//        StorageManager.shared.deleteInCoreData(entity: "Rates")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-//        self.tableView.reloadData()
     }
     
     @objc func handleNotification(notification: Notification) {
         print("Received: ", notification.name.rawValue)
+        transactions = transactions.sorted { $0.dateCreated > $1.dateCreated }
         self.tableView.reloadData()
     }
-
 
 }
 

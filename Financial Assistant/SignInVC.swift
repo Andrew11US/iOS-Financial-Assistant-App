@@ -32,8 +32,7 @@ class SignInVC: UIViewController {
             }
         }
         
-//        print(StorageManager.shared.getUserOffline()?["name"] ?? "")
-        
+        print(StorageManager.shared.getUserCache().uid)
         self.emailTextField.delegate = self
         self.passwordTextField.delegate = self
     }
@@ -53,7 +52,7 @@ class SignInVC: UIViewController {
                 guard let user = user?.user else { return }
                 print("Succesfully authenticated for: ", user.uid)
                 KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
-//                StorageManager.shared.saveUserOffline(uid: user.uid)
+                StorageManager.shared.setUserCache(uid: user.uid)
                 self.performSegue(withIdentifier: Segue.toOverview.rawValue, sender: nil)
                 self.removeSpinner(self.spinner)
             }
@@ -62,9 +61,6 @@ class SignInVC: UIViewController {
         self.view.endEditing(true)
     }
     
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-     }
 }
 
 extension SignInVC: UITextFieldDelegate {

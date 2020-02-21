@@ -23,7 +23,7 @@ class DetailTransactionVC: UIViewController {
     @IBOutlet weak var deleteBtn: UIButton!
     
     var transaction: (Transaction, Int)!
-    let unifiedCurrencyCode = defaults.string(forKey: "UnifiedCurrencyCode") ?? "USD"
+    let unifiedCurrencyCode = StorageManager.shared.getUserCache().code
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -304,25 +304,46 @@ public struct StorageManager {
         StorageManager.dbReference.child(uid).updateChildValues(data)
     }
     
-    // Save user data to defaults to use offline
-    func saveUserOffline(uid: String, name: String = "John Doe") {
+    // Cache user data to use offline in order to decrease number of calls to DB
+    func setUserCache(uid: String, name: String = "John Doe") {
         let dict : [String: String] = [
             "name" : name,
             "latestLogin" : Date().formattedString,
-            "uid" : uid
+            "uid" : uid,
+            "UnifiedCurrencyCode": "USD"
         ]
         defaults.set(dict, forKey: "CurrentUser")
     }
     
-    func getUserOffline() -> [String:String]? {
-        let dict = defaults.dictionary(forKey: "CurrentUser")
-        if let data = dict as? Dictionary<String,String> {
-            return data
-        }
-        return nil
+    func updateUserCache(key: String, value: String) {
+        let dict : [String: String] = [
+            key : value
+        ]
+        defaults.set(dict, forKey: "CurrentUser")
     }
     
-    func removeUserOffline() {
+    func getUserCache() -> (name:String,uid:String,date:String,code:String) {
+        var out : (name:String,uid:String,date:String,code:String) = ("name","uid","date","USD")
+        
+        if let dict = defaults.dictionary(forKey: "CurrentUser") {
+            if let name = dict["name"] as? String {
+                out.name = name
+            }
+            if let uid = dict["uid"] as? String {
+                out.uid = uid
+            }
+            if let date = dict["latestLogin"] as? String {
+                out.date = date
+            }
+            if let code = dict["UnifiedCurrencyCode"] as? String {
+                out.code = code
+            }
+        }
+        
+        return out
+    }
+    
+    func removeUserCache() {
         defaults.removeObject(forKey: "CurrentUser")
     }
 

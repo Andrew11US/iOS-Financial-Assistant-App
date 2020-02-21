@@ -45,6 +45,7 @@ class SignUpVC: UIViewController {
                     print("New user has been succesfully created: ", user.uid)
                     StorageManager.shared.createUser(uid: user.uid)
                     KeychainWrapper.standard.set(user.uid, forKey: KEY_UID)
+                    StorageManager.shared.setUserCache(uid: user.uid)
                     self.removeSpinner(self.spinner)
                     self.performSegue(withIdentifier: Segue.signedUp.rawValue, sender: nil)
                 }
