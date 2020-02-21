@@ -13,41 +13,50 @@ class ResetPasswordVC: UIViewController {
     
     @IBOutlet weak var resetBtn: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var codeTextField: UITextField!
+    
+    let spinner = SpinnerViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.emailTextField.delegate = self
     }
     
     @IBAction func resetBtnTapped(_ sender: Any) {
         
-        guard let email = emailTextField.text else {
+        guard let emailStr = emailTextField.text else {
             print("Provide E-mail to reset password!")
             return
         }
         
+        let email = emailStr.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        addSpinner(spinner)
+        
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let err = error {
-                print("Reset password email has not been sent Error: ", err.localizedDescription)
+                print(err.localizedDescription)
+                self.removeSpinner(self.spinner)
             } else {
                 print("Reset password email has been sent to: ", email)
+                self.removeSpinner(self.spinner)
+                self.dismiss(animated: true, completion: nil)
             }
         }
-        
-//        self.dismiss(animated: true, completion: nil)
+        self.view.endEditing(true)
+    }
+
+}
+
+extension ResetPasswordVC: UITextFieldDelegate {
+    // Dismiss keyboard function
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // Dismiss when return btn pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTextField.resignFirstResponder()
+        return true
     }
-    */
-
 }

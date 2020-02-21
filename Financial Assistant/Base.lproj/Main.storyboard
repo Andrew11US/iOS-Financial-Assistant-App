@@ -1559,17 +1559,17 @@
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yen-Da-cC8">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZTB-gV-wz8">
                                         <rect key="frame" x="0.0" y="42" width="375" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="confirm password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2B-wJ-XtC">
                                         <rect key="frame" x="0.0" y="84" width="375" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53H-OZ-Ich">
                                         <rect key="frame" x="0.0" y="126" width="375" height="30"/>
@@ -1612,20 +1612,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HVj-8Q-y6s">
-                                <rect key="frame" x="0.0" y="322" width="375" height="114"/>
+                                <rect key="frame" x="0.0" y="343" width="375" height="72"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rVB-4U-Dfo">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M5v-R3-Nrf">
-                                        <rect key="frame" x="0.0" y="42" width="375" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-Ve-FKP">
-                                        <rect key="frame" x="0.0" y="84" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="42" width="375" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="resetBtnTapped:" destination="lU0-BC-WBs" eventType="touchUpInside" id="r6d-8I-lm9"/>
@@ -1645,7 +1640,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="SAB-ZT-kLb"/>
                     <connections>
-                        <outlet property="codeTextField" destination="M5v-R3-Nrf" id="rOK-zN-7Lq"/>
                         <outlet property="emailTextField" destination="rVB-4U-Dfo" id="mwL-vx-hxH"/>
                         <outlet property="resetBtn" destination="mAL-Ve-FKP" id="vWF-yu-rMm"/>
                     </connections>
