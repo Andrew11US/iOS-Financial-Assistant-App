@@ -20,13 +20,19 @@ class WalletVC: UIViewController {
         self.tableView.dataSource = self
         
         StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childChanged) {
-            self.tableView.reloadData()
+            wallets.removeAll()
+            StorageManager.shared.getWallets {
+                wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
+                self.tableView.reloadData()
+            }
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(notification:)), name: .didUpdateWallets, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
         self.tableView.reloadData()
     }
     
@@ -37,6 +43,11 @@ class WalletVC: UIViewController {
                 destination.wallet = wallet
             }
         }
+    }
+    
+    @objc func handleNotification(notification: Notification) {
+        wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
+        self.tableView.reloadData()
     }
 
 }

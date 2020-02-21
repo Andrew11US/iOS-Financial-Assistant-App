@@ -10,8 +10,8 @@ import UIKit
 
 class AddWalletVC: UIViewController {
     
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var initialBalanceTextField: UITextField!
+    @IBOutlet weak var nameTextField: CurrencyTextField!
+    @IBOutlet weak var initialBalanceTextField: CurrencyTextField!
     @IBOutlet weak var limitTextField: UITextField!
     @IBOutlet weak var typeBtn: UIButton!
     @IBOutlet weak var currencyBtn: UIButton!
@@ -30,9 +30,11 @@ class AddWalletVC: UIViewController {
     var types = WalletType.getArray()
     
     private var balance = 0.0
+    private var unifiedBalance = 0.0
     private var limit = 0.0
     private var type = WalletType.getArray()[0]
-    private var currency = Locale.current.currencyCode ?? "UAH"
+    private var currency = Locale.current.currencyCode ?? "USD"
+    private var unifiedCurrencyCode = StorageManager.shared.getUserCache().code
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,14 +45,20 @@ class AddWalletVC: UIViewController {
   
     @IBAction func typeBtnTapped(_ sender: Any) {
         animateUp(view: typeView, constraint: typeViewHeight)
+        self.view.endEditing(true)
     }
     
     @IBAction func currencyBtnTapped(_ sender: Any) {
         animateUp(view: currencyView, constraint: currencyViewHeight)
+        self.view.endEditing(true)
     }
     
     @IBAction func currencySelectedBtnTapped(_ sender: Any) {
         animateDown(view: currencyView, constraint: currencyViewHeight)
+        NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
+            self.unifiedBalance = self.balance * coff
+            print("Unified Balance: ", self.unifiedBalance, "USD")
+        }
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.currencyBtn.setTitle(self.currency, for: .normal)
         }
@@ -78,14 +86,17 @@ class AddWalletVC: UIViewController {
             }
         }
         
-        let unifiedBalance = 1.0
-        let unifiedCurrencyCode = defaults.string(forKey: "UnifiedCurrencyCode") ?? "USD"
+
+            
+
         
         let key = StorageManager.shared.getAutoKey(at: FDChild.wallets.rawValue)
         let wallet = Wallet(id: key, name: name, type: type, currencyCode: currency, unifiedCurrencyCode: unifiedCurrencyCode, balance: balance, unifiedBalance: unifiedBalance, limit: limit)
-    
+
         StorageManager.shared.pushObject(to: FDChild.wallets.rawValue, key: key, data: wallet.getDictionary())
         wallets.append(wallet)
+
+        self.createNotification(name: .didUpdateWallets)
         dismiss(animated: true, completion: nil)
     }
     

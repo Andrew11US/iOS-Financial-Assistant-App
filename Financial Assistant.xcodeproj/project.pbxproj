@@ -92,6 +92,7 @@
 		01A58D8C23DCADFC004F124C /* Financial_AssistantTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A58D8B23DCADFC004F124C /* Financial_AssistantTests.swift */; };
 		01A58D9723DCADFC004F124C /* Financial_AssistantUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A58D9623DCADFC004F124C /* Financial_AssistantUITests.swift */; };
 		01A6C2F924002A6E002F88D1 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6C2F824002A6E002F88D1 /* NotificationManager.swift */; };
+		01A6C2FB24006F5E002F88D1 /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6C2FA24006F5E002F88D1 /* CurrencyTextField.swift */; };
 		01D3037923F9A4D500D5448C /* DetailTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3037823F9A4D500D5448C /* DetailTransactionVC.swift */; };
 		01D3037B23F9BD4000D5448C /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3037A23F9BD4000D5448C /* SpinnerViewController.swift */; };
 		01D3037D23F9C3F000D5448C /* DetailWalletVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3037C23F9C3F000D5448C /* DetailWalletVC.swift */; };
@@ -215,6 +216,7 @@
 		01A58D9623DCADFC004F124C /* Financial_AssistantUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Financial_AssistantUITests.swift; sourceTree = "<group>"; };
 		01A58D9823DCADFC004F124C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01A6C2F824002A6E002F88D1 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		01A6C2FA24006F5E002F88D1 /* CurrencyTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
 		01D3037823F9A4D500D5448C /* DetailTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTransactionVC.swift; sourceTree = "<group>"; };
 		01D3037A23F9BD4000D5448C /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		01D3037C23F9C3F000D5448C /* DetailWalletVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWalletVC.swift; sourceTree = "<group>"; };
@@ -637,6 +639,7 @@
 		019F47A223FB363E004CB77D /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				01A6C2FA24006F5E002F88D1 /* CurrencyTextField.swift */,
 				019F471C23FB3623004CB77D /* PickersAndAlerts */,
 			);
 			name = Libraries;
@@ -1037,6 +1040,7 @@
 				019F478B23FB3624004CB77D /* LocationSearchResultsViewController.swift in Sources */,
 				01D891D823EE1B9F0009FD5A /* PlanningVC.swift in Sources */,
 				019F477723FB3624004CB77D /* UISearchBar+Extensions.swift in Sources */,
+				01A6C2FB24006F5E002F88D1 /* CurrencyTextField.swift in Sources */,
 				019F478F23FB3624004CB77D /* Address.swift in Sources */,
 				01D3037923F9A4D500D5448C /* DetailTransactionVC.swift in Sources */,
 				019F478E23FB3624004CB77D /* Location.swift in Sources */,
@@ -1260,7 +1264,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 55;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1281,7 +1285,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 54;
+				CURRENT_PROJECT_VERSION = 55;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
