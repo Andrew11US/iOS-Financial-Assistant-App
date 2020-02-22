@@ -11,8 +11,8 @@ import UIKit
 class AddWalletVC: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var balanceTextField: UITextField!
-    @IBOutlet weak var limitTextField: UITextField!
+    @IBOutlet weak var balanceTextField: CurrencyTextField!
+    @IBOutlet weak var limitTextField: CurrencyTextField!
     @IBOutlet weak var typeBtn: UIButton!
     @IBOutlet weak var currencyBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
@@ -51,11 +51,15 @@ class AddWalletVC: UIViewController {
     @IBAction func typeBtnTapped(_ sender: Any) {
         animateUp(view: typeView, constraint: typeViewHeight)
         self.view.endEditing(true)
+        self.balanceTextField.resignFirstResponder()
+        self.limitTextField.resignFirstResponder()
     }
     
     @IBAction func currencyBtnTapped(_ sender: Any) {
         animateUp(view: currencyView, constraint: currencyViewHeight)
         self.view.endEditing(true)
+        self.balanceTextField.resignFirstResponder()
+        self.limitTextField.resignFirstResponder()
     }
     
     @IBAction func currencySelectedBtnTapped(_ sender: Any) {
@@ -66,6 +70,7 @@ class AddWalletVC: UIViewController {
         }
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.currencyBtn.setTitle(self.currency, for: .normal)
+            self.currencyBtn.setTitleColor(.blue, for: .normal)
         }
     }
     
@@ -73,65 +78,50 @@ class AddWalletVC: UIViewController {
         animateDown(view: typeView, constraint: typeViewHeight)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.typeBtn.setTitle(self.type.capitalized, for: .normal)
+            self.typeBtn.setTitleColor(.blue, for: .normal)
         }
     }
     
     @IBAction func nameTextFieldEdited(_ sender: Any) {
-        if let name = nameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !name.isEmpty {
-            self.name = name
-            print("Name set: ", name)
+        let value = DataManager.getData.name(field: nameTextField)
+        if let strValue = value {
+            self.name = strValue
             showBadInput(bad: false, view: nameTextField)
         } else {
             self.name = ""
-            print("Name bad input!")
             showBadInput(bad: true, view: nameTextField)
         }
+        print("Name set: ", self.name)
     }
     
     @IBAction func balanceTextFieldEdited(_ sender: Any) {
-        if let balance = balanceTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !balance.isEmpty {
-            if let doubleValue = Double(balance) {
-                if sign {
-                    self.balance = Double(round(doubleValue*100)/100)
-                } else {
-                    self.balance = Double(round(-doubleValue*100)/100)
-                }
-                print("Balance set: ", self.balance)
-                self.balanceTextField.text = String(format: "%.2f", doubleValue)
-                showBadInput(bad: false, view: balanceTextField)
+        let value = DataManager.getData.currency(field: balanceTextField)
+        if let doubleValue = value {
+            if sign {
+                self.balance = Double(round(doubleValue*100)/100)
             } else {
-                self.balance = 0.0
-                print("Balance bad input!")
-                showBadInput(bad: true, view: balanceTextField)
+                self.balance = Double(round(-doubleValue*100)/100)
             }
         } else {
-            self.balance = 0.0
-            print("Balance bad input!")
-            showBadInput(bad: true, view: balanceTextField)
+            self.balance = 0
         }
+        print("Balance set: ", self.balance)
     }
     
     @IBAction func limitTextFieldEdited(_ sender: Any) {
-        if let limit = limitTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !limit.isEmpty {
-            if let doubleValue = Double(limit) {
-                self.limit = Double(round(-doubleValue*100)/100)
-                print("Limit set: ", self.limit)
-                self.limitTextField.text = String(format: "%.2f", doubleValue)
-                showBadInput(bad: false, view: limitTextField)
-            } else {
-                self.limit = 0.0
-                print("Limit bad input!")
-                showBadInput(bad: true, view: limitTextField)
-            }
+        let value = DataManager.getData.currency(field: limitTextField)
+        if let doubleValue = value {
+            self.limit = Double(round(-doubleValue*100)/100)
         } else {
-            self.limit = 0.0
-            print("Limit bad input!")
-            showBadInput(bad: true, view: limitTextField)
+            self.limit = 0
         }
+        print("Limit set: ", self.limit)
     }
     
     @IBAction func signBtnTapped(_ sender: Any) {
-        self.view.endEditing(true)
+        self.nameTextField.resignFirstResponder()
+        self.balanceTextField.resignFirstResponder()
+        self.limitTextField.resignFirstResponder()
         if sign {
             sign = false
             self.balance = -balance
@@ -143,17 +133,23 @@ class AddWalletVC: UIViewController {
             signBtn.setTitle("+", for: .normal)
             signBtn.setTitleColor(.green, for: .normal)
         }
-        print("Balance sign: ", balance)
+        print("Balance sign changed: ", balance)
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
+        nameTextField.resignFirstResponder()
+        balanceTextField.resignFirstResponder()
+        limitTextField.resignFirstResponder()
+        
         if name.isEmpty {
             print("Name is empty")
             showBadInput(bad: true, view: nameTextField)
         } else if type.isEmpty {
             print("Type has not been selected!")
+            typeBtn.setTitleColor(.red, for: .normal)
         } else if currency.isEmpty {
             print("Currency has not been selected!")
+            currencyBtn.setTitleColor(.red, for: .normal)
         } else {
         
         let key = StorageManager.shared.getAutoKey(at: FDChild.wallets.rawValue)

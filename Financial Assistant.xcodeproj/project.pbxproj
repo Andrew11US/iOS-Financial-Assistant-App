@@ -28,6 +28,7 @@
 		0165347F23F6E87E00776770 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0165347E23F6E87E00776770 /* GoogleService-Info.plist */; };
 		017E848423FBFD5600850C7C /* CurrencySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */; };
 		018B2FFB23FD86A30006F9B1 /* NetworkWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */; };
+		019F3B5C240195720041B332 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F3B5B240195720041B332 /* DataManager.swift */; };
 		019F476D23FB3624004CB77D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F471E23FB3623004CB77D /* Array+Extensions.swift */; };
 		019F476E23FB3624004CB77D /* UISegmentedControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F471F23FB3623004CB77D /* UISegmentedControl+Extensions.swift */; };
 		019F476F23FB3624004CB77D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F472023FB3623004CB77D /* UIImageView+Extensions.swift */; };
@@ -147,6 +148,7 @@
 		0165347E23F6E87E00776770 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionCell.swift; sourceTree = "<group>"; };
 		018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWrapper.swift; sourceTree = "<group>"; };
+		019F3B5B240195720041B332 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		019F471E23FB3623004CB77D /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		019F471F23FB3623004CB77D /* UISegmentedControl+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Extensions.swift"; sourceTree = "<group>"; };
 		019F472023FB3623004CB77D /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 			children = (
 				013C84BF23F4AA0D0007B7EB /* StorageManager.swift */,
 				01A6C2F824002A6E002F88D1 /* NotificationManager.swift */,
+				019F3B5B240195720041B332 /* DataManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1087,6 +1090,7 @@
 				0106E87623F7502500429EBE /* TemporaryData.swift in Sources */,
 				019F479923FB3624004CB77D /* PhotoLayout.swift in Sources */,
 				019F477023FB3624004CB77D /* UIViewController+Extensions.swift in Sources */,
+				019F3B5C240195720041B332 /* DataManager.swift in Sources */,
 				019F477423FB3624004CB77D /* UITextView+Extensions.swift in Sources */,
 				019F479B23FB3624004CB77D /* ItemWithPhoto.swift in Sources */,
 				0104A03623F719AC00C52ED2 /* AppEnums.swift in Sources */,
@@ -1268,7 +1272,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1289,7 +1293,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 58;
+				CURRENT_PROJECT_VERSION = 59;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
