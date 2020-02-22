@@ -15,12 +15,13 @@ class DetailWalletVC: UIViewController {
     @IBOutlet weak var typeLbl: UILabel!
     @IBOutlet weak var balanceLbl: UILabel!
     @IBOutlet weak var unifiedBalanceLbl: UILabel!
-    @IBOutlet weak var limitTextField: UITextField!
+    @IBOutlet weak var limitTextField: CurrencyTextField!
     @IBOutlet weak var currencyLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var deleteBtn: UIButton!
  
     var wallet: (Wallet, Int)!
+    private var limit = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,10 @@ class DetailWalletVC: UIViewController {
     }
     
     @IBAction func deleteBtnTapped(_ sender: Any) {
-        // << debug wallet removal !!!
         StorageManager.shared.deleteObject(location: FDChild.wallets.rawValue, id: wallet.0.id)
         wallets.remove(at: wallet.1)
         print(wallet.1)
+        self.createNotification(name: .didUpdateWallets)
         dismiss(animated: true, completion: nil)
     }
     
@@ -41,26 +42,24 @@ class DetailWalletVC: UIViewController {
         self.idLbl.text = wallet.0.id
         self.nameLbl.text = wallet.0.name
         self.typeLbl.text = wallet.0.type
-        self.balanceLbl.text = "\(wallet.0.balance) \(wallet.0.currencyCode)"
+        self.balanceLbl.text = "\(wallet.0.balance.currencyFormat) \(wallet.0.currencyCode)"
         self.unifiedBalanceLbl.text = "\(wallet.0.unifiedBalance) USD"
         self.currencyLbl.text = wallet.0.currencyCode
-        self.limitTextField.text = "\(wallet.0.limit)"
+        self.limitTextField.text = "\(-wallet.0.limit)"
         self.dateLbl.text = wallet.0.dateCreated
     }
     
     @IBAction func limitChange(_ sender: Any) {
-        guard let limitStr = limitTextField.text, limitStr != "" else {
-            print("LImit can't be empty!")
-            return
+        let value = DataManager.getData.currency(field: limitTextField)
+        if let doubleValue = value {
+            self.limit = Double(round(-doubleValue*100)/100)
+        } else {
+            self.limit = 0
         }
         
-        if let limit = Double(limitStr), -limit != wallet.0.limit  {
-            let newLimit = ["limit": -limit] as [String: AnyObject]
-            
-            StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.0.id, data: newLimit)
-        } else {
-            print("Limit has not been changed!")
-        }
+        let newLimit = ["limit": limit] as [String: AnyObject]
+        StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.0.id, data: newLimit)
+        print("New limit set: ", self.limit)
     }
     
 

@@ -45,6 +45,15 @@ class AddTransactionVC: UIViewController {
         self.nameTextField.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if !InternetConnectionManager.isConnected() {
+            print("Connection is offline!")
+            addBtn.isEnabled = false
+        }
+    }
+    
     @IBAction func segmentControlChanged(_ sender: Any) {
         print("Segment index: ", segmentControl.selectedSegmentIndex)
         category = "Select Category"

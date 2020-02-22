@@ -65,7 +65,6 @@ public struct StorageManager {
     }
     
     func getTransactions(_ completion: @escaping () -> Void) {
-//        var transactions : [Transaction] = []
         // Remove duplicates
         transactions.removeAll()
         
@@ -75,10 +74,7 @@ public struct StorageManager {
                     if let dict = snap.value as? Dictionary<String,AnyObject> {
                         let id = snap.key
                         let transaction = Transaction(id: id, data: dict)
-                        
                         transactions.append(transaction)
-                        
-//                        print(Transaction(id: id, data: dict).convertToString ?? "zz")
                     }
                 }
             }
@@ -88,7 +84,6 @@ public struct StorageManager {
     }
     
         func getWallets(_ completion: @escaping () -> Void) {
-    //        var transactions : [Transaction] = []
             // Remove duplicates
             wallets.removeAll()
             
@@ -98,10 +93,7 @@ public struct StorageManager {
                         if let dict = snap.value as? Dictionary<String,AnyObject> {
                             let id = snap.key
                             let wallet = Wallet(id: id, data: dict)
-                            
                             wallets.append(wallet)
-                            
-    //                        print(Transaction(id: id, data: dict).convertToString ?? "zz")
                         }
                     }
                 }
@@ -115,9 +107,10 @@ public struct StorageManager {
             if error != nil {
                 print("Error occured while trying to delete an object with \(id)")
                 print(error.debugDescription)
+            } else {
+                print("value deleted for: ", id)
             }
         }
-        print("value deleted for: ", id)
     }
     
     func listenForChanges(location: String, event: DataEventType, completion: @escaping () -> Void) {

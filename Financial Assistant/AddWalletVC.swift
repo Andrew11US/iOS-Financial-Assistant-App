@@ -48,7 +48,15 @@ class AddWalletVC: UIViewController {
         self.limitTextField.delegate = self
 //        self.currencyView.layer.cornerRadius = 10.0
 //        self.typeView.layer.cornerRadius = 10.0
-        print("Connection established: ", InternetConnectionManager.isConnected())
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if !InternetConnectionManager.isConnected() {
+            print("Connection is offline!")
+            addBtn.isEnabled = false
+        }
     }
   
     @IBAction func typeBtnTapped(_ sender: Any) {
@@ -63,19 +71,19 @@ class AddWalletVC: UIViewController {
     
     @IBAction func currencySelectedBtnTapped(_ sender: Any) {
         animateDown(view: currencyView, constraint: currencyViewHeight)
-        addBtn.isEnabled = false
+//        addBtn.isEnabled = false
         if currency == "USD" {
             self.unifiedBalance = self.balance
             self.currencyBtn.setTitle(self.currency, for: .normal)
             self.currencyBtn.setTitleColor(.blue, for: .normal)
-            self.addBtn.isEnabled = true
+//            self.addBtn.isEnabled = true
         } else {
             if currency.isEmpty {
                 currency = "USD"
                 self.unifiedBalance = self.balance
                 self.currencyBtn.setTitle(self.currency, for: .normal)
                 self.currencyBtn.setTitleColor(.blue, for: .normal)
-                self.addBtn.isEnabled = true
+//                self.addBtn.isEnabled = true
             } else {
                 NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
                     self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
@@ -83,7 +91,7 @@ class AddWalletVC: UIViewController {
                     Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
                         self.currencyBtn.setTitle(self.currency, for: .normal)
                         self.currencyBtn.setTitleColor(.blue, for: .normal)
-                        self.addBtn.isEnabled = true
+//                        self.addBtn.isEnabled = true
                     }
                 }
             }
