@@ -38,7 +38,6 @@ class AddWalletVC: UIViewController {
     private var currency = ""
     private var unifiedCurrencyCode = StorageManager.shared.getUserCache().code
     private var selectedCurrency : [String] = []
-    private var wasOffline = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,28 +70,24 @@ class AddWalletVC: UIViewController {
     
     @IBAction func currencySelectedBtnTapped(_ sender: Any) {
         animateDown(view: currencyView, constraint: currencyViewHeight)
-//        addBtn.isEnabled = false
+        
         if currency == "USD" {
             self.unifiedBalance = self.balance
             self.currencyBtn.setTitle(self.currency, for: .normal)
             self.currencyBtn.setTitleColor(.blue, for: .normal)
-//            self.addBtn.isEnabled = true
         } else {
             if currency.isEmpty {
                 currency = "USD"
                 self.unifiedBalance = self.balance
                 self.currencyBtn.setTitle(self.currency, for: .normal)
                 self.currencyBtn.setTitleColor(.blue, for: .normal)
-//                self.addBtn.isEnabled = true
             } else {
+                self.addBtn.isEnabled = false
                 NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
                     self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
-                    
-                    Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
-                        self.currencyBtn.setTitle(self.currency, for: .normal)
-                        self.currencyBtn.setTitleColor(.blue, for: .normal)
-//                        self.addBtn.isEnabled = true
-                    }
+                    self.currencyBtn.setTitle(self.currency, for: .normal)
+                    self.currencyBtn.setTitleColor(.blue, for: .normal)
+                    self.addBtn.isEnabled = true
                 }
             }
         }
@@ -134,11 +129,9 @@ class AddWalletVC: UIViewController {
                 print("Currency hasn't been selected yet!")
             } else if currency == "USD" {
                 self.unifiedBalance = self.balance
-                self.addBtn.isEnabled = true
             } else {
                 NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
                     self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
-                    self.addBtn.isEnabled = true
                 }
             }
         } else {
@@ -180,7 +173,10 @@ class AddWalletVC: UIViewController {
     @IBAction func addBtnTapped(_ sender: Any) {
         resignTextFields()
         
-        if name.isEmpty {
+        if !InternetConnectionManager.isConnected() {
+            print("Connection is offline!")
+            addBtn.isEnabled = false
+        } else if name.isEmpty {
             print("Name is empty")
             showBadInput(bad: true, view: nameTextField)
         } else if type.isEmpty {
@@ -189,12 +185,6 @@ class AddWalletVC: UIViewController {
         } else if currency.isEmpty {
             print("Currency has not been selected!")
             currencyBtn.setTitleColor(.red, for: .normal)
-        } else if !InternetConnectionManager.isConnected() {
-            print("Connection is offline!")
-            wasOffline = true
-        } else if wasOffline {
-            currencySelectedBtnTapped(Any.self)
-            wasOffline = false
         } else {
             
             let key = StorageManager.shared.getAutoKey(at: FDChild.wallets.rawValue)
