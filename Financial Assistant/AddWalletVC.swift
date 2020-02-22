@@ -183,6 +183,7 @@ class AddWalletVC: UIViewController {
             currencyBtn.setTitleColor(.red, for: .normal)
         } else if !InternetConnectionManager.isConnected() {
             print("Connection is offline!")
+            wasOffline = true
         } else if wasOffline {
             currencySelectedBtnTapped(Any.self)
             wasOffline = false
