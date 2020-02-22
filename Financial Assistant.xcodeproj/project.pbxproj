@@ -29,6 +29,7 @@
 		017E848423FBFD5600850C7C /* CurrencySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */; };
 		018B2FFB23FD86A30006F9B1 /* NetworkWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */; };
 		019F3B5C240195720041B332 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F3B5B240195720041B332 /* DataManager.swift */; };
+		019F3B5E2401AF890041B332 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F3B5D2401AF890041B332 /* InternetConnectionManager.swift */; };
 		019F476D23FB3624004CB77D /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F471E23FB3623004CB77D /* Array+Extensions.swift */; };
 		019F476E23FB3624004CB77D /* UISegmentedControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F471F23FB3623004CB77D /* UISegmentedControl+Extensions.swift */; };
 		019F476F23FB3624004CB77D /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F472023FB3623004CB77D /* UIImageView+Extensions.swift */; };
@@ -149,6 +150,7 @@
 		017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionCell.swift; sourceTree = "<group>"; };
 		018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWrapper.swift; sourceTree = "<group>"; };
 		019F3B5B240195720041B332 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		019F3B5D2401AF890041B332 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
 		019F471E23FB3623004CB77D /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		019F471F23FB3623004CB77D /* UISegmentedControl+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Extensions.swift"; sourceTree = "<group>"; };
 		019F472023FB3623004CB77D /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
@@ -362,6 +364,7 @@
 				013C84BF23F4AA0D0007B7EB /* StorageManager.swift */,
 				01A6C2F824002A6E002F88D1 /* NotificationManager.swift */,
 				019F3B5B240195720041B332 /* DataManager.swift */,
+				019F3B5D2401AF890041B332 /* InternetConnectionManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1022,6 +1025,7 @@
 				013C84CA23F4B3D20007B7EB /* TransactionCell.swift in Sources */,
 				019F477123FB3624004CB77D /* UIView+Extensions.swift in Sources */,
 				019F478A23FB3624004CB77D /* PhotoLibraryPickerViewController.swift in Sources */,
+				019F3B5E2401AF890041B332 /* InternetConnectionManager.swift in Sources */,
 				0104A03423F717FA00C52ED2 /* SignInVC.swift in Sources */,
 				01A58D7423DCADFA004F124C /* OverviewVC.swift in Sources */,
 				019F47A123FB3624004CB77D /* Button.swift in Sources */,
@@ -1272,7 +1276,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1293,7 +1297,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 60;
+				CURRENT_PROJECT_VERSION = 61;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

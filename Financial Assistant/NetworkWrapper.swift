@@ -13,7 +13,7 @@ import Alamofire
 struct NetworkWrapper {
     static func getRates(pair: (from:String,to:String), completion: @escaping (Double) -> Void) {
         let url = "https://api.exchangerate-api.com/v4/latest/\(pair.from)"
-        var out : Double = 1
+        var out : Double = 0
         
         // Using temporary fx rate when if saved for offline and used in current session
         if exchangeRates.count > 0 {
