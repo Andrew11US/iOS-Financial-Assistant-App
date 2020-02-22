@@ -38,6 +38,8 @@ class AddWalletVC: UIViewController {
     private var currency = ""
     private var unifiedCurrencyCode = StorageManager.shared.getUserCache().code
     
+    private var selectedCurrency : [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -64,18 +66,25 @@ class AddWalletVC: UIViewController {
     
     @IBAction func currencySelectedBtnTapped(_ sender: Any) {
         animateDown(view: currencyView, constraint: currencyViewHeight)
+        addBtn.isEnabled = false
         NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
             self.unifiedBalance = self.balance * coff
             print("Unified Balance: ", self.unifiedBalance, "USD")
+            self.addBtn.isEnabled = true
+            
+            Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
+                self.currencyBtn.setTitle(self.currency, for: .normal)
+                self.currencyBtn.setTitleColor(.blue, for: .normal)
+            }
         }
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
-            self.currencyBtn.setTitle(self.currency, for: .normal)
-            self.currencyBtn.setTitleColor(.blue, for: .normal)
-        }
+        
     }
     
     @IBAction func typeSelectedBtnTapped(_ sender: Any) {
         animateDown(view: typeView, constraint: typeViewHeight)
+        if type.isEmpty {
+            type = types[0]
+        }
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.typeBtn.setTitle(self.type.capitalized, for: .normal)
             self.typeBtn.setTitleColor(.blue, for: .normal)
@@ -224,15 +233,30 @@ extension AddWalletVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
         currency = currencies[indexPath.row][0..<3]
+        selectedCurrency.append(currency)
         print("Selected currency: ", currency)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         self.tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        let item = currencies[indexPath.row][0..<3]
+        for (index, value) in selectedCurrency.enumerated() {
+            if value == item {
+                selectedCurrency.remove(at: index)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CurrencySelectionCell", for: indexPath) as? CurrencySelectionCell {
+            
+            // Fixes accessory duplicates issue, when scrolling tableView
+            let checkmarks =  selectedCurrency.filter { $0 == currencies[indexPath.row][0..<3] }
+            if checkmarks.count > 0 {
+                cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+            } else {
+                cell.accessoryType = UITableViewCell.AccessoryType.none
+            }
             
             let currency = currencies[indexPath.row]
             cell.configureCell(currency: currency)
