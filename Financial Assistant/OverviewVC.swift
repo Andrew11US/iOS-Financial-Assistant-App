@@ -35,13 +35,45 @@ class OverviewVC: UIViewController {
             }
         }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(notification:)), name: .didUpdateTransactions, object: nil)
+//        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childAdded) {
+//            self.createNotification(name: .didAddWalletInDB)
+//            print("New Wallet added to DB")
+//        }
+        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childChanged) {
+            self.createNotification(name: .didChangeWalletInDB)
+            print("Wallet changed in DB")
+        }
+//        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childRemoved) {
+//            self.createNotification(name: .didRemoveWalletInDB)
+//            print("Wallet removed from DB")
+//        }
+//        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childAdded) {
+//            self.createNotification(name: .didAddTransactionInDB)
+//            print("Transaction added to DB")
+//        }
+//        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childRemoved) {
+//            self.createNotification(name: .didRemoveTransactionInDB)
+//            print("Transaction removed from DB")
+//        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLocalChange(notification:)), name: .didUpdateTransactions, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didAddTransactionInDB, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didRemoveTransactionInDB, object: nil)
     }
     
-    @objc func handleNotification(notification: Notification) {
+    @objc func handleLocalChange(notification: Notification) {
         print("Received: ", notification.name.rawValue)
         transactions = transactions.sorted { $0.dateCreated > $1.dateCreated }
         self.tableView.reloadData()
+    }
+    
+    @objc func handleDatabaseChange(notification: Notification) {
+        print("Received: ", notification.name.rawValue)
+        transactions.removeAll()
+        StorageManager.shared.getTransactions {
+            transactions = transactions.sorted { $0.dateCreated > $1.dateCreated }
+            self.tableView.reloadData()
+        }
     }
 
 }

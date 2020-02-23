@@ -18,9 +18,12 @@ class TransactionsVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
-            self.tableView.reloadData()
-        }
+//        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
+//            self.tableView.reloadData()
+//        }
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLocalChange(notification:)), name: .didUpdateTransactions, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didAddTransactionInDB, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didRemoveTransactionInDB, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +38,17 @@ class TransactionsVC: UIViewController {
                 destination.transaction = trans
             }
         }
+    }
+    
+    @objc func handleLocalChange(notification: Notification) {
+        print("Received: ", notification.name.rawValue)
+        transactions = transactions.sorted { $0.dateCreated > $1.dateCreated }
+        self.tableView.reloadData()
+    }
+    
+    @objc func handleDatabaseChange(notification: Notification) {
+        print("Received: ", notification.name.rawValue)
+            self.tableView.reloadData()
     }
     
 }

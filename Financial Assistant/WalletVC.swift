@@ -19,15 +19,10 @@ class WalletVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childChanged) {
-            wallets.removeAll()
-            StorageManager.shared.getWallets {
-                wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
-                self.tableView.reloadData()
-            }
-        }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification(notification:)), name: .didUpdateWallets, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLocalChange(notification:)), name: .didUpdateWallets, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didAddWalletInDB, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didChangeWalletInDB, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didRemoveWalletInDB, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,9 +40,17 @@ class WalletVC: UIViewController {
         }
     }
     
-    @objc func handleNotification(notification: Notification) {
+    @objc func handleLocalChange(notification: Notification) {
         wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
         self.tableView.reloadData()
+    }
+    
+    @objc func handleDatabaseChange(notification: Notification) {
+        wallets.removeAll()
+        StorageManager.shared.getWallets {
+            wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
+            self.tableView.reloadData()
+        }
     }
 
 }

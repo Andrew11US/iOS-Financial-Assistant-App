@@ -121,7 +121,6 @@ public struct StorageManager {
     }
     
     func retrieveData() {
-        
         userReference.child("transactions").observeSingleEvent(of: .value) { (snapshot) in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for snap in snapshot {

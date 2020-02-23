@@ -43,7 +43,7 @@ class DetailWalletVC: UIViewController {
         self.nameLbl.text = wallet.0.name
         self.typeLbl.text = wallet.0.type
         self.balanceLbl.text = "\(wallet.0.balance.currencyFormat) \(wallet.0.currencyCode)"
-        self.unifiedBalanceLbl.text = "\(wallet.0.unifiedBalance) USD"
+        self.unifiedBalanceLbl.text = "\(wallet.0.unifiedBalance.currencyFormat) USD"
         self.currencyLbl.text = wallet.0.currencyCode
         self.limitTextField.text = "\(wallet.0.limit.currencyFormat)"
         self.dateLbl.text = wallet.0.dateCreated

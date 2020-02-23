@@ -93,6 +93,11 @@ extension Decodable {
 extension Notification.Name {
     static let didUpdateTransactions = Notification.Name(rawValue: "didUpdateTransactions")
     static let didUpdateWallets = Notification.Name(rawValue: "didUpdateWallets")
+    static let didAddWalletInDB = Notification.Name(rawValue: "didAddWalletInDB")
+    static let didChangeWalletInDB = Notification.Name(rawValue: "didChangeWalletInDB")
+    static let didRemoveWalletInDB = Notification.Name(rawValue: "didRemoveWalletInDB")
+    static let didAddTransactionInDB = Notification.Name(rawValue: "didAddTransactionInDB")
+    static let didRemoveTransactionInDB = Notification.Name(rawValue: "didRemoveTransactionInDB")
 }
 
 // Adds wrapper to UIViewController to easily show alert

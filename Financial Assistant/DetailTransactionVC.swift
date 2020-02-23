@@ -34,6 +34,8 @@ class DetailTransactionVC: UIViewController {
     @IBAction func deleteBtnTapped(_ sender: Any) {
         StorageManager.shared.deleteObject(location: FDChild.transactions.rawValue, id: transaction.0.id)
         transactions.remove(at: transaction.1)
+        print(transaction.1)
+        self.createNotification(name: .didUpdateTransactions)
         dismiss(animated: true, completion: nil)
     }
     
