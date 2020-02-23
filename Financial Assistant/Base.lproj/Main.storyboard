@@ -445,25 +445,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YvD-LQ-QNk">
-                                <rect key="frame" x="0.0" y="724" width="375" height="0.0"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5CG-dl-PeJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="5CG-dl-PeJ" secondAttribute="bottom" id="a1b-t8-8tK"/>
-                                    <constraint firstAttribute="trailing" secondItem="5CG-dl-PeJ" secondAttribute="trailing" id="hec-ra-avl"/>
-                                    <constraint firstAttribute="height" id="lX7-pU-7QS"/>
-                                    <constraint firstItem="5CG-dl-PeJ" firstAttribute="leading" secondItem="YvD-LQ-QNk" secondAttribute="leading" id="uko-DB-GAV"/>
-                                    <constraint firstItem="5CG-dl-PeJ" firstAttribute="top" secondItem="YvD-LQ-QNk" secondAttribute="top" id="xEb-Fp-Wbq"/>
-                                </constraints>
-                            </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhB-ka-JeU">
                                 <rect key="frame" x="0.0" y="724" width="375" height="0.0"/>
                                 <subviews>
@@ -574,6 +555,25 @@
                                     <constraint firstItem="Nat-4s-EDH" firstAttribute="leading" secondItem="F1S-CF-bSb" secondAttribute="leading" id="w0X-R5-Auk"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YvD-LQ-QNk">
+                                <rect key="frame" x="0.0" y="724" width="375" height="0.0"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Connection" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5CG-dl-PeJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="5CG-dl-PeJ" secondAttribute="bottom" id="a1b-t8-8tK"/>
+                                    <constraint firstAttribute="trailing" secondItem="5CG-dl-PeJ" secondAttribute="trailing" id="hec-ra-avl"/>
+                                    <constraint firstAttribute="height" id="lX7-pU-7QS"/>
+                                    <constraint firstItem="5CG-dl-PeJ" firstAttribute="leading" secondItem="YvD-LQ-QNk" secondAttribute="leading" id="uko-DB-GAV"/>
+                                    <constraint firstItem="5CG-dl-PeJ" firstAttribute="top" secondItem="YvD-LQ-QNk" secondAttribute="top" id="xEb-Fp-Wbq"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -587,7 +587,7 @@
                             <constraint firstItem="8aH-GR-PBs" firstAttribute="bottom" secondItem="yB0-9N-b1V" secondAttribute="bottom" id="bNY-Lf-HiR"/>
                             <constraint firstItem="F1S-CF-bSb" firstAttribute="bottom" secondItem="8aH-GR-PBs" secondAttribute="bottom" id="cx5-lI-nRf"/>
                             <constraint firstItem="yB0-9N-b1V" firstAttribute="leading" secondItem="Bz8-Rl-xgS" secondAttribute="leading" constant="20" symbolic="YES" id="ml6-rj-BrR"/>
-                            <constraint firstItem="fhB-ka-JeU" firstAttribute="top" secondItem="YvD-LQ-QNk" secondAttribute="bottom" id="qfD-28-AZ6"/>
+                            <constraint firstItem="YvD-LQ-QNk" firstAttribute="bottom" secondItem="8aH-GR-PBs" secondAttribute="bottom" id="nv3-hv-y15"/>
                             <constraint firstItem="F1S-CF-bSb" firstAttribute="trailing" secondItem="8aH-GR-PBs" secondAttribute="trailing" id="ugb-ZL-zKj"/>
                             <constraint firstAttribute="trailing" secondItem="fhB-ka-JeU" secondAttribute="trailing" id="yBZ-4O-Wpo"/>
                         </constraints>

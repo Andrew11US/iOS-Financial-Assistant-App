@@ -52,15 +52,13 @@ class AddWalletVC: UIViewController {
 //        self.currencyView.layer.cornerRadius = 10.0
 //        self.typeView.layer.cornerRadius = 10.0
         
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             if !InternetConnectionManager.isConnected() {
                 print("Connection is offline!")
-//                self.addBtn.isEnabled = false
-                if self.connectionViewHeight.constant != 40 {
-                    self.showNoCennection(view: self.connectionView, constraint: self.connectionViewHeight, to: 40, interaction: false)
+                if self.connectionViewHeight.constant != 50 {
+                    self.showNoCennection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
                 }
             } else {
-//                self.addBtn.isEnabled = true
                 if self.connectionViewHeight.constant != 0 {
                     self.showNoCennection(view: self.connectionView, constraint: self.connectionViewHeight, to: 0, interaction: true)
                 }
@@ -71,8 +69,6 @@ class AddWalletVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-
-
     }
   
     @IBAction func typeBtnTapped(_ sender: Any) {
@@ -88,24 +84,23 @@ class AddWalletVC: UIViewController {
     @IBAction func currencySelectedBtnTapped(_ sender: Any) {
         animateDown(view: currencyView, constraint: currencyViewHeight)
         
-        if currency == "USD" {
+        if currency.isEmpty {
+            currency = "USD"
             self.unifiedBalance = self.balance
             self.currencyBtn.setTitle(self.currency, for: .normal)
             self.currencyBtn.setTitleColor(.blue, for: .normal)
+            print("Currency default: ", currency)
+        } else if currency == "USD" {
+            self.unifiedBalance = self.balance
+            self.currencyBtn.setTitle(self.currency, for: .normal)
+            self.currencyBtn.setTitleColor(.blue, for: .normal)
+            print("Currency selected: ", currency)
         } else {
-            if currency.isEmpty {
-                currency = "USD"
-                self.unifiedBalance = self.balance
+            NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
+                self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
                 self.currencyBtn.setTitle(self.currency, for: .normal)
                 self.currencyBtn.setTitleColor(.blue, for: .normal)
-            } else {
-                self.addSpinner(spinner)
-                NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
-                    self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
-                    self.currencyBtn.setTitle(self.currency, for: .normal)
-                    self.currencyBtn.setTitleColor(.blue, for: .normal)
-                    self.removeSpinner(self.spinner)
-                }
+                print("Calculated unified: ", self.unifiedBalance)
             }
         }
         print("Unified Balance: ", self.unifiedBalance, "USD")
@@ -243,7 +238,6 @@ class AddWalletVC: UIViewController {
     }
     
     func showNoCennection(view: UIView, constraint: NSLayoutConstraint, to: Int, interaction: Bool) {
-        // Optimized for iPhone SE 4-inch screen and Up
         constraint.constant = CGFloat(to)
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
