@@ -31,6 +31,7 @@ class OverviewVC: UIViewController {
         if wallets.count == 0 {
             StorageManager.shared.getWallets {
                 wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
+                self.createNotification(name: .didUpdateWallets)
             }
         }
         

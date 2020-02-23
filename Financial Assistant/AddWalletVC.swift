@@ -23,8 +23,12 @@ class AddWalletVC: UIViewController {
     @IBOutlet weak var currencyView: UIView!
     @IBOutlet weak var typeViewHeight: NSLayoutConstraint!
     @IBOutlet weak var typeView: UIView!
+    @IBOutlet weak var connectionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var connectionView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pickerView: UIPickerView!
+    
+    let spinner = SpinnerViewController()
     
     // Data to choose when customizing a Wallet
     var types = WalletType.getArray()
@@ -47,15 +51,28 @@ class AddWalletVC: UIViewController {
         self.limitTextField.delegate = self
 //        self.currencyView.layer.cornerRadius = 10.0
 //        self.typeView.layer.cornerRadius = 10.0
+        
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: true) { timer in
+            if !InternetConnectionManager.isConnected() {
+                print("Connection is offline!")
+//                self.addBtn.isEnabled = false
+                if self.connectionViewHeight.constant != 40 {
+                    self.showNoCennection(view: self.connectionView, constraint: self.connectionViewHeight, to: 40, interaction: false)
+                }
+            } else {
+//                self.addBtn.isEnabled = true
+                if self.connectionViewHeight.constant != 0 {
+                    self.showNoCennection(view: self.connectionView, constraint: self.connectionViewHeight, to: 0, interaction: true)
+                }
+            }
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         
-        if !InternetConnectionManager.isConnected() {
-            print("Connection is offline!")
-            addBtn.isEnabled = false
-        }
+
+
     }
   
     @IBAction func typeBtnTapped(_ sender: Any) {
@@ -82,12 +99,12 @@ class AddWalletVC: UIViewController {
                 self.currencyBtn.setTitle(self.currency, for: .normal)
                 self.currencyBtn.setTitleColor(.blue, for: .normal)
             } else {
-                self.addBtn.isEnabled = false
+                self.addSpinner(spinner)
                 NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
                     self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
                     self.currencyBtn.setTitle(self.currency, for: .normal)
                     self.currencyBtn.setTitleColor(.blue, for: .normal)
-                    self.addBtn.isEnabled = true
+                    self.removeSpinner(self.spinner)
                 }
             }
         }
@@ -222,6 +239,15 @@ class AddWalletVC: UIViewController {
         } else {
             view.layer.borderWidth = 0
             view.layer.borderColor = UIColor.clear.cgColor
+        }
+    }
+    
+    func showNoCennection(view: UIView, constraint: NSLayoutConstraint, to: Int, interaction: Bool) {
+        // Optimized for iPhone SE 4-inch screen and Up
+        constraint.constant = CGFloat(to)
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+            view.superview?.subviews[0].isUserInteractionEnabled = interaction
         }
     }
     

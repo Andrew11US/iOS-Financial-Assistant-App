@@ -45,7 +45,7 @@ class DetailWalletVC: UIViewController {
         self.balanceLbl.text = "\(wallet.0.balance.currencyFormat) \(wallet.0.currencyCode)"
         self.unifiedBalanceLbl.text = "\(wallet.0.unifiedBalance) USD"
         self.currencyLbl.text = wallet.0.currencyCode
-        self.limitTextField.text = "\(-wallet.0.limit)"
+        self.limitTextField.text = "\(wallet.0.limit.currencyFormat)"
         self.dateLbl.text = wallet.0.dateCreated
     }
     
@@ -53,9 +53,15 @@ class DetailWalletVC: UIViewController {
         let value = DataManager.getData.currency(field: limitTextField)
         if let doubleValue = value {
             self.limit = Double(round(-doubleValue*100)/100)
+            wallet.0.limit = -doubleValue
         } else {
             self.limit = 0
+            wallet.0.limit = 0
         }
+         
+        wallets[wallet.1] = wallet.0
+        print(wallet.0)
+        self.createNotification(name: .didUpdateWallets)
         
         let newLimit = ["limit": limit] as [String: AnyObject]
         StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.0.id, data: newLimit)
