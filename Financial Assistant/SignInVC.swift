@@ -38,10 +38,9 @@ class SignInVC: UIViewController {
     }
     
     @IBAction func signInBtnPressed(_ sender: AnyObject) {
-        
+        resignTextFields()
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
-        
         addSpinner(spinner)
         
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
@@ -57,8 +56,6 @@ class SignInVC: UIViewController {
                 self.removeSpinner(self.spinner)
             }
         }
-        
-        self.view.endEditing(true)
     }
     
 }
@@ -74,6 +71,11 @@ extension SignInVC: UITextFieldDelegate {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
         return true
+    }
+    
+    func resignTextFields() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
     }
 }
 

@@ -15,6 +15,7 @@ class ResetPasswordVC: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     
     let spinner = SpinnerViewController()
+    private var email = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,27 +24,36 @@ class ResetPasswordVC: UIViewController {
     }
     
     @IBAction func resetBtnTapped(_ sender: Any) {
+        emailTextField.resignFirstResponder()
         
-        guard let emailStr = emailTextField.text else {
-            print("Provide E-mail to reset password!")
+        let value = DataManager.getData.text(field: emailTextField)
+        if let strValue = value {
+            self.email = strValue
+        } else {
+            self.email = ""
+           print("Email field is empty!")
             return
         }
         
-        let email = emailStr.trimmingCharacters(in: .whitespacesAndNewlines)
-        
         addSpinner(spinner)
-        
         Auth.auth().sendPasswordReset(withEmail: email) { error in
             if let err = error {
                 print(err.localizedDescription)
                 self.removeSpinner(self.spinner)
             } else {
-                print("Reset password email has been sent to: ", email)
+                print("Reset password email has been sent to: ", self.email)
                 self.removeSpinner(self.spinner)
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        self.view.endEditing(true)
+    }
+    
+    @IBAction func emailTextFieldChanged(_ sender: Any) {
+        if emailTextField.text?.count > 0 {
+            resetBtn.isHidden = false
+        } else {
+            resetBtn.isHidden = true
+        }
     }
 
 }

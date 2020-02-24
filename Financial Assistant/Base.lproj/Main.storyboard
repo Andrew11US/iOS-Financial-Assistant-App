@@ -1557,7 +1557,7 @@
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccS-zf-Inz">
                                         <rect key="frame" x="0.0" y="84" width="303" height="34"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="Sign In"/>
                                         <connections>
                                             <action selector="signInBtnPressed:" destination="9Bi-p0-1Co" eventType="touchUpInside" id="VP5-Jq-DrQ"/>
                                         </connections>
@@ -1667,16 +1667,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="HVj-8Q-y6s">
-                                <rect key="frame" x="0.0" y="343" width="375" height="72"/>
+                                <rect key="frame" x="0.0" y="362" width="375" height="34"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rVB-4U-Dfo">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                        <connections>
+                                            <action selector="emailTextFieldChanged:" destination="lU0-BC-WBs" eventType="editingChanged" id="H4b-PF-tEJ"/>
+                                        </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-Ve-FKP">
-                                        <rect key="frame" x="0.0" y="42" width="375" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-Ve-FKP">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="resetBtnTapped:" destination="lU0-BC-WBs" eventType="touchUpInside" id="r6d-8I-lm9"/>
                                         </connections>
@@ -1730,6 +1735,6 @@
         <image name="star.fill" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZkV-6L-UMn"/>
+        <segue reference="Y49-cP-V9x"/>
     </inferredMetricsTieBreakers>
 </document>

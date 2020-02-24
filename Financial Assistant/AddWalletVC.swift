@@ -96,10 +96,12 @@ class AddWalletVC: UIViewController {
             self.currencyBtn.setTitleColor(.blue, for: .normal)
             print("Currency selected: ", currency)
         } else {
+            addSpinner(spinner)
             NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
                 self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
                 self.currencyBtn.setTitle(self.currency, for: .normal)
                 self.currencyBtn.setTitleColor(.blue, for: .normal)
+                self.removeSpinner(self.spinner)
                 print("Calculated unified: ", self.unifiedBalance)
             }
         }
@@ -118,7 +120,7 @@ class AddWalletVC: UIViewController {
     }
     
     @IBAction func nameTextFieldEdited(_ sender: Any) {
-        let value = DataManager.getData.name(field: nameTextField)
+        let value = DataManager.getData.text(field: nameTextField)
         if let strValue = value {
             self.name = strValue
             showBadInput(bad: false, view: nameTextField)
@@ -142,8 +144,10 @@ class AddWalletVC: UIViewController {
             } else if currency == "USD" {
                 self.unifiedBalance = self.balance
             } else {
+                addSpinner(spinner)
                 NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
                     self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
+                    self.removeSpinner(self.spinner)
                 }
             }
         } else {

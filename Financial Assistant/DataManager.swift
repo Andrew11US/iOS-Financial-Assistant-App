@@ -11,7 +11,7 @@ import Foundation
 struct DataManager {
     static let getData = DataManager()
     
-    func name(field: UITextField) -> String? {
+    func text(field: UITextField) -> String? {
         if let str = field.text?.trimmingCharacters(in: .whitespacesAndNewlines), !str.isEmpty {
             return str
         } else {

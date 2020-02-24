@@ -29,6 +29,7 @@ class AddTransactionVC: UIViewController {
     @IBOutlet weak var connectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var connectionView: UIView!
     
+    let spinner = SpinnerViewController()
     // Data for selection when customizing new transaction
     private var categories = TransactionCategory.Income.getArray()
     
@@ -88,9 +89,11 @@ class AddTransactionVC: UIViewController {
             }
 //            self.amount = Double(round(doubleValue*100)/100)
             if let wallet = wallet.0 {
+                addSpinner(spinner)
                 NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
                     self.unifiedAmount = Double(round((self.amount * coff)*100)/100)
                     self.tempRate = coff
+                    self.removeSpinner(self.spinner)
                 }
             } else {
                 print("Wallet has not been selected yet!")
@@ -115,11 +118,13 @@ class AddTransactionVC: UIViewController {
         if let wallet = wallet.0 {
             print("Currency default: ", wallet.name)
             self.currencyLbl.text = wallet.currencyCode
+            addSpinner(spinner)
             NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
                 self.unifiedAmount = Double(round((self.amount * coff)*100)/100)
                 self.walletBtn.setTitle(wallet.name.capitalized, for: .normal)
                 self.walletBtn.setTitleColor(.blue, for: .normal)
                 self.tempRate = coff
+                self.removeSpinner(self.spinner)
                 print("Calculated unified: ", self.unifiedAmount)
             }
         } else {
@@ -156,7 +161,7 @@ class AddTransactionVC: UIViewController {
     }
     
     @IBAction func nameTextFieldEdited(_ sender: Any) {
-        let value = DataManager.getData.name(field: nameTextField)
+        let value = DataManager.getData.text(field: nameTextField)
         if let strValue = value {
             self.name = strValue
             showBadInput(bad: false, view: nameTextField)

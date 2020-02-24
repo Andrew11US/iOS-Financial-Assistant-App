@@ -28,7 +28,7 @@ class SignUpVC: UIViewController {
     }
     
     @IBAction func signUpBtnPressed(_ sender: AnyObject) {
-        
+        resignTextFields()
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         guard let confirmation = confirmPassTextField.text else { return }
@@ -51,7 +51,6 @@ class SignUpVC: UIViewController {
                 }
             }
         }
-        self.view.endEditing(true)
     }
 
 }
@@ -68,5 +67,11 @@ extension SignUpVC: UITextFieldDelegate {
         passwordTextField.resignFirstResponder()
         confirmPassTextField.resignFirstResponder()
         return true
+    }
+    
+    func resignTextFields() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        confirmPassTextField.resignFirstResponder()
     }
 }
