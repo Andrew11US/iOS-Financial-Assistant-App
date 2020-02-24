@@ -1555,7 +1555,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccS-zf-Inz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ccS-zf-Inz" customClass="CustomButton" customModule="Financial_Assistant" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="84" width="303" height="34"/>
                                         <state key="normal" title="Sign In"/>
                                         <connections>
@@ -1735,6 +1735,6 @@
         <image name="star.fill" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Y49-cP-V9x"/>
+        <segue reference="ZkV-6L-UMn"/>
     </inferredMetricsTieBreakers>
 </document>

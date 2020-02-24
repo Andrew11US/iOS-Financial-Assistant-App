@@ -107,6 +107,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - pop (1.0.12)
   - PromisesObjC (1.2.8)
   - SwiftKeychainWrapper (3.4.0)
 
@@ -117,6 +118,7 @@ DEPENDENCIES:
   - FirebaseUI/Auth
   - FirebaseUI/Facebook
   - FirebaseUI/OAuth
+  - pop
   - SwiftKeychainWrapper
 
 SPEC REPOS:
@@ -142,6 +144,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - pop
     - PromisesObjC
     - SwiftKeychainWrapper
 
@@ -167,9 +170,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: cea130bbfe5a7edc8d06d3f0d17288c32ffe9925
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: c65db9b7642c5477e4824300286c594e13dd0ccc
+PODFILE CHECKSUM: 6b15bff0af627f5f1bb5b502ca29cd2f8486c7a2
 
 COCOAPODS: 1.8.4

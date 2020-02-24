@@ -14,7 +14,7 @@ class SignInVC: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var signInBtn: UIButton!
+    @IBOutlet weak var signInBtn: CustomButton!
     
     let spinner = SpinnerViewController()
     

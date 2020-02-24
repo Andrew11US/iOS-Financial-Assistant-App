@@ -27,6 +27,8 @@
 		015C501E23FCAB4F006A09F7 /* WalletSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015C501D23FCAB4F006A09F7 /* WalletSelectionCell.swift */; };
 		0165347F23F6E87E00776770 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0165347E23F6E87E00776770 /* GoogleService-Info.plist */; };
 		017E848423FBFD5600850C7C /* CurrencySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */; };
+		018697D424048B9B00548D02 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018697D224048B9A00548D02 /* CustomButton.swift */; };
+		018697D724048CBB00548D02 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018697D624048CBA00548D02 /* CustomTextField.swift */; };
 		018B2FFB23FD86A30006F9B1 /* NetworkWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */; };
 		019F3B5C240195720041B332 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F3B5B240195720041B332 /* DataManager.swift */; };
 		019F3B5E2401AF890041B332 /* InternetConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019F3B5D2401AF890041B332 /* InternetConnectionManager.swift */; };
@@ -148,6 +150,9 @@
 		015C501D23FCAB4F006A09F7 /* WalletSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSelectionCell.swift; sourceTree = "<group>"; };
 		0165347E23F6E87E00776770 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencySelectionCell.swift; sourceTree = "<group>"; };
+		018697CF24048AE300548D02 /* Financial Assistant-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Financial Assistant-Bridging-Header.h"; sourceTree = "<group>"; };
+		018697D224048B9A00548D02 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		018697D624048CBA00548D02 /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		018B2FFA23FD86A30006F9B1 /* NetworkWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkWrapper.swift; sourceTree = "<group>"; };
 		019F3B5B240195720041B332 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		019F3B5D2401AF890041B332 /* InternetConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionManager.swift; sourceTree = "<group>"; };
@@ -281,6 +286,8 @@
 				017E848323FBFD5600850C7C /* CurrencySelectionCell.swift */,
 				015C501B23FCA1CF006A09F7 /* CategorySelectionCell.swift */,
 				015C501D23FCAB4F006A09F7 /* WalletSelectionCell.swift */,
+				018697D224048B9A00548D02 /* CustomButton.swift */,
+				018697D624048CBA00548D02 /* CustomTextField.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -354,6 +361,7 @@
 				01A58D8223DCADFC004F124C /* Info.plist */,
 				0165347E23F6E87E00776770 /* GoogleService-Info.plist */,
 				01A58D7A23DCADFA004F124C /* Financial_Assistant.xcdatamodeld */,
+				018697CF24048AE300548D02 /* Financial Assistant-Bridging-Header.h */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
@@ -809,6 +817,7 @@
 				TargetAttributes = {
 					01A58D6B23DCADFA004F124C = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 					01A58D8623DCADFC004F124C = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -1051,6 +1060,7 @@
 				01D891D823EE1B9F0009FD5A /* PlanningVC.swift in Sources */,
 				019F477723FB3624004CB77D /* UISearchBar+Extensions.swift in Sources */,
 				01A6C2FB24006F5E002F88D1 /* CurrencyTextField.swift in Sources */,
+				018697D424048B9B00548D02 /* CustomButton.swift in Sources */,
 				019F478F23FB3624004CB77D /* Address.swift in Sources */,
 				01D3037923F9A4D500D5448C /* DetailTransactionVC.swift in Sources */,
 				019F478E23FB3624004CB77D /* Location.swift in Sources */,
@@ -1090,6 +1100,7 @@
 				019F477523FB3624004CB77D /* UIColor+Extensions.swift in Sources */,
 				019F478723FB3624004CB77D /* TwoTextFieldsViewController.swift in Sources */,
 				019F479C23FB3624004CB77D /* LikeButtonCell.swift in Sources */,
+				018697D724048CBB00548D02 /* CustomTextField.swift in Sources */,
 				01D891D623EE1B890009FD5A /* StatisticsVC.swift in Sources */,
 				0106E87623F7502500429EBE /* TemporaryData.swift in Sources */,
 				019F479923FB3624004CB77D /* PhotoLayout.swift in Sources */,
@@ -1275,8 +1286,9 @@
 			baseConfigurationReference = 08900C8C6FEE549447528E83 /* Pods-Financial Assistant.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1286,6 +1298,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Andrew11US.Financial-Assistant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Financial Assistant/Financial Assistant-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1296,8 +1310,9 @@
 			baseConfigurationReference = BBECA15D6EE526C947F75F8A /* Pods-Financial Assistant.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 69;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_TEAM = PTRW36GG78;
 				INFOPLIST_FILE = "Financial Assistant/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1307,6 +1322,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Andrew11US.Financial-Assistant";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Financial Assistant/Financial Assistant-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

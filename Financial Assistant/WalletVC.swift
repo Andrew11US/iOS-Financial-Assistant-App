@@ -33,7 +33,6 @@ class WalletVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? DetailWalletVC {
-            
             if let wallet = sender as? (Wallet, Int) {
                 destination.wallet = wallet
             }

@@ -12,6 +12,7 @@ target 'Financial Assistant' do
   pod 'FirebaseUI/OAuth'
   pod 'SwiftKeychainWrapper'
   pod 'Alamofire', '~> 5.0'
+  pod 'pop'
 
   target 'Financial AssistantTests' do
     inherit! :search_paths
