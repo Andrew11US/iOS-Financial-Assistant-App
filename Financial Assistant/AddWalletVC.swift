@@ -56,11 +56,11 @@ class AddWalletVC: UIViewController {
             if !InternetConnectionManager.isConnected() {
                 print("Connection is offline!")
                 if self.connectionViewHeight.constant != 50 {
-                    self.showNoCennection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
+                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
                 }
             } else {
                 if self.connectionViewHeight.constant != 0 {
-                    self.showNoCennection(view: self.connectionView, constraint: self.connectionViewHeight, to: 0, interaction: true)
+                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 0, interaction: true)
                 }
             }
         }
@@ -187,7 +187,7 @@ class AddWalletVC: UIViewController {
         
         if !InternetConnectionManager.isConnected() {
             print("Connection is offline!")
-            addBtn.isEnabled = false
+            self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
         } else if name.isEmpty {
             print("Name is empty")
             showBadInput(bad: true, view: nameTextField)
@@ -237,7 +237,7 @@ class AddWalletVC: UIViewController {
         }
     }
     
-    func showNoCennection(view: UIView, constraint: NSLayoutConstraint, to: Int, interaction: Bool) {
+    func showNoConnection(view: UIView, constraint: NSLayoutConstraint, to: Int, interaction: Bool) {
         constraint.constant = CGFloat(to)
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()

@@ -11,7 +11,7 @@ import Foundation
 
 class AddTransactionVC: UIViewController {
     
-    @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var amountTextField: CurrencyTextField!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var walletBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
@@ -26,6 +26,8 @@ class AddTransactionVC: UIViewController {
     @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var walletViewHeight: NSLayoutConstraint!
     @IBOutlet weak var walletView: UIView!
+    @IBOutlet weak var connectionViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var connectionView: UIView!
     
     // Data for selection when customizing new transaction
     private var categories = TransactionCategory.Income.getArray()
@@ -34,6 +36,8 @@ class AddTransactionVC: UIViewController {
     private var selectedWallet = 0
     private var date = ""
     private var category = ""
+    private var name = ""
+    private var type = ""
     private var amount = 0.0
     private var unifiedAmount = 0.0
     private var tempRate: Double = 0
@@ -43,57 +47,91 @@ class AddTransactionVC: UIViewController {
         
         self.amountTextField.delegate = self
         self.nameTextField.delegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         
-        if !InternetConnectionManager.isConnected() {
-            print("Connection is offline!")
-            addBtn.isEnabled = false
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if !InternetConnectionManager.isConnected() {
+                print("Connection is offline!")
+                if self.connectionViewHeight.constant != 50 {
+                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
+                }
+            } else {
+                if self.connectionViewHeight.constant != 0 {
+                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 0, interaction: true)
+                }
+            }
         }
     }
     
     @IBAction func segmentControlChanged(_ sender: Any) {
         print("Segment index: ", segmentControl.selectedSegmentIndex)
-        category = "Select Category"
-        categorySelectedTapped((Any).self)
+        if segmentControl.selectedSegmentIndex == 0 {
+            amount = -amount
+            type = TransactionType.income.rawValue
+            print("Amount: ", amount)
+        } else {
+            amount = -amount
+            type = TransactionType.expense.rawValue
+            print("Amount: ", amount)
+        }
+        category.removeAll()
+        self.categoryBtn.setTitle("Select Category", for: .normal)
+        self.categoryBtn.setTitleColor(.blue, for: .normal)
     }
     
     @IBAction func amountTextFieldEdited(_ sender: Any) {
-        if let amountStr = amountTextField.text {
-            if let amountDouble = Double(amountStr) {
-                self.amount = amountDouble
-                if tempRate != 0.0 {
-                    unifiedAmount = amount * tempRate
-                }
-                print("Amount set: ", amount)
+        let value = DataManager.getData.currency(field: amountTextField)
+        if let doubleValue = value, doubleValue != 0.0 {
+            if segmentControl.selectedSegmentIndex == 0 {
+                self.amount = Double(round(doubleValue*100)/100)
+            } else {
+                self.amount = Double(round(-doubleValue*100)/100)
             }
+//            self.amount = Double(round(doubleValue*100)/100)
+            if let wallet = wallet.0 {
+                NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
+                    self.unifiedAmount = Double(round((self.amount * coff)*100)/100)
+                    self.tempRate = coff
+                }
+            } else {
+                print("Wallet has not been selected yet!")
+            }
+            self.showBadInput(bad: false, view: amountTextField)
+        } else {
+            self.amount = 0
+            self.showBadInput(bad: true, view: amountTextField)
         }
+        print("Amount set: ", self.amount)
+        print("Unified Amount: ", self.unifiedAmount, "USD")
     }
     
     @IBAction func walletBtnTapped(_ sender: Any) {
+        resignTextFields()
         animateUp(view: walletView, constraint: walletViewHeight)
     }
     
     @IBAction func walletSelectedTapped(_ sender: Any) {
         animateDown(view: walletView, constraint: walletViewHeight)
-        if wallet.0 == nil {
-            wallet.0 = wallets[0]
-        }
-        guard let wallet = wallet.0 else { return }
-
-        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
-            self.walletBtn.setTitle(wallet.name.capitalized, for: .normal)
+        
+        if let wallet = wallet.0 {
+            print("Currency default: ", wallet.name)
+            self.currencyLbl.text = wallet.currencyCode
             NetworkWrapper.getRates(pair: (from: wallet.currencyCode, to: "USD")) { coff in
-                self.unifiedAmount = self.amount * coff
-                print("Unified: ", self.unifiedAmount, "USD")
+                self.unifiedAmount = Double(round((self.amount * coff)*100)/100)
+                self.walletBtn.setTitle(wallet.name.capitalized, for: .normal)
+                self.walletBtn.setTitleColor(.blue, for: .normal)
                 self.tempRate = coff
+                print("Calculated unified: ", self.unifiedAmount)
             }
+        } else {
+            print("No wallet selected!")
+            self.walletBtn.setTitle("Select Wallet", for: .normal)
+            self.walletBtn.setTitleColor(.red, for: .normal)
         }
+        print("Unified Amount: ", self.unifiedAmount, "USD")
     }
     
     @IBAction func categoryBtnTapped(_ sender: Any) {
+        resignTextFields()
         if segmentControl.selectedSegmentIndex == 0 {
             categories = TransactionCategory.Income.getArray()
         } else {
@@ -107,52 +145,69 @@ class AddTransactionVC: UIViewController {
     @IBAction func categorySelectedTapped(_ sender: Any) {
         animateDown(view: categoryView, constraint: categoryViewHeight)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
-            self.categoryBtn.setTitle(self.category.capitalized, for: .normal)
+            if self.category.isEmpty {
+                self.categoryBtn.setTitle("Select Category", for: .normal)
+                self.categoryBtn.setTitleColor(.blue, for: .normal)
+            } else {
+                self.categoryBtn.setTitle(self.category.capitalized, for: .normal)
+                self.categoryBtn.setTitleColor(.blue, for: .normal)
+            }
         }
     }
     
-    @IBAction func addBtnTapped(_ sender: Any) {
-        
-        guard let name = nameTextField.text else { return }
-        guard var wallet = self.wallet.0 else { return }
-        guard let walletIndex = self.wallet.1 else { return }
- 
-        if let amount = amountTextField.text {
-            if let doubleValue = Double(amount), doubleValue != 0.0 {
-                self.amount = doubleValue
-            } else {
-                return
-            }
-        }
-        var type = TransactionType.income.rawValue
-        if segmentControl.selectedSegmentIndex == 0 {
-            type = TransactionType.income.rawValue
+    @IBAction func nameTextFieldEdited(_ sender: Any) {
+        let value = DataManager.getData.name(field: nameTextField)
+        if let strValue = value {
+            self.name = strValue
+            showBadInput(bad: false, view: nameTextField)
         } else {
-            type = TransactionType.expense.rawValue
-            amount = -amount
+            self.name = ""
+            showBadInput(bad: true, view: nameTextField)
+        }
+        print("Name set: ", self.name)
+    }
+    
+    @IBAction func addBtnTapped(_ sender: Any) {
+        resignTextFields()
+        
+        if type.isEmpty {
+            type = TransactionType.income.rawValue
         }
         
-        let key = StorageManager.shared.getAutoKey(at: FDChild.transactions.rawValue)
-        
-        let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, unifiedAmount: unifiedAmount, wallet: wallet)
-//        transaction.getDictionary()
-
-        transactions.append(transaction)
-        wallet.balance += transaction.originalAmount
-        print("Wallet new balance: ", wallet.balance)
-        
+        if !InternetConnectionManager.isConnected() {
+            print("Connection is offline!")
+            self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
+        } else if amount == 0.0 {
+            print("Amount can not be 0!")
+            showBadInput(bad: true, view: amountTextField)
+        } else if wallet.0 == nil && wallet.1 == nil {
+            print("Wallet has not been selected!")
+            walletBtn.setTitleColor(.red, for: .normal)
+        } else if category.isEmpty {
+            print("Category has not been selected!")
+            categoryBtn.setTitleColor(.red, for: .normal)
+        } else if name.isEmpty {
+            print("Name is empty")
+            showBadInput(bad: true, view: nameTextField)
+        } else {
+            guard var wallet = self.wallet.0, let walletIndex = self.wallet.1 else { return }
+            let key = StorageManager.shared.getAutoKey(at: FDChild.transactions.rawValue)
             
-                
-        wallet.unifiedBalance = wallet.balance * tempRate
-        print("New unified balance: ", wallet.unifiedBalance)
-        
-        StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
-        StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.id, data: wallet.getDictionary())
-        
-        wallets[walletIndex] = wallet
-        
-        self.createNotification(name: .didUpdateTransactions)
-        self.dismiss(animated: true, completion: nil)
+            let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, unifiedAmount: unifiedAmount, wallet: wallet)
+            
+            transactions.append(transaction)
+            wallet.balance += transaction.originalAmount
+            wallet.unifiedBalance = wallet.balance * tempRate
+            wallets[walletIndex] = wallet
+            print("Wallet new balance: ", wallet.balance)
+            print("New unified balance: ", wallet.unifiedBalance)
+            self.createNotification(name: .didUpdateTransactions)
+            
+            StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
+            StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.id, data: wallet.getDictionary())
+            
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     // popView animations
@@ -171,6 +226,29 @@ class AddTransactionVC: UIViewController {
             self.view.layoutIfNeeded()
             view.superview?.subviews[0].isUserInteractionEnabled = true
         }
+    }
+    
+    func showBadInput(bad: Bool, view: UIView) {
+        if bad {
+            view.layer.borderWidth = 2.0
+            view.layer.borderColor = UIColor.red.cgColor
+        } else {
+            view.layer.borderWidth = 0
+            view.layer.borderColor = UIColor.clear.cgColor
+        }
+    }
+    
+    func showNoConnection(view: UIView, constraint: NSLayoutConstraint, to: Int, interaction: Bool) {
+        constraint.constant = CGFloat(to)
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+            view.superview?.subviews[0].isUserInteractionEnabled = interaction
+        }
+    }
+    
+    func resignTextFields() {
+        self.nameTextField.resignFirstResponder()
+        self.amountTextField.resignFirstResponder()
     }
 
 }
