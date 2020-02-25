@@ -36,7 +36,7 @@ class TransactionCell: UITableViewCell {
         self.category.text = transaction.category.capitalized
         self.walletName.text = transaction.walletName.capitalized
         
-        self.amount.text = "\(transaction.originalAmount) \(transaction.currencyCode)"
+        self.amount.text = "\(transaction.originalAmount.currencyFormat) \(transaction.currencyCode)"
         // FIX: << Transaction can't be 0!!!
         if transaction.originalAmount < 0 {
             self.amount.textColor = .systemRed

@@ -29,7 +29,7 @@ class OverviewTransactionCell: UITableViewCell {
         
         self.date.text = transaction.dateCreated // << make reformatting!!!
         self.name.text = transaction.name
-        self.amount.text = "\(transaction.originalAmount) \(transaction.currencyCode)"
+        self.amount.text = "\(transaction.originalAmount.currencyFormat) \(transaction.currencyCode)"
     }
     
     func configureCell(test: String) {

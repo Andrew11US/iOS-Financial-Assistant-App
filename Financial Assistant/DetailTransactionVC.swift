@@ -42,8 +42,8 @@ class DetailTransactionVC: UIViewController {
     func showTransaction() {
         self.idLbl.text = transaction.0.id
         self.nameLbl.text = transaction.0.name
-        self.originalAmountLbl.text = "\(transaction.0.originalAmount) \(transaction.0.currencyCode)"
-        self.unifiedAmountLbl.text = "\(transaction.0.unifiedAmount) \(unifiedCurrencyCode)"
+        self.originalAmountLbl.text = "\(transaction.0.originalAmount.currencyFormat) \(transaction.0.currencyCode)"
+        self.unifiedAmountLbl.text = "\(transaction.0.unifiedAmount.currencyFormat) \(unifiedCurrencyCode)"
         self.categoryLbl.text = transaction.0.category
         self.currencyLbl.text = transaction.0.currencyCode
         self.unufiedCurrencyLbl.text = unifiedCurrencyCode

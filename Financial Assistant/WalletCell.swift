@@ -29,7 +29,7 @@ class WalletCell: UITableViewCell {
         
         self.type.text = wallet.type
         self.name.text = wallet.name
-        self.balance.text = "\(wallet.balance) \(wallet.currencyCode)"
+        self.balance.text = "\(wallet.balance.currencyFormat) \(wallet.currencyCode)"
     }
 
 }
