@@ -16,9 +16,14 @@ class DetailWalletVC: UIViewController {
     @IBOutlet weak var balanceLbl: UILabel!
     @IBOutlet weak var unifiedBalanceLbl: UILabel!
     @IBOutlet weak var limitTextField: CurrencyTextField!
+    @IBOutlet weak var limitLbl: UILabel!
     @IBOutlet weak var currencyLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var deleteBtn: UIButton!
+    @IBOutlet weak var changeLimitBtn: UIButton!
+    @IBOutlet weak var discardBtn: UIButton!
+    @IBOutlet weak var changeLimitView: UIView!
+    @IBOutlet weak var changeLimitViewHeight: NSLayoutConstraint!
  
     var wallet: (Wallet, Int)!
     private var limit = 0.0
@@ -45,11 +50,12 @@ class DetailWalletVC: UIViewController {
         self.balanceLbl.text = "\(wallet.0.balance.currencyFormat) \(wallet.0.currencyCode)"
         self.unifiedBalanceLbl.text = "\(wallet.0.unifiedBalance.currencyFormat) USD"
         self.currencyLbl.text = wallet.0.currencyCode
-        self.limitTextField.text = "\(wallet.0.limit.currencyFormat)"
+        self.limitLbl.text = wallet.0.limit.currencyFormat
         self.dateLbl.text = wallet.0.dateCreated
     }
     
-    @IBAction func limitChange(_ sender: Any) {
+    @IBAction func changeLimitBtnTapped(_ sender: Any) {
+        limitTextField.resignFirstResponder()
         let value = DataManager.getData.currency(field: limitTextField)
         if let doubleValue = value {
             self.limit = Double(round(-doubleValue*100)/100)
@@ -61,24 +67,45 @@ class DetailWalletVC: UIViewController {
          
         wallets[wallet.1] = wallet.0
         print(wallet.0)
+        self.limitLbl.text = wallet.0.limit.currencyFormat
         self.createNotification(name: .didUpdateWallets)
         
         let newLimit = ["limit": limit] as [String: AnyObject]
         StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.0.id, data: newLimit)
         print("New limit set: ", self.limit)
+        animateDown(view: changeLimitView, constraint: changeLimitViewHeight)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func discardBtnTapped(_ sender: Any) {
+        limitTextField.resignFirstResponder()
+        animateDown(view: changeLimitView, constraint: changeLimitViewHeight)
     }
-    */
-
+    
+    @IBAction func limitLblTapped(_ sender: Any) {
+        animateUp(view: changeLimitView, constraint: changeLimitViewHeight)
+        limitTextField.becomeFirstResponder()
+    }
+    
+    // popView animations
+    func animateUp(view: UIView, constraint: NSLayoutConstraint) {
+        // Optimized for iPhone SE 4-inch screen and Up
+        constraint.constant = 200
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+            view.superview?.subviews[0].isUserInteractionEnabled = false
+            view.superview?.layer.backgroundColor = UIColor.gray.cgColor
+        }
+    }
+    
+    func animateDown(view: UIView, constraint: NSLayoutConstraint) {
+        constraint.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+            view.superview?.subviews[0].isUserInteractionEnabled = true
+            view.superview?.layer.backgroundColor = UIColor.white.cgColor
+        }
+    }
+    
 }
 
 extension DetailWalletVC: UITextFieldDelegate {
