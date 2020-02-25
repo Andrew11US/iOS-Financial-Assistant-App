@@ -196,6 +196,12 @@ class AddTransactionVC: UIViewController {
             showBadInput(bad: true, view: nameTextField)
         } else {
             guard var wallet = self.wallet.0, let walletIndex = self.wallet.1 else { return }
+            
+            if amount + wallet.balance < wallet.limit {
+                print("Wallet balance exceeded!, unable to process")
+                return
+            }
+            
             let key = StorageManager.shared.getAutoKey(at: FDChild.transactions.rawValue)
             
             let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, unifiedAmount: unifiedAmount, wallet: wallet)
