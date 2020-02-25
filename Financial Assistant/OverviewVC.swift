@@ -11,7 +11,12 @@ import UIKit
 class OverviewVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var totalBalanceLbl: UILabel!
+    
     let spinner = SpinnerViewController()
+    
+    let unifiedCurrencyCode = StorageManager.shared.getUserCache().code
+    private var totalBalance = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,7 @@ class OverviewVC: UIViewController {
             StorageManager.shared.getWallets {
                 wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
                 self.createNotification(name: .didUpdateWallets)
+                self.totalBalanceLbl.text = self.calculateTotal()
             }
         }
         
@@ -74,6 +80,14 @@ class OverviewVC: UIViewController {
             transactions = transactions.sorted { $0.dateCreated > $1.dateCreated }
             self.tableView.reloadData()
         }
+    }
+    
+    func calculateTotal() -> String {
+        for w in wallets {
+            totalBalance += w.unifiedBalance
+        }
+        print(totalBalance)
+        return "\(totalBalance.currencyFormat) \(unifiedCurrencyCode)"
     }
 
 }
