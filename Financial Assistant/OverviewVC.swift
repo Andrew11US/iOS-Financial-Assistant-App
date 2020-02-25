@@ -83,6 +83,10 @@ extension OverviewVC: UITableViewDelegate, UITableViewDataSource {
         return transactions.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

@@ -10,7 +10,8 @@ import UIKit
 
 class OverviewTransactionCell: UITableViewCell {
     
-    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var monthLbl: UILabel!
+    @IBOutlet weak var dayLbl: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var amount: UILabel!
 
@@ -27,16 +28,16 @@ class OverviewTransactionCell: UITableViewCell {
     
     func configureCell(transaction: Transaction) {
         
-        self.date.text = transaction.dateCreated // << make reformatting!!!
+        self.monthLbl.text = transaction.dateCreated.createDate?.getMonth
+        self.dayLbl.text = transaction.dateCreated.createDate?.getDay
         self.name.text = transaction.name
         self.amount.text = "\(transaction.originalAmount.currencyFormat) \(transaction.currencyCode)"
-    }
-    
-    func configureCell(test: String) {
         
-        self.date.text = test
-        self.name.text = test
-        self.amount.text = "$ 11.1"
+        if transaction.originalAmount < 0 {
+            self.amount.textColor = .systemRed
+        } else {
+            self.amount.textColor = .systemGreen
+        }
     }
 
 }

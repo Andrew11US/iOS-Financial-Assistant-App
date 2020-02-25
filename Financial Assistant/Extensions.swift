@@ -17,6 +17,19 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter.string(from: self)
     }
+    
+    var getMonth: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "us_US")
+        formatter.dateFormat = "MMM"
+        return formatter.string(from: self)
+    }
+    
+    var getDay: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd"
+        return formatter.string(from: self)
+    }
 }
 
 // Extends String with a property that creates a Date object from formatted string

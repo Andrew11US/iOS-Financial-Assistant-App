@@ -19,7 +19,8 @@ class TransactionCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.layer.cornerRadius = CGFloat(11)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -37,7 +38,7 @@ class TransactionCell: UITableViewCell {
         self.walletName.text = transaction.walletName.capitalized
         
         self.amount.text = "\(transaction.originalAmount.currencyFormat) \(transaction.currencyCode)"
-        // FIX: << Transaction can't be 0!!!
+        
         if transaction.originalAmount < 0 {
             self.amount.textColor = .systemRed
         } else {
