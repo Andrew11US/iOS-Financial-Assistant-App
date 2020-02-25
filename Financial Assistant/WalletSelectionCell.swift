@@ -14,11 +14,27 @@ class WalletSelectionCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        self.layer.cornerRadius = CGFloat(20)
+//        self.layer.backgroundColor = UIColor.systemTeal.cgColor
+        addGradient()
     }
     
     func configureCell(wallet: String) {
         self.nameLbl.text = wallet
+    }
+    
+    func addGradient() {
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.locations = [0, 1]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 0)
+        gradient.colors = [
+            UIColor.blue.cgColor,
+            UIColor.systemTeal.cgColor
+        ]
+        layer.insertSublayer(gradient, at: 0)
     }
 
 }

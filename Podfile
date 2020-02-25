@@ -13,6 +13,7 @@ target 'Financial Assistant' do
   pod 'SwiftKeychainWrapper'
   pod 'Alamofire', '~> 5.0'
   pod 'pop'
+  pod "CenteredCollectionView"
 
   target 'Financial AssistantTests' do
     inherit! :search_paths

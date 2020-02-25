@@ -129,4 +129,20 @@ public extension UIViewController {
         let notification = Notification(name: name)
         NotificationCenter.default.post(notification)
     }
+    
+    internal func animate(view: UIView, constraint: NSLayoutConstraint, to: Int) {
+        constraint.constant = CGFloat(to)
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+            if to == 0 {
+                view.superview?.subviews[0].isUserInteractionEnabled = true
+                view.superview?.layer.backgroundColor = UIColor.white.cgColor
+            } else {
+                view.superview?.subviews[0].isUserInteractionEnabled = false
+                view.superview?.layer.backgroundColor = UIColor.lightGray.cgColor
+            }
+        }
+    }
+    
 }
+

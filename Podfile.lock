@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.0.0)
+  - CenteredCollectionView (2.2.2)
   - FBSDKCoreKit (5.15.1):
     - FBSDKCoreKit/Basics (= 5.15.1)
     - FBSDKCoreKit/Core (= 5.15.1)
@@ -113,6 +114,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.0)
+  - CenteredCollectionView
   - Firebase/Analytics
   - Firebase/Database
   - FirebaseUI/Auth
@@ -124,6 +126,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CenteredCollectionView
     - FBSDKCoreKit
     - FBSDKLoginKit
     - Firebase
@@ -150,6 +153,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 58ff2bfb8daaacaa233d5c36e37b10a5248f59b1
+  CenteredCollectionView: a9217908a698c386cbb98af11b596da48900b908
   FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
   FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   Firebase: 2672e5636b42f977177716317e68346ae5e9de25
@@ -174,6 +178,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: 6b15bff0af627f5f1bb5b502ca29cd2f8486c7a2
+PODFILE CHECKSUM: 261a6d8bd2f78d32a6f1d5473986d5ce48f36eda
 
 COCOAPODS: 1.8.4

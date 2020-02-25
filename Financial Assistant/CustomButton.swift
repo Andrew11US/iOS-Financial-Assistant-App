@@ -66,9 +66,9 @@ class CustomButton: UIButton {
     @objc func scaleAnimation() {
 
         let scaleAnim = POPSpringAnimation(propertyNamed: kPOPLayerScaleXY)
-        scaleAnim?.velocity = NSValue(cgPoint: CGPoint(x: 3.0, y: 3.0))
+        scaleAnim?.velocity = NSValue(cgPoint: CGPoint(x: 2.0, y: 2.0))
         scaleAnim?.toValue = NSValue(cgPoint: CGPoint(x: 1.0, y: 1.0))
-        scaleAnim?.springBounciness = 18.0
+        scaleAnim?.springBounciness = 5.0
         self.layer.pop_add(scaleAnim, forKey: "LayerScaleSmallAnimation")
         
     }

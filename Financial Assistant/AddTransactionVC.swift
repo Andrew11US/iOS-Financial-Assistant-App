@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import CenteredCollectionView
 
 class AddTransactionVC: UIViewController {
     
@@ -21,13 +22,14 @@ class AddTransactionVC: UIViewController {
     
     // Selection subViews
     @IBOutlet weak var categoryTableView: UITableView!
-    @IBOutlet weak var walletCollectionView: UICollectionView!
     @IBOutlet weak var categoryViewHeight: NSLayoutConstraint!
     @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var walletViewHeight: NSLayoutConstraint!
     @IBOutlet weak var walletView: UIView!
     @IBOutlet weak var connectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var connectionView: UIView!
+    @IBOutlet weak var walletCollectionView: UICollectionView!
+    var walletCollectionViewFlowLayout: CenteredCollectionViewFlowLayout!
     
     let spinner = SpinnerViewController()
     // Data for selection when customizing new transaction
@@ -48,6 +50,7 @@ class AddTransactionVC: UIViewController {
         
         self.amountTextField.delegate = self
         self.nameTextField.delegate = self
+        setWalletCollectionView()
         
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             if !InternetConnectionManager.isConnected() {
@@ -109,11 +112,11 @@ class AddTransactionVC: UIViewController {
     
     @IBAction func walletBtnTapped(_ sender: Any) {
         resignTextFields()
-        animateUp(view: walletView, constraint: walletViewHeight)
+        self.animate(view: walletView, constraint: walletViewHeight, to: 300)
     }
     
     @IBAction func walletSelectedTapped(_ sender: Any) {
-        animateDown(view: walletView, constraint: walletViewHeight)
+        self.animate(view: walletView, constraint: walletViewHeight, to: 0)
         
         if let wallet = wallet.0 {
             print("Currency default: ", wallet.name)
@@ -260,6 +263,16 @@ class AddTransactionVC: UIViewController {
     func resignTextFields() {
         self.nameTextField.resignFirstResponder()
         self.amountTextField.resignFirstResponder()
+    }
+    
+    func setWalletCollectionView() {
+        // Get the reference to the CenteredCollectionViewFlowLayout (REQURED)
+        walletCollectionViewFlowLayout = (walletCollectionView.collectionViewLayout as! CenteredCollectionViewFlowLayout)
+        // Modify the collectionView's decelerationRate (REQURED)
+        walletCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
+        walletCollectionViewFlowLayout.itemSize = CGSize(width: 200, height: 200)
+        // Configure the optional inter item spacing (OPTIONAL)
+        walletCollectionViewFlowLayout.minimumLineSpacing = 20
     }
 
 }

@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class ResetPasswordVC: UIViewController {
     
-    @IBOutlet weak var resetBtn: UIButton!
+    @IBOutlet weak var resetBtn: CustomButton!
     @IBOutlet weak var emailTextField: UITextField!
     
     let spinner = SpinnerViewController()
@@ -54,6 +54,10 @@ class ResetPasswordVC: UIViewController {
         } else {
             resetBtn.isHidden = true
         }
+    }
+    
+    @IBAction func dismissBtnTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 
 }
