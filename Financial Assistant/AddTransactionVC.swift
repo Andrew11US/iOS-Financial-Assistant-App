@@ -69,10 +69,12 @@ class AddTransactionVC: UIViewController {
     @IBAction func segmentControlChanged(_ sender: Any) {
         print("Segment index: ", segmentControl.selectedSegmentIndex)
         if segmentControl.selectedSegmentIndex == 0 {
+            self.addBtn.layer.backgroundColor = UIColor.appGreen.cgColor
             amount = -amount
             type = TransactionType.income.rawValue
             print("Amount: ", amount)
         } else {
+            self.addBtn.layer.backgroundColor = UIColor.appRed.cgColor
             amount = -amount
             type = TransactionType.expense.rawValue
             print("Amount: ", amount)
@@ -112,7 +114,7 @@ class AddTransactionVC: UIViewController {
     
     @IBAction func walletBtnTapped(_ sender: Any) {
         resignTextFields()
-        self.animate(view: walletView, constraint: walletViewHeight, to: 300)
+        self.animate(view: walletView, constraint: walletViewHeight, to: 200)
     }
     
     @IBAction func walletSelectedTapped(_ sender: Any) {
@@ -146,12 +148,14 @@ class AddTransactionVC: UIViewController {
             categories = TransactionCategory.Expense.getArray()
         }
         categoryTableView.reloadData()
-        animateUp(view: categoryView, constraint: categoryViewHeight)
+//        animateUp(view: categoryView, constraint: categoryViewHeight)
+        self.animate(view: categoryView, constraint: categoryViewHeight, to: 500)
         categoryView.superview?.subviews[0].isUserInteractionEnabled = false
     }
     
     @IBAction func categorySelectedTapped(_ sender: Any) {
-        animateDown(view: categoryView, constraint: categoryViewHeight)
+//        animateDown(view: categoryView, constraint: categoryViewHeight)
+        self.animate(view: categoryView, constraint: categoryViewHeight, to: 0)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             if self.category.isEmpty {
                 self.categoryBtn.setTitle("Select Category", for: .normal)
@@ -270,7 +274,7 @@ class AddTransactionVC: UIViewController {
         walletCollectionViewFlowLayout = (walletCollectionView.collectionViewLayout as! CenteredCollectionViewFlowLayout)
         // Modify the collectionView's decelerationRate (REQURED)
         walletCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
-        walletCollectionViewFlowLayout.itemSize = CGSize(width: 200, height: 200)
+        walletCollectionViewFlowLayout.itemSize = CGSize(width: 200, height: 100)
         // Configure the optional inter item spacing (OPTIONAL)
         walletCollectionViewFlowLayout.minimumLineSpacing = 20
     }
@@ -284,6 +288,10 @@ extension AddTransactionVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

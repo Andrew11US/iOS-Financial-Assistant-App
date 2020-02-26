@@ -149,10 +149,10 @@ public extension UIViewController {
             self.view.layoutIfNeeded()
             if to == 0 {
                 view.superview?.subviews[0].isUserInteractionEnabled = true
-                view.superview?.layer.backgroundColor = UIColor.white.cgColor
+//                view.superview?.layer.backgroundColor = UIColor.white.cgColor
             } else {
                 view.superview?.subviews[0].isUserInteractionEnabled = false
-                view.superview?.layer.backgroundColor = UIColor.lightGray.cgColor
+//                view.superview?.layer.backgroundColor = UIColor.lightGray.cgColor
             }
         }
     }
