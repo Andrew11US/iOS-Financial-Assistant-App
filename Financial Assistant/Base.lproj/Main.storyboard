@@ -18,17 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="HGJ-Cm-n7P">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="HGJ-Cm-n7P">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Transaction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLy-em-Op7">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="67.333333333333329"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="J5D-uW-Hu1">
-                                        <rect key="frame" x="0.0" y="82" width="375" height="51.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="82.333333333333329" width="375" height="51.999999999999986"/>
                                         <segments>
                                             <segment title="Income"/>
                                             <segment title="Expense"/>
@@ -38,13 +38,13 @@
                                         </connections>
                                     </segmentedControl>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFb-Zu-zU8">
-                                        <rect key="frame" x="0.0" y="148.33333333333334" width="375" height="38.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="148.33333333333334" width="375" height="39.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dND-Kb-L4H" customClass="CurrencyTextField" customModule="Financial_Assistant" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="203" width="375" height="60"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="dND-Kb-L4H" customClass="CurrencyTextField" customModule="Financial_Assistant" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="202.66666666666666" width="375" height="59.999999999999972"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="4ly-et-laA"/>
                                         </constraints>
@@ -55,7 +55,7 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XXX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSr-Cc-BwB">
-                                        <rect key="frame" x="0.0" y="279" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="277.66666666666669" width="375" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="dII-Ip-mKp"/>
                                         </constraints>
@@ -64,13 +64,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1J-CT-xZd">
-                                        <rect key="frame" x="0.0" y="325" width="375" height="38.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="322.66666666666669" width="375" height="39.333333333333314"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Groceries..." textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="86N-sT-H8u">
-                                        <rect key="frame" x="0.0" y="379.66666666666669" width="375" height="60"/>
+                                        <rect key="frame" x="0.0" y="377" width="375" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="yoB-td-nAP"/>
                                         </constraints>
@@ -81,10 +81,10 @@
                                         </connections>
                                     </textField>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="DMk-Zf-Akg">
-                                        <rect key="frame" x="0.0" y="455.66666666666669" width="375" height="192.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="452" width="375" height="197"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mv-xT-Kpl" customClass="CustomButton" customModule="Financial_Assistant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="98.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
                                                 <state key="normal" title="Select Category">
                                                     <color key="titleColor" red="0.55231133489999995" green="0.45335176160000001" blue="0.83908325429999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -94,7 +94,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fv8-oB-iIY" customClass="CustomButton" customModule="Financial_Assistant" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="95.999999999999943" width="375" height="96.333333333333314"/>
+                                                <rect key="frame" x="0.0" y="98.666666666666629" width="375" height="98.333333333333314"/>
                                                 <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
                                                 <state key="normal" title="Select Wallet">
                                                     <color key="titleColor" red="0.55231133489999995" green="0.45335176160000001" blue="0.83908325429999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -206,10 +206,10 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="K3X-no-Vbf">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="K3X-no-Vbf">
                                                                     <rect key="frame" x="25" y="11" width="46" height="28"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b75-4q-be0">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b75-4q-be0">
                                                                             <rect key="frame" x="0.0" y="0.0" width="46" height="28"/>
                                                                             <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="18"/>
                                                                             <nil key="textColor"/>
@@ -329,46 +329,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yB0-9N-b1V">
-                                <rect key="frame" x="20" y="20" width="335" height="704"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="yB0-9N-b1V">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMj-zf-nau">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="63.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kw8-2E-pxA">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="62.333333333333336"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="30"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set initial balance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cx-CD-Dzr">
+                                        <rect key="frame" x="0.0" y="77.333333333333329" width="375" height="36.666666666666671"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="CXc-qn-B2q">
-                                        <rect key="frame" x="0.0" y="71.333333333333314" width="335" height="105.66666666666669"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SO0-X4-yUz">
+                                        <rect key="frame" x="0.0" y="129" width="375" height="60"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLL-ih-nWm">
-                                                <rect key="frame" x="0.0" y="0.0" width="45" height="105.66666666666667"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Bank of America, Maestro, etc." textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jiD-nQ-1IK">
-                                                <rect key="frame" x="62" y="0.0" width="273" height="105.66666666666667"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <connections>
-                                                    <action selector="nameTextFieldEdited:" destination="nSb-Z0-JbS" eventType="editingDidEnd" id="AeI-r1-goo"/>
-                                                </connections>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kQC-62-K5D">
-                                        <rect key="frame" x="0.0" y="185" width="335" height="112"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="initial balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsH-Ob-UI6">
-                                                <rect key="frame" x="0.0" y="0.0" width="106.33333333333333" height="112"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a74-K3-Om9">
-                                                <rect key="frame" x="114.33333333333334" y="0.0" width="106.33333333333334" height="112"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="60" id="FV6-AO-a3b"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="42"/>
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -376,80 +360,90 @@
                                                     <action selector="signBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="PoG-Yg-hlq"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q5K-M9-bd2" customClass="CurrencyTextField" customModule="Financial_Assistant" customModuleProvider="target">
-                                                <rect key="frame" x="228.66666666666666" y="0.0" width="106.33333333333334" height="112"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="7ms-Bg-JxS" customClass="CurrencyTextField" customModule="Financial_Assistant" customModuleProvider="target">
+                                                <rect key="frame" x="68" y="0.0" width="307" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="7G2-jd-xfq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="24"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                 <connections>
-                                                    <action selector="balanceTextFieldEdited:" destination="nSb-Z0-JbS" eventType="editingDidEnd" id="hrM-Ft-zsU"/>
+                                                    <action selector="balanceTextFieldEdited:" destination="nSb-Z0-JbS" eventType="editingDidEnd" id="yNn-Fl-RtE"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="U43-dR-SNI">
-                                        <rect key="frame" x="0.0" y="305" width="335" height="105.66666666666669"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IHS-ru-QEr">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="105.66666666666667"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m2E-R6-xxK" customClass="CurrencyTextField" customModule="Financial_Assistant" customModuleProvider="target">
-                                                <rect key="frame" x="40" y="0.0" width="295" height="105.66666666666667"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                                                <connections>
-                                                    <action selector="limitTextFieldEdited:" destination="nSb-Z0-JbS" eventType="editingDidEnd" id="9cs-u1-aAz"/>
-                                                </connections>
-                                            </textField>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="PN6-9e-fj8">
-                                        <rect key="frame" x="0.0" y="418.66666666666669" width="335" height="93.333333333333314"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62N-2Z-mJ6">
-                                                <rect key="frame" x="0.0" y="0.0" width="34" height="93.333333333333329"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tba-XP-wq7">
-                                                <rect key="frame" x="51" y="0.0" width="284" height="93.333333333333329"/>
-                                                <state key="normal" title="Select Type"/>
-                                                <connections>
-                                                    <action selector="typeBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="MQT-lX-R0M"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="aX6-BU-HtG">
-                                        <rect key="frame" x="0.0" y="520" width="335" height="116"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="currency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hmh-49-9hP">
-                                                <rect key="frame" x="0.0" y="0.0" width="67.666666666666671" height="116"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGf-VZ-OIH">
-                                                <rect key="frame" x="84.666666666666671" y="0.0" width="250.33333333333331" height="116"/>
-                                                <state key="normal" title="Select Currency"/>
-                                                <connections>
-                                                    <action selector="currencyBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="qFf-We-yzB"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LR1-Cc-bqV">
-                                        <rect key="frame" x="0.0" y="644" width="335" height="60"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3w-L7-z0F">
+                                        <rect key="frame" x="0.0" y="204" width="375" height="36.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Bank of America" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWf-8H-iUR">
+                                        <rect key="frame" x="0.0" y="255.33333333333337" width="375" height="60"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="ZVu-iq-Fcb"/>
+                                            <constraint firstAttribute="height" constant="60" id="TsJ-JM-ejY"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                        <state key="normal" title="Add Wallet"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits"/>
                                         <connections>
-                                            <action selector="addBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="aNw-wS-bWx"/>
+                                            <action selector="nameTextFieldEdited:" destination="nSb-Z0-JbS" eventType="editingDidEnd" id="t9A-C9-XYS"/>
+                                        </connections>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set limit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShC-5f-J6N">
+                                        <rect key="frame" x="0.0" y="330.33333333333331" width="375" height="36.666666666666686"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="a59-R1-dEN" customClass="CurrencyTextField" customModule="Financial_Assistant" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="382" width="375" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="sgW-pX-7Bs"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="24"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                        <connections>
+                                            <action selector="limitTextFieldEdited:" destination="nSb-Z0-JbS" eventType="editingDidEnd" id="LM5-vw-Mo3"/>
+                                        </connections>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hLZ-tp-rgR">
+                                        <rect key="frame" x="0.0" y="457" width="375" height="192"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Tw-u3-Ge4" customClass="CustomButton" customModule="Financial_Assistant" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                                <state key="normal" title="Select Type">
+                                                    <color key="titleColor" red="0.55231133489999995" green="0.45335176160000001" blue="0.83908325429999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="typeBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="PmH-22-vuT"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DWe-2C-edC" customClass="CustomButton" customModule="Financial_Assistant" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="96" width="375" height="96"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="18"/>
+                                                <state key="normal" title="Select Currency">
+                                                    <color key="titleColor" red="0.55231133489999995" green="0.45335176160000001" blue="0.83908325429999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="currencyBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="6cJ-rH-Fm6"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6U-4P-FWO" customClass="CustomButton" customModule="Financial_Assistant" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="664" width="375" height="60"/>
+                                        <color key="backgroundColor" red="0.32549019610000002" green="0.52549019610000003" blue="0.6705882353" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="MNf-rh-GMN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="21"/>
+                                        <state key="normal" title="Add Wallet">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addBtnTapped:" destination="nSb-Z0-JbS" eventType="touchUpInside" id="yoc-zo-orq"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -586,8 +580,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="yB0-9N-b1V" secondAttribute="trailing" constant="20" symbolic="YES" id="4oy-GZ-L4a"/>
-                            <constraint firstItem="yB0-9N-b1V" firstAttribute="top" secondItem="Bz8-Rl-xgS" secondAttribute="top" constant="20" symbolic="YES" id="6LS-uK-6e5"/>
+                            <constraint firstAttribute="trailing" secondItem="yB0-9N-b1V" secondAttribute="trailing" id="4oy-GZ-L4a"/>
+                            <constraint firstItem="yB0-9N-b1V" firstAttribute="top" secondItem="Bz8-Rl-xgS" secondAttribute="top" id="6LS-uK-6e5"/>
                             <constraint firstItem="fhB-ka-JeU" firstAttribute="leading" secondItem="Bz8-Rl-xgS" secondAttribute="leading" id="7LS-zU-22z"/>
                             <constraint firstItem="8aH-GR-PBs" firstAttribute="trailing" secondItem="YvD-LQ-QNk" secondAttribute="trailing" id="Eai-jf-fkW"/>
                             <constraint firstItem="YvD-LQ-QNk" firstAttribute="leading" secondItem="8aH-GR-PBs" secondAttribute="leading" id="HfG-Hd-eej"/>
@@ -595,7 +589,7 @@
                             <constraint firstItem="8aH-GR-PBs" firstAttribute="bottom" secondItem="fhB-ka-JeU" secondAttribute="bottom" id="bH4-Sr-MJN"/>
                             <constraint firstItem="8aH-GR-PBs" firstAttribute="bottom" secondItem="yB0-9N-b1V" secondAttribute="bottom" id="bNY-Lf-HiR"/>
                             <constraint firstItem="F1S-CF-bSb" firstAttribute="bottom" secondItem="8aH-GR-PBs" secondAttribute="bottom" id="cx5-lI-nRf"/>
-                            <constraint firstItem="yB0-9N-b1V" firstAttribute="leading" secondItem="Bz8-Rl-xgS" secondAttribute="leading" constant="20" symbolic="YES" id="ml6-rj-BrR"/>
+                            <constraint firstItem="yB0-9N-b1V" firstAttribute="leading" secondItem="Bz8-Rl-xgS" secondAttribute="leading" id="ml6-rj-BrR"/>
                             <constraint firstItem="YvD-LQ-QNk" firstAttribute="bottom" secondItem="8aH-GR-PBs" secondAttribute="bottom" id="nv3-hv-y15"/>
                             <constraint firstItem="F1S-CF-bSb" firstAttribute="trailing" secondItem="8aH-GR-PBs" secondAttribute="trailing" id="ugb-ZL-zKj"/>
                             <constraint firstAttribute="trailing" secondItem="fhB-ka-JeU" secondAttribute="trailing" id="yBZ-4O-Wpo"/>
@@ -604,19 +598,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="JJe-sP-1zx"/>
                     <connections>
-                        <outlet property="addBtn" destination="LR1-Cc-bqV" id="EMN-fc-8Co"/>
-                        <outlet property="balanceTextField" destination="Q5K-M9-bd2" id="M14-Yv-UGl"/>
+                        <outlet property="addBtn" destination="f6U-4P-FWO" id="ZKq-nK-Rlv"/>
+                        <outlet property="balanceTextField" destination="7ms-Bg-JxS" id="tUc-xg-Hz6"/>
                         <outlet property="connectionView" destination="YvD-LQ-QNk" id="Uq5-gZ-nd7"/>
                         <outlet property="connectionViewHeight" destination="lX7-pU-7QS" id="KxF-uM-n7V"/>
-                        <outlet property="currencyBtn" destination="OGf-VZ-OIH" id="eY8-sV-D4E"/>
+                        <outlet property="currencyBtn" destination="DWe-2C-edC" id="kOy-K1-xWf"/>
                         <outlet property="currencyView" destination="F1S-CF-bSb" id="xWj-xQ-8wI"/>
                         <outlet property="currencyViewHeight" destination="900-kp-6xr" id="NdQ-w3-dw2"/>
-                        <outlet property="limitTextField" destination="m2E-R6-xxK" id="FLz-Q3-F7y"/>
-                        <outlet property="nameTextField" destination="jiD-nQ-1IK" id="qvB-zJ-adA"/>
+                        <outlet property="limitTextField" destination="a59-R1-dEN" id="9Qe-ld-Eac"/>
+                        <outlet property="nameTextField" destination="fWf-8H-iUR" id="45R-rw-HMO"/>
                         <outlet property="pickerView" destination="gFo-1a-vut" id="dQo-3Z-y1b"/>
                         <outlet property="signBtn" destination="a74-K3-Om9" id="qrH-qg-jlf"/>
                         <outlet property="tableView" destination="6BW-gV-Egq" id="S74-G9-gWM"/>
-                        <outlet property="typeBtn" destination="Tba-XP-wq7" id="VzT-yF-dmf"/>
+                        <outlet property="typeBtn" destination="5Tw-u3-Ge4" id="pr8-LX-j2V"/>
                         <outlet property="typeView" destination="fhB-ka-JeU" id="i17-b5-bHo"/>
                         <outlet property="typeViewHeight" destination="HfB-ZE-XCl" id="HeI-M9-yWW"/>
                     </connections>
@@ -1610,7 +1604,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-HA-Txj">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-HA-Txj">
                                 <rect key="frame" x="30" y="128" width="315" height="541"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
