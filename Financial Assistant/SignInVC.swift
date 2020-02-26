@@ -17,6 +17,7 @@ class SignInVC: UIViewController {
     @IBOutlet weak var signInBtn: CustomButton!
     
     let spinner = SpinnerViewController()
+    let user = Auth.auth().currentUser
     
     override func viewDidLoad() {
         super.viewDidLoad()

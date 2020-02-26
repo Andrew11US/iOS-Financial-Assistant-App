@@ -14,9 +14,9 @@ class AddTransactionVC: UIViewController {
     
     @IBOutlet weak var amountTextField: CurrencyTextField!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var walletBtn: UIButton!
-    @IBOutlet weak var addBtn: UIButton!
-    @IBOutlet weak var categoryBtn: UIButton!
+    @IBOutlet weak var walletBtn: CustomButton!
+    @IBOutlet weak var addBtn: CustomButton!
+    @IBOutlet weak var categoryBtn: CustomButton!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var currencyLbl: UILabel!
     

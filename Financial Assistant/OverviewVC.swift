@@ -15,7 +15,7 @@ class OverviewVC: UIViewController {
     
     let spinner = SpinnerViewController()
     
-    let unifiedCurrencyCode = StorageManager.shared.getUserCache().code
+    let userCache = StorageManager.shared.getUserCache()
     private var totalBalance = 0.0
 
     override func viewDidLoad() {
@@ -84,10 +84,11 @@ class OverviewVC: UIViewController {
     
     func calculateTotal() -> String {
         for w in wallets {
+            // << Refactor to class Statistics !!! Add, delete, update wallet
             totalBalance += w.unifiedBalance
         }
         print(totalBalance)
-        return "\(totalBalance.currencyFormat) \(unifiedCurrencyCode)"
+        return "\(totalBalance.currencyFormat) \(userCache.code)"
     }
 
 }
