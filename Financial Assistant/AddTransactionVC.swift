@@ -36,6 +36,7 @@ class AddTransactionVC: UIViewController {
     private var categories = TransactionCategory.Income.getArray()
     
     private var wallet: (Wallet?, Int?)
+//    private var statisticMonth: StatisticMonth?
     private var selectedWallet = 0
     private var date = ""
     private var category = ""
@@ -51,19 +52,12 @@ class AddTransactionVC: UIViewController {
         self.amountTextField.delegate = self
         self.nameTextField.delegate = self
         setWalletCollectionView()
+        monitorConnection(interval: 1)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if !InternetConnectionManager.isConnected() {
-                print("Connection is offline!")
-                if self.connectionViewHeight.constant != 50 {
-                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
-                }
-            } else {
-                if self.connectionViewHeight.constant != 0 {
-                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 0, interaction: true)
-                }
-            }
-        }
     }
     
     @IBAction func segmentControlChanged(_ sender: Any) {
@@ -181,7 +175,9 @@ class AddTransactionVC: UIViewController {
     
     @IBAction func addBtnTapped(_ sender: Any) {
         resignTextFields()
-        
+//        curre = Statistics.getMonth(id: Date().getYearAndMonth)
+//        print(statisticMonth ?? "No month")
+//        print(segmentControl.selectedSegmentIndex)
         if type.isEmpty {
             type = TransactionType.income.rawValue
         }
@@ -203,28 +199,58 @@ class AddTransactionVC: UIViewController {
             showBadInput(bad: true, view: nameTextField)
         } else {
             guard var wallet = self.wallet.0, let walletIndex = self.wallet.1 else { return }
+            guard var month = currentMonth.0, let monthIndex = currentMonth.1 else { return }
             
             if amount + wallet.balance < wallet.limit {
                 print("Wallet balance exceeded!, unable to process")
                 return
             }
             
-            let key = StorageManager.shared.getAutoKey(at: FDChild.transactions.rawValue)
+            if segmentControl.selectedSegmentIndex == 0 {
+                Statistics.update(month: &month, income: unifiedAmount)
+            } else {
+                Statistics.update(month: &month, expense: unifiedAmount)
+            }
             
+            if monthIndex == -1 {
+                statistics.append(month)
+            } else {
+                statistics[monthIndex] = month
+            }
+            
+            let key = StorageManager.shared.getAutoKey(at: FDChild.transactions.rawValue)
             let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, unifiedAmount: unifiedAmount, wallet: wallet)
             
             transactions.append(transaction)
             wallet.balance += transaction.originalAmount
             wallet.unifiedBalance = wallet.balance * tempRate
             wallets[walletIndex] = wallet
+            currentMonth.0 = month
             print("Wallet new balance: ", wallet.balance)
             print("New unified balance: ", wallet.unifiedBalance)
             self.createNotification(name: .didUpdateTransactions)
+            self.createNotification(name: .didUpdateStatistics)
             
-            StorageManager.shared.pushObject(to: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
-            StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.id, data: wallet.getDictionary())
+            StorageManager.shared.pushObject(at: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
+            StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, key: wallet.id, data: wallet.getDictionary())
+            StorageManager.shared.updateObject(at: FDChild.statistics.rawValue, key: month.id, data: month.getDictionary())
             
             self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func monitorConnection(interval: TimeInterval) {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if !InternetConnectionManager.isConnected() {
+                print("Connection is offline!")
+                if self.connectionViewHeight.constant != 50 {
+                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
+                }
+            } else {
+                if self.connectionViewHeight.constant != 0 {
+                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 0, interaction: true)
+                }
+            }
         }
     }
     

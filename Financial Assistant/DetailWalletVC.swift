@@ -71,7 +71,7 @@ class DetailWalletVC: UIViewController {
         self.createNotification(name: .didUpdateWallets)
         
         let newLimit = ["limit": limit] as [String: AnyObject]
-        StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, id: wallet.0.id, data: newLimit)
+        StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, key: wallet.0.id, data: newLimit)
         print("New limit set: ", self.limit)
         animateDown(view: changeLimitView, constraint: changeLimitViewHeight)
     }

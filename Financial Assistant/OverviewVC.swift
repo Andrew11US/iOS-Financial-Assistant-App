@@ -41,6 +41,13 @@ class OverviewVC: UIViewController {
             }
         }
         
+        if statistics.count == 0 {
+            StorageManager.shared.getStatistics {
+                currentMonth = Statistics.getMonth(id: Date().getYearAndMonth)
+                print(currentMonth ?? "No month")
+            }
+        }
+        
 //        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childAdded) {
 //            self.createNotification(name: .didAddWalletInDB)
 //            print("New Wallet added to DB")

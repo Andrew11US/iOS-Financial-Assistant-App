@@ -18,6 +18,20 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    var getYearAndMonth: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "us_US")
+        formatter.dateFormat = "YYYY-MMM"
+        return formatter.string(from: self)
+    }
+    
+    var getYear: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "us_US")
+        formatter.dateFormat = "YYYY"
+        return formatter.string(from: self)
+    }
+    
     var getMonth: String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "us_US")
@@ -30,6 +44,7 @@ extension Date {
         formatter.dateFormat = "dd"
         return formatter.string(from: self)
     }
+
 }
 
 // Extends String with a property that creates a Date object from formatted string
@@ -110,6 +125,7 @@ extension Notification.Name {
     static let didRemoveWalletInDB = Notification.Name(rawValue: "didRemoveWalletInDB")
     static let didAddTransactionInDB = Notification.Name(rawValue: "didAddTransactionInDB")
     static let didRemoveTransactionInDB = Notification.Name(rawValue: "didRemoveTransactionInDB")
+    static let didUpdateStatistics = Notification.Name(rawValue: "didUpdateStatistics")
 }
 
 // Adds wrapper to UIViewController to easily show alert

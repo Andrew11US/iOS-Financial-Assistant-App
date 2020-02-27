@@ -208,7 +208,7 @@ class AddWalletVC: UIViewController {
             wallets.append(wallet)
             self.createNotification(name: .didUpdateWallets)
             
-            StorageManager.shared.pushObject(to: FDChild.wallets.rawValue, key: key, data: wallet.getDictionary())
+            StorageManager.shared.pushObject(at: FDChild.wallets.rawValue, key: key, data: wallet.getDictionary())
             dismiss(animated: true, completion: nil)
         }
     }

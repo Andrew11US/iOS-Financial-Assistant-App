@@ -29,35 +29,35 @@ public struct StorageManager {
     
     func saveData() {
         
-            let msg = [
-                 "name" : "Food",
-                 "category" : "groceries",
-                 "originalAmount" : -123.23,
-                 "type" : "expense",
-                 "dateCreated" : "2020-02-14 21:42:23",
-                 "walletName" : "Mastercard",
-                 "unifiedAmount" : -123.23,
-                 "walletID" : "2020-02-14 21:42:23%Mastercard@USD&0.0",
-                 "currencyCode" : "USD"
-                ] as [String : AnyObject]
-            
+        let msg = [
+            "name" : "Food",
+            "category" : "groceries",
+            "originalAmount" : -123.23,
+            "type" : "expense",
+            "dateCreated" : "2020-02-14 21:42:23",
+            "walletName" : "Mastercard",
+            "unifiedAmount" : -123.23,
+            "walletID" : "2020-02-14 21:42:23%Mastercard@USD&0.0",
+            "currencyCode" : "USD"
+            ] as [String : AnyObject]
+        
         let fireMsg = userReference.child("transactions").childByAutoId()
-            fireMsg.setValue(msg)
+        fireMsg.setValue(msg)
     }
     
-//    func pushObject(to: String, data: [String:AnyObject]) {
-//        let dbRef = userReference.child(to).childByAutoId()
-//            dbRef.setValue(data)
-//    }
+    //    func pushObject(to: String, data: [String:AnyObject]) {
+    //        let dbRef = userReference.child(to).childByAutoId()
+    //            dbRef.setValue(data)
+    //    }
     
-    func pushObject(to: String, key: String, data: [String:AnyObject]) {
-        let dbRef = userReference.child(to).child(key)
-            dbRef.setValue(data)
+    func pushObject(at: String, key: String, data: [String:AnyObject]) {
+        let dbRef = userReference.child(at).child(key)
+        dbRef.setValue(data)
     }
     
-    func updateObject(at: String, id: String, data: [String:AnyObject]) {
-        let dbRef = userReference.child(at).child(id)
-            dbRef.updateChildValues(data)
+    func updateObject(at: String, key: String, data: [String:AnyObject]) {
+        let dbRef = userReference.child(at).child(key)
+        dbRef.updateChildValues(data)
     }
     
     func getAutoKey(at: String) -> String {
@@ -83,24 +83,43 @@ public struct StorageManager {
         }
     }
     
-        func getWallets(_ completion: @escaping () -> Void) {
-            // Remove duplicates
-            wallets.removeAll()
-            
-            userReference.child("wallets").observeSingleEvent(of: .value) { (snapshot) in
-                if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                    for snap in snapshot {
-                        if let dict = snap.value as? Dictionary<String,AnyObject> {
-                            let id = snap.key
-                            let wallet = Wallet(id: id, data: dict)
-                            wallets.append(wallet)
-                        }
+    func getWallets(_ completion: @escaping () -> Void) {
+        // Remove duplicates
+        wallets.removeAll()
+        
+        userReference.child("wallets").observeSingleEvent(of: .value) { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    if let dict = snap.value as? Dictionary<String,AnyObject> {
+                        let id = snap.key
+                        let wallet = Wallet(id: id, data: dict)
+                        wallets.append(wallet)
                     }
                 }
-                print("Wallets: ", wallets.count)
-                completion()
             }
+            print("Wallets: ", wallets.count)
+            completion()
         }
+    }
+    
+    func getStatistics(_ completion: @escaping () -> Void) {
+        // Remove duplicates
+        statistics.removeAll()
+        
+        userReference.child(FDChild.statistics.rawValue).observeSingleEvent(of: .value) { (snapshot) in
+            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for snap in snapshot {
+                    if let dict = snap.value as? Dictionary<String,AnyObject> {
+                        let id = snap.key
+                        let month = StatisticMonth(id: id, data: dict)
+                        statistics.append(month)
+                    }
+                }
+            }
+            print("Statistic months: ", statistics.count)
+            completion()
+        }
+    }
     
     func deleteObject(location: String, id: String) {
         userReference.child(location).child(id).removeValue { (error, ref) in
@@ -134,18 +153,18 @@ public struct StorageManager {
         
     }
     
-//    func monitorForchanges() {
-//        userReference.child("transactions").observe(.value) { (snapshot) in
-//            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-//                for snap in snapshot {
-//                    if let dict = snap.value as? Dictionary<String,AnyObject> {
-//                        let id = snap.key
-//                        print(Transaction(uid: id, data: dict).convertToString ?? "zz")
-//                    }
-//                }
-//            }
-//        }
-//    }
+    //    func monitorForchanges() {
+    //        userReference.child("transactions").observe(.value) { (snapshot) in
+    //            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
+    //                for snap in snapshot {
+    //                    if let dict = snap.value as? Dictionary<String,AnyObject> {
+    //                        let id = snap.key
+    //                        print(Transaction(uid: id, data: dict).convertToString ?? "zz")
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
     
     public func saveToCoreData(toEntity: String, value: [String:Double], forKey: String) {
         
@@ -179,7 +198,7 @@ public struct StorageManager {
                 print("\(error.localizedDescription)")
             }
         }
-
+        
     }
     
     public func getFromCoreData(fromEntity: String, key: String) -> [String:Double]? {
@@ -278,7 +297,7 @@ public struct StorageManager {
                 print("\(error.localizedDescription)")
             }
         }
-
+        
     }
     
     func createUser(uid: String) {
@@ -338,5 +357,5 @@ public struct StorageManager {
     func removeUserCache() {
         defaults.removeObject(forKey: "CurrentUser")
     }
-
+    
 }

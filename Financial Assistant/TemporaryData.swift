@@ -11,4 +11,6 @@ import Foundation
 // Stores temporary data downloaded from persistent storage and used for current session
 var wallets : [Wallet] = []
 var transactions : [Transaction] = []
+var statistics : [StatisticMonth] = []
+var currentMonth : (StatisticMonth?, Int?)
 var exchangeRates : [String: Double] = [:]

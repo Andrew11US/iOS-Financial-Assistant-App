@@ -12,7 +12,6 @@ import SystemConfiguration
 
 public class InternetConnectionManager {
 
-
     private init() {}
 
     public static func isConnected() -> Bool {
