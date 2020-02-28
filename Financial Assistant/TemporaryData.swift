@@ -14,3 +14,13 @@ var transactions : [Transaction] = []
 var statistics : [StatisticMonth] = []
 var currentMonth : (StatisticMonth?, Int?)
 var exchangeRates : [String: Double] = [:]
+
+
+// MARK: APP FLAGS
+enum AppFlags: String {
+    case transactions
+    case wallets
+    case statistics
+}
+
+var appFlags : [String:Bool] = ["transactions": false, "wallets": false, "statistics": false]

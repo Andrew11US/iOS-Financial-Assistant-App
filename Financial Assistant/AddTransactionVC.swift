@@ -55,11 +55,6 @@ class AddTransactionVC: UIViewController {
         monitorConnection(interval: 1)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-    }
-    
     @IBAction func segmentControlChanged(_ sender: Any) {
         print("Segment index: ", segmentControl.selectedSegmentIndex)
         if segmentControl.selectedSegmentIndex == 0 {
@@ -175,16 +170,19 @@ class AddTransactionVC: UIViewController {
     
     @IBAction func addBtnTapped(_ sender: Any) {
         resignTextFields()
-//        curre = Statistics.getMonth(id: Date().getYearAndMonth)
-//        print(statisticMonth ?? "No month")
-//        print(segmentControl.selectedSegmentIndex)
+
         if type.isEmpty {
             type = TransactionType.income.rawValue
         }
         
+        guard appFlags[AppFlags.statistics.rawValue]! else {
+            print("Error!, statistics data has not been downloaded!")
+            return
+        }
+        
         if !InternetConnectionManager.isConnected() {
             print("Connection is offline!")
-            self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
+            self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 60, interaction: false)
         } else if amount == 0.0 {
             print("Amount can not be 0!")
             showBadInput(bad: true, view: amountTextField)

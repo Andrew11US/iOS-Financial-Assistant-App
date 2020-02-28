@@ -81,9 +81,9 @@ public struct Statistics {
     }
     
     static func update(month: inout StatisticMonth, income: Double = 0, expense: Double = 0) {
-        month.incomes += income
-        month.expenses += expense
-        month.balance = month.incomes + month.expenses
+        month.incomes = Double(month.incomes + income).roundTo(places: 2)
+        month.expenses = Double(month.expenses + expense).roundTo(places: 2)
+        month.balance = Double(month.incomes + month.expenses).roundTo(places: 2)
         print("Calculated: ", month)
     }
 }

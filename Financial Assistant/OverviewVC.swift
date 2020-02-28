@@ -44,7 +44,8 @@ class OverviewVC: UIViewController {
         if statistics.count == 0 {
             StorageManager.shared.getStatistics {
                 currentMonth = Statistics.getMonth(id: Date().getYearAndMonth)
-                print(currentMonth ?? "No month")
+                appFlags[AppFlags.statistics.rawValue] = true
+                print(currentMonth)
             }
         }
         
