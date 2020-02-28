@@ -132,6 +132,17 @@ public struct StorageManager {
         }
     }
     
+    func deleteObject(location: String) {
+        userReference.child(location).removeValue { (error, ref) in
+            if error != nil {
+                print("Error occured while trying to delete an object at: ", location)
+                print(error.debugDescription)
+            } else {
+                print("value deleted at location: ", location)
+            }
+        }
+    }
+    
     func listenForChanges(location: String, event: DataEventType, completion: @escaping () -> Void) {
         userReference.child(location).observe( event) { (snapshot) in
             print("db changed!")

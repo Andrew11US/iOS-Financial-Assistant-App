@@ -55,6 +55,14 @@ class AddTransactionVC: UIViewController {
         monitorConnection(interval: 1)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        if currentMonth.0 == nil {
+            currentMonth = Statistics.getMonth(id: Date().getYearAndMonth)
+        }
+    }
+    
     @IBAction func segmentControlChanged(_ sender: Any) {
         print("Segment index: ", segmentControl.selectedSegmentIndex)
         if segmentControl.selectedSegmentIndex == 0 {
@@ -212,6 +220,7 @@ class AddTransactionVC: UIViewController {
             
             if monthIndex == -1 {
                 statistics.append(month)
+                print(statistics.count)
             } else {
                 statistics[monthIndex] = month
             }
