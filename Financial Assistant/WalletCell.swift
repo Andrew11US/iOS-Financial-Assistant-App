@@ -16,7 +16,7 @@ class WalletCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,6 +30,19 @@ class WalletCell: UITableViewCell {
         self.type.text = wallet.type
         self.name.text = wallet.name
         self.balance.text = "\(wallet.balance.currencyFormat) \(wallet.currencyCode)"
+    }
+    
+    func addGradient() {
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.locations = [0, 1]
+        gradient.startPoint = CGPoint(x: 0, y: 0)
+        gradient.endPoint = CGPoint(x: 1, y: 0)
+        gradient.colors = [
+            UIColor(hexString: "fbc2eb").cgColor,
+            UIColor(hexString: "a6c1ee").cgColor
+        ]
+        layer.insertSublayer(gradient, at: 0)
     }
 
 }

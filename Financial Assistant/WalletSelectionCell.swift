@@ -31,8 +31,8 @@ class WalletSelectionCell: UICollectionViewCell {
         gradient.startPoint = CGPoint(x: 0, y: 0)
         gradient.endPoint = CGPoint(x: 1, y: 0)
         gradient.colors = [
-            UIColor.red.cgColor,
-            UIColor.orange.cgColor
+            UIColor(hexString: "fbc2eb").cgColor,
+            UIColor(hexString: "a6c1ee").cgColor
         ]
         layer.insertSublayer(gradient, at: 0)
     }

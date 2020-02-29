@@ -73,37 +73,17 @@ class DetailWalletVC: UIViewController {
         let newLimit = ["limit": limit] as [String: AnyObject]
         StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, key: wallet.0.id, data: newLimit)
         print("New limit set: ", self.limit)
-        animateDown(view: changeLimitView, constraint: changeLimitViewHeight)
+        animate(view: changeLimitView, constraint: changeLimitViewHeight, to: 0)
     }
     
     @IBAction func discardBtnTapped(_ sender: Any) {
         limitTextField.resignFirstResponder()
-        animateDown(view: changeLimitView, constraint: changeLimitViewHeight)
+        animate(view: changeLimitView, constraint: changeLimitViewHeight, to: 0)
     }
     
     @IBAction func limitLblTapped(_ sender: Any) {
-        animateUp(view: changeLimitView, constraint: changeLimitViewHeight)
+        animate(view: changeLimitView, constraint: changeLimitViewHeight, to: 200)
         limitTextField.becomeFirstResponder()
-    }
-    
-    // popView animations
-    func animateUp(view: UIView, constraint: NSLayoutConstraint) {
-        // Optimized for iPhone SE 4-inch screen and Up
-        constraint.constant = 200
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-            view.superview?.subviews[0].isUserInteractionEnabled = false
-            view.superview?.layer.backgroundColor = UIColor.gray.cgColor
-        }
-    }
-    
-    func animateDown(view: UIView, constraint: NSLayoutConstraint) {
-        constraint.constant = 0
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-            view.superview?.subviews[0].isUserInteractionEnabled = true
-            view.superview?.layer.backgroundColor = UIColor.white.cgColor
-        }
     }
     
 }
@@ -113,7 +93,6 @@ extension DetailWalletVC: UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    // Dismiss when return btn pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         limitTextField.resignFirstResponder()
         return true

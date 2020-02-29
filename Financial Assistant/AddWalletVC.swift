@@ -30,18 +30,16 @@ class AddWalletVC: UIViewController {
     
     let spinner = SpinnerViewController()
     
-    // Data to choose when customizing a Wallet
-    var types = WalletType.getArray()
-    
-    private var name = ""
+    private var types = WalletType.getArray()
+    private var unifiedCurrencyCode = StorageManager.shared.getUserCache().code
+    private var selectedCurrency : [String] = []
+    private var sign = true
     private var balance = 0.0
     private var unifiedBalance = 0.0
     private var limit = 0.0
-    private var sign = true
+    private var name = ""
     private var type = ""
     private var currency = ""
-    private var unifiedCurrencyCode = StorageManager.shared.getUserCache().code
-    private var selectedCurrency : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,73 +47,54 @@ class AddWalletVC: UIViewController {
         self.nameTextField.delegate = self
         self.balanceTextField.delegate = self
         self.limitTextField.delegate = self
-//        self.currencyView.layer.cornerRadius = 10.0
-//        self.typeView.layer.cornerRadius = 10.0
         
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-            if !InternetConnectionManager.isConnected() {
-                print("Connection is offline!")
-                if self.connectionViewHeight.constant != 50 {
-                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
-                }
-            } else {
-                if self.connectionViewHeight.constant != 0 {
-                    self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 0, interaction: true)
-                }
-            }
-        }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
+        monitorConnection(interval: 1, view: connectionView, constraint: connectionViewHeight)
     }
   
     @IBAction func typeBtnTapped(_ sender: Any) {
-        animateUp(view: typeView, constraint: typeViewHeight)
+        animate(view: typeView, constraint: typeViewHeight, to: 500)
         resignTextFields()
     }
     
     @IBAction func currencyBtnTapped(_ sender: Any) {
-        animateUp(view: currencyView, constraint: currencyViewHeight)
+        animate(view: currencyView, constraint: currencyViewHeight, to: 500)
         resignTextFields()
     }
     
     @IBAction func currencySelectedBtnTapped(_ sender: Any) {
-        animateDown(view: currencyView, constraint: currencyViewHeight)
+        animate(view: currencyView, constraint: currencyViewHeight, to: 0)
         
         if currency.isEmpty {
             currency = "USD"
             self.unifiedBalance = self.balance
             self.currencyBtn.setTitle(self.currency, for: .normal)
-            self.currencyBtn.setTitleColor(.blue, for: .normal)
+            self.currencyBtn.setTitleColor(.appPurple, for: .normal)
             print("Currency default: ", currency)
         } else if currency == "USD" {
             self.unifiedBalance = self.balance
             self.currencyBtn.setTitle(self.currency, for: .normal)
-            self.currencyBtn.setTitleColor(.blue, for: .normal)
+            self.currencyBtn.setTitleColor(.appPurple, for: .normal)
             print("Currency selected: ", currency)
         } else {
             addSpinner(spinner)
             NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
-                self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
+                self.unifiedBalance = Double(self.balance * coff).round(places: 2)
                 self.currencyBtn.setTitle(self.currency, for: .normal)
-                self.currencyBtn.setTitleColor(.blue, for: .normal)
+                self.currencyBtn.setTitleColor(.appPurple, for: .normal)
                 self.removeSpinner(self.spinner)
                 print("Calculated unified: ", self.unifiedBalance)
             }
         }
-        print("Unified Balance: ", self.unifiedBalance, "USD")
     }
     
     @IBAction func typeSelectedBtnTapped(_ sender: Any) {
-        animateDown(view: typeView, constraint: typeViewHeight)
+        animate(view: typeView, constraint: typeViewHeight, to: 0)
         if type.isEmpty {
             type = types[0]
         }
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
             self.typeBtn.setTitle(self.type.capitalized, for: .normal)
-            self.typeBtn.setTitleColor(.blue, for: .normal)
+            self.typeBtn.setTitleColor(.appPurple, for: .normal)
         }
     }
     
@@ -135,9 +114,9 @@ class AddWalletVC: UIViewController {
         let value = DataManager.getData.currency(field: balanceTextField)
         if let doubleValue = value {
             if sign {
-                self.balance = Double(round(doubleValue*100)/100)
+                self.balance = Double(doubleValue).round(places: 2)
             } else {
-                self.balance = Double(round(-doubleValue*100)/100)
+                self.balance = Double(-doubleValue).round(places: 2)
             }
             if currency.isEmpty {
                 print("Currency hasn't been selected yet!")
@@ -146,7 +125,7 @@ class AddWalletVC: UIViewController {
             } else {
                 addSpinner(spinner)
                 NetworkWrapper.getRates(pair: (from: currency, to: "USD")) { coff in
-                    self.unifiedBalance = Double(round((self.balance * coff)*100)/100)
+                    self.unifiedBalance = Double(self.balance * coff).round(places: 2)
                     self.removeSpinner(self.spinner)
                 }
             }
@@ -160,7 +139,7 @@ class AddWalletVC: UIViewController {
     @IBAction func limitTextFieldEdited(_ sender: Any) {
         let value = DataManager.getData.currency(field: limitTextField)
         if let doubleValue = value {
-            self.limit = Double(round(-doubleValue*100)/100)
+            self.limit = Double(-doubleValue).round(places: 2)
         } else {
             self.limit = 0
         }
@@ -174,16 +153,15 @@ class AddWalletVC: UIViewController {
             self.balance = -balance
             self.unifiedBalance = -unifiedBalance
             signBtn.setTitle("-", for: .normal)
-            signBtn.setTitleColor(.red, for: .normal)
+            signBtn.setTitleColor(.appRed, for: .normal)
         } else {
             sign = true
             self.balance = -balance
             self.unifiedBalance = -unifiedBalance
             signBtn.setTitle("+", for: .normal)
-            signBtn.setTitleColor(.green, for: .normal)
+            signBtn.setTitleColor(.appGreen, for: .normal)
         }
-        print("Balance sign changed: ", balance)
-        print("Unified sign changed: ", unifiedBalance)
+        print("sign changed: ", balance, unifiedBalance)
     }
     
     @IBAction func addBtnTapped(_ sender: Any) {
@@ -191,61 +169,25 @@ class AddWalletVC: UIViewController {
         
         if !InternetConnectionManager.isConnected() {
             print("Connection is offline!")
-            self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 50, interaction: false)
+            animate(view: connectionView, constraint: connectionViewHeight, to: 60)
         } else if name.isEmpty {
             print("Name is empty")
             showBadInput(bad: true, view: nameTextField)
         } else if type.isEmpty {
             print("Type has not been selected!")
-            typeBtn.setTitleColor(.red, for: .normal)
+            typeBtn.setTitleColor(.appRed, for: .normal)
         } else if currency.isEmpty {
             print("Currency has not been selected!")
-            currencyBtn.setTitleColor(.red, for: .normal)
+            currencyBtn.setTitleColor(.appRed, for: .normal)
         } else {
             
             let key = StorageManager.shared.getAutoKey(at: FDChild.wallets.rawValue)
             let wallet = Wallet(id: key, name: name, type: type, currencyCode: currency, unifiedCurrencyCode: unifiedCurrencyCode, balance: balance, unifiedBalance: unifiedBalance, limit: limit)
             wallets.append(wallet)
-            self.createNotification(name: .didUpdateWallets)
+            createNotification(name: .didUpdateWallets)
             
             StorageManager.shared.pushObject(at: FDChild.wallets.rawValue, key: key, data: wallet.getDictionary())
             dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    // popView animations
-    func animateUp(view: UIView, constraint: NSLayoutConstraint) {
-        // Optimized for iPhone SE 4-inch screen and Up
-        constraint.constant = 550
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-            view.superview?.subviews[0].isUserInteractionEnabled = false
-        }
-    }
-
-   func animateDown(view: UIView, constraint: NSLayoutConstraint) {
-        constraint.constant = 0
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-            view.superview?.subviews[0].isUserInteractionEnabled = true
-        }
-    }
-    
-    func showBadInput(bad: Bool, view: UIView) {
-        if bad {
-            view.layer.borderWidth = 2.0
-            view.layer.borderColor = UIColor.red.cgColor
-        } else {
-            view.layer.borderWidth = 0
-            view.layer.borderColor = UIColor.clear.cgColor
-        }
-    }
-    
-    func showNoConnection(view: UIView, constraint: NSLayoutConstraint, to: Int, interaction: Bool) {
-        constraint.constant = CGFloat(to)
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-            view.superview?.subviews[0].isUserInteractionEnabled = interaction
         }
     }
     

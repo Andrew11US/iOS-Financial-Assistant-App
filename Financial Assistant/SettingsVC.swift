@@ -42,6 +42,7 @@ class SettingsVC: UIViewController {
             print("Key has been removed from the keychain: ", result)
             wallets.removeAll()
             transactions.removeAll()
+            statistics.removeAll()
             self.removeSpinner(spinner)
             self.performSegue(withIdentifier: Segue.signedOut.rawValue, sender: nil)
         } catch let error {

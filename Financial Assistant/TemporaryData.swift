@@ -14,6 +14,7 @@ var transactions : [Transaction] = []
 var statistics : [StatisticMonth] = []
 var currentMonth : (StatisticMonth?, Int?)
 var exchangeRates : [String: Double] = [:]
+var availableAmount: Double = 0
 
 
 // MARK: APP FLAGS

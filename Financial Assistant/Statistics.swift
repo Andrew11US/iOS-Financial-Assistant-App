@@ -81,9 +81,17 @@ public struct Statistics {
     }
     
     static func update(month: inout StatisticMonth, income: Double = 0, expense: Double = 0) {
-        month.incomes = Double(month.incomes + income).roundTo(places: 2)
-        month.expenses = Double(month.expenses + expense).roundTo(places: 2)
-        month.balance = Double(month.incomes + month.expenses).roundTo(places: 2)
+        month.incomes = Double(month.incomes + income).round(places: 2)
+        month.expenses = Double(month.expenses + expense).round(places: 2)
+        month.balance = Double(month.incomes + month.expenses).round(places: 2)
         print("Month stat updated: ", month)
+    }
+    
+    static func calculateTotal() {
+        for w in wallets {
+            availableAmount += w.unifiedBalance
+        }
+        availableAmount = Double(availableAmount).round(places: 2)
+        print("Available: ", availableAmount)
     }
 }

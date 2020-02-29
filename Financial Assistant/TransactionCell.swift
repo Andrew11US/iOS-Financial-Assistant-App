@@ -20,7 +20,7 @@ class TransactionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.layer.cornerRadius = CGFloat(11)
+        self.layer.cornerRadius = CGFloat(7)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

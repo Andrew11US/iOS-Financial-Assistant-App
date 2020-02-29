@@ -11,7 +11,10 @@ import UIKit
 class WalletVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var avaliableLbl: UILabel!
+    
     let spinner = SpinnerViewController()
+    let userCache = StorageManager.shared.getUserCache()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +31,7 @@ class WalletVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
+        avaliableLbl.text = "\(availableAmount.currencyFormat) \(userCache.code)"
         self.tableView.reloadData()
     }
     

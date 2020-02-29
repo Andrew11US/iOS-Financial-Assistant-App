@@ -86,7 +86,7 @@ extension Double {
         return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
     }
     
-    func roundTo(places:Int) -> Double {
+    func round(places: Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
@@ -177,6 +177,33 @@ public extension UIViewController {
                 view.superview?.subviews[0].isUserInteractionEnabled = false
 //                view.superview?.layer.backgroundColor = UIColor.lightGray.cgColor
             }
+        }
+    }
+    
+    // Monitors internet connection, if connection is not available - shows banner
+    internal func monitorConnection(interval: TimeInterval, view: UIView, constraint: NSLayoutConstraint) {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+            if !InternetConnectionManager.isConnected() {
+                print("Connection is offline!")
+                if constraint.constant != 60 {
+                    self.animate(view: view, constraint: constraint, to: 60)
+                }
+            } else {
+                if constraint.constant != 0 {
+                    self.animate(view: view, constraint: constraint, to: 0)
+                }
+            }
+        }
+    }
+    
+    // Temp: replace in future with popUp window
+    internal func showBadInput(bad: Bool, view: UIView) {
+        if bad {
+            view.layer.borderWidth = 2.0
+            view.layer.borderColor = UIColor.appRed.cgColor
+        } else {
+            view.layer.borderWidth = 0
+            view.layer.borderColor = UIColor.clear.cgColor
         }
     }
     

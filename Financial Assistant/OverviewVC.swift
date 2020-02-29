@@ -14,9 +14,7 @@ class OverviewVC: UIViewController {
     @IBOutlet weak var totalBalanceLbl: UILabel!
     
     let spinner = SpinnerViewController()
-    
     let userCache = StorageManager.shared.getUserCache()
-    private var totalBalance = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +35,8 @@ class OverviewVC: UIViewController {
             StorageManager.shared.getWallets {
                 wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
                 self.createNotification(name: .didUpdateWallets)
-                self.totalBalanceLbl.text = self.calculateTotal()
+                Statistics.calculateTotal()
+                self.totalBalanceLbl.text = "\(availableAmount.currencyFormat) \(self.userCache.code)"
             }
         }
         
@@ -45,7 +44,7 @@ class OverviewVC: UIViewController {
             StorageManager.shared.getStatistics {
                 currentMonth = Statistics.getMonth(id: Date().getYearAndMonth)
                 appFlags[AppFlags.statistics.rawValue] = true
-                print(currentMonth)
+                print(currentMonth.0?.id ?? "CM")
             }
         }
         
@@ -89,15 +88,6 @@ class OverviewVC: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
-    func calculateTotal() -> String {
-        for w in wallets {
-            // << Refactor to class Statistics !!! Add, delete, update wallet
-            totalBalance += w.unifiedBalance
-        }
-        print(totalBalance)
-        return "\(totalBalance.currencyFormat) \(userCache.code)"
-    }
 
 }
 
@@ -121,7 +111,6 @@ extension OverviewVC: UITableViewDelegate, UITableViewDataSource {
             let transaction = transactions[indexPath.row]
             cell.configureCell(transaction: transaction)
             return cell
-            
         } else {
             return UITableViewCell()
         }
