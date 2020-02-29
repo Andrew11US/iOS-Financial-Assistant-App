@@ -13,6 +13,7 @@ class OverviewVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalBalanceLbl: UILabel!
+    @IBOutlet weak var addBtn: CustomButton!
     
     let spinner = SpinnerViewController()
     let userCache = StorageManager.shared.getUserCache()
@@ -83,10 +84,22 @@ class OverviewVC: UIViewController {
 //        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didRemoveTransactionInDB, object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        if wallets.count > 0 {
+            addBtn.isEnabled = true
+        } else {
+            addBtn.isEnabled = false
+        }
+        self.totalBalanceLbl.text = "\(availableAmount.currencyFormat) \(self.userCache.code)"
+    }
+    
     @objc func handleLocalChange(notification: Notification) {
         print("Received: ", notification.name.rawValue)
         transactions = transactions.sorted { $0.dateCreated > $1.dateCreated }
         self.tableView.reloadData()
+        totalBalanceLbl.text = "\(availableAmount.currencyFormat) \(userCache.code)"
     }
     
     @objc func handleDatabaseChange(notification: Notification) {

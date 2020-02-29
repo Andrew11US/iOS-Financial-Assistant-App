@@ -233,6 +233,7 @@ class AddTransactionVC: UIViewController {
             wallet.balance += transaction.originalAmount
             wallet.unifiedBalance = wallet.balance * tempRate
             wallets[walletIndex] = wallet
+            Statistics.calculateTotal()
             
             print("Wallet new balance: ", wallet.balance)
             print("New unified balance: ", wallet.unifiedBalance)

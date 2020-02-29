@@ -185,6 +185,7 @@ class AddWalletVC: UIViewController {
             let wallet = Wallet(id: key, name: name, type: type, currencyCode: currency, unifiedCurrencyCode: unifiedCurrencyCode, balance: balance, unifiedBalance: unifiedBalance, limit: limit)
             wallets.append(wallet)
             createNotification(name: .didUpdateWallets)
+            Statistics.calculateTotal()
             
             StorageManager.shared.pushObject(at: FDChild.wallets.rawValue, key: key, data: wallet.getDictionary())
             dismiss(animated: true, completion: nil)

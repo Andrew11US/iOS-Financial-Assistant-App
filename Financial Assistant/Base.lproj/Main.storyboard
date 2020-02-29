@@ -1042,6 +1042,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Overview" image="star.fill" catalog="system" id="acW-dT-cKf"/>
                     <connections>
+                        <outlet property="addBtn" destination="Uho-03-i1c" id="CSq-lg-cuy"/>
                         <outlet property="tableView" destination="kc5-Ie-scs" id="rh2-c1-Aag"/>
                         <outlet property="totalBalanceLbl" destination="Qo9-tZ-7ej" id="Gxv-lD-I1y"/>
                     </connections>

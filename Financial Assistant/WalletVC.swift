@@ -46,6 +46,7 @@ class WalletVC: UIViewController {
     @objc func handleLocalChange(notification: Notification) {
         wallets = wallets.sorted { $0.name.lowercased() < $1.name.lowercased() }
         self.tableView.reloadData()
+        avaliableLbl.text = "\(availableAmount.currencyFormat) \(userCache.code)"
     }
     
     @objc func handleDatabaseChange(notification: Notification) {

@@ -17,11 +17,17 @@ enum TransactionType: String, CaseIterable {
 
 // Wallet type
 enum WalletType: String, CaseIterable {
-    case payPal
+    case AMEX
+    case appleCard
     case bank
-    case visa
-    case mastercard
     case cash
+    case discovery
+    case maestro
+    case mastercard
+    case online
+    case payoneer
+    case payPal
+    case visa
     case other
     
     static func getArray() -> [String] {
@@ -37,9 +43,22 @@ enum WalletType: String, CaseIterable {
 enum TransactionCategory {
     
     enum Income: String, CaseIterable {
+        case ads
+        case appStore
         case business
+        case cashback
+        case course
+        case dividends
+        case freelance
+        case gift
         case internship
+        case online
+        case rent
+        case royalties
         case salary
+        case sales
+        case schoolarship
+        case youTube
         case transfer
         case other
         
@@ -53,9 +72,35 @@ enum TransactionCategory {
     }
 
     enum Expense: String, CaseIterable {
-        case groceries
-        case study
+        case apartments
+        case appStore
         case bar
+        case beauty
+        case cellphone
+        case clothing
+        case commute
+        case dentist
+        case drugstore
+        case entertainment
+        case fee
+        case fitness
+        case gift
+        case groceries
+        case haircut
+        case health
+        case hobby
+        case insurance
+        case investment
+        case lease
+        case owed
+        case parking
+        case study
+        case subscription
+        case tax
+        case travel
+        case utilities
+        case visa
+        case transfer
         case other
         
         static func getArray() -> [String] {
