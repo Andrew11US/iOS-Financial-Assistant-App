@@ -29,14 +29,15 @@ class StatisticsVC: UIViewController {
             showStatistics()
         } else {
             print("Error when loading statistics!")
-            eraceBtn.isEnabled = false
+//            eraceBtn.isEnabled = false
         }
     }
     
     @IBAction func eraceStatisticsTapped(sender: UIButton) {
-        StorageManager.shared.deleteObject(location: FDChild.statistics.rawValue, id: currentMonth.0!.id)
-        statistics.remove(at: currentMonth.1!)
-        currentMonth.0 = nil
+        // Consider for future addition of the feature, temporary disabled
+//        StorageManager.shared.deleteObject(location: FDChild.statistics.rawValue, id: currentMonth.0!.id)
+//        statistics.remove(at: currentMonth.1!)
+//        currentMonth.0 = nil
     }
     
     @objc func handleLocalChange(notification: Notification) {

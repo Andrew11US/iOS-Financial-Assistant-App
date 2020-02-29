@@ -12,14 +12,19 @@ import SwiftKeychainWrapper
 
 class SettingsVC: UIViewController {
     
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var currencyLbl: UILabel!
+    @IBOutlet weak var loginLbl: UILabel!
+    @IBOutlet weak var idLbl: UILabel!
     @IBOutlet weak var signOutBtn: UIButton!
     
     let spinner = SpinnerViewController()
+    let user = StorageManager.shared.getUserCache()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        showUserData()
     }
     
     @IBAction func backTapped(_ sender: UIButton) {
@@ -44,6 +49,13 @@ class SettingsVC: UIViewController {
             self.removeSpinner(spinner)
         }
         
+    }
+    
+    func showUserData() {
+        nameLbl.text = user.name
+        idLbl.text = user.uid
+        loginLbl.text = user.date
+        currencyLbl.text = user.code
     }
     
 

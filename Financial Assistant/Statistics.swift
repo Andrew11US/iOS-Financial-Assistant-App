@@ -66,17 +66,17 @@ public struct Statistics {
         if statistics.count > 0 {
             for (key,value) in statistics.enumerated() {
                 if id == value.id {
-                    print("Match found!")
+                    print("Month found!")
                     return (value, key)
                 }
             }
-            print("No match found, creating new month")
+            print("No match in statistics, creating new month")
             statistics.append(output)
-            return (output, -1)
+            return (output, statistics.count-1)
         } else {
-            print("Creating new month")
+            print("Creating first month")
             statistics.append(output)
-            return (output, -1)
+            return (output, 0)
         }
     }
     
@@ -84,6 +84,6 @@ public struct Statistics {
         month.incomes = Double(month.incomes + income).roundTo(places: 2)
         month.expenses = Double(month.expenses + expense).roundTo(places: 2)
         month.balance = Double(month.incomes + month.expenses).roundTo(places: 2)
-        print("Calculated: ", month)
+        print("Month stat updated: ", month)
     }
 }

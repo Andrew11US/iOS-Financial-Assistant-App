@@ -58,8 +58,9 @@ class AddTransactionVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        if currentMonth.0 == nil {
+        if appFlags[AppFlags.statistics.rawValue]! {
             currentMonth = Statistics.getMonth(id: Date().getYearAndMonth)
+            print(currentMonth.0 ?? "No month")
         }
     }
     
@@ -132,7 +133,7 @@ class AddTransactionVC: UIViewController {
         } else {
             print("No wallet selected!")
             self.walletBtn.setTitle("Select Wallet", for: .normal)
-            self.walletBtn.setTitleColor(.red, for: .normal)
+            self.walletBtn.setTitleColor(.appRed, for: .normal)
         }
         print("Unified Amount: ", self.unifiedAmount, "USD")
     }
@@ -218,13 +219,6 @@ class AddTransactionVC: UIViewController {
                 Statistics.update(month: &month, expense: unifiedAmount)
             }
             
-            if monthIndex == -1 {
-                statistics.append(month)
-                print(statistics.count)
-            } else {
-                statistics[monthIndex] = month
-            }
-            
             let key = StorageManager.shared.getAutoKey(at: FDChild.transactions.rawValue)
             let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, unifiedAmount: unifiedAmount, wallet: wallet)
             
@@ -232,11 +226,13 @@ class AddTransactionVC: UIViewController {
             wallet.balance += transaction.originalAmount
             wallet.unifiedBalance = wallet.balance * tempRate
             wallets[walletIndex] = wallet
+            statistics[monthIndex] = month
             currentMonth.0 = month
+            
             print("Wallet new balance: ", wallet.balance)
             print("New unified balance: ", wallet.unifiedBalance)
             self.createNotification(name: .didUpdateTransactions)
-            self.createNotification(name: .didUpdateStatistics)
+//            self.createNotification(name: .didUpdateStatistics)
             
             StorageManager.shared.pushObject(at: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
             StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, key: wallet.id, data: wallet.getDictionary())
@@ -302,13 +298,11 @@ class AddTransactionVC: UIViewController {
         self.amountTextField.resignFirstResponder()
     }
     
+    // Wallet Collection View setup for CenteredCollectionView
     func setWalletCollectionView() {
-        // Get the reference to the CenteredCollectionViewFlowLayout (REQURED)
         walletCollectionViewFlowLayout = (walletCollectionView.collectionViewLayout as! CenteredCollectionViewFlowLayout)
-        // Modify the collectionView's decelerationRate (REQURED)
         walletCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         walletCollectionViewFlowLayout.itemSize = CGSize(width: 200, height: 100)
-        // Configure the optional inter item spacing (OPTIONAL)
         walletCollectionViewFlowLayout.minimumLineSpacing = 20
     }
 
