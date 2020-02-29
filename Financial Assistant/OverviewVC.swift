@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class OverviewVC: UIViewController {
     
@@ -15,6 +16,7 @@ class OverviewVC: UIViewController {
     
     let spinner = SpinnerViewController()
     let userCache = StorageManager.shared.getUserCache()
+//    let user = Auth.auth().currentUser
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,14 +50,22 @@ class OverviewVC: UIViewController {
             }
         }
         
-//        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childAdded) {
-//            self.createNotification(name: .didAddWalletInDB)
-//            print("New Wallet added to DB")
-//        }
         StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childChanged) {
             self.createNotification(name: .didChangeWalletInDB)
             print("Wallet changed in DB")
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleLocalChange(notification:)), name: .didUpdateTransactions, object: nil)
+        
+//        if let user = user {
+//            StorageManager.shared.setUserCache(uid: user.uid)
+//        }
+        
+//        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childAdded) {
+//            self.createNotification(name: .didAddWalletInDB)
+//            print("New Wallet added to DB")
+//        }
+        
 //        StorageManager.shared.listenForChanges(location: FDChild.wallets.rawValue, event: .childRemoved) {
 //            self.createNotification(name: .didRemoveWalletInDB)
 //            print("Wallet removed from DB")
@@ -69,7 +79,6 @@ class OverviewVC: UIViewController {
 //            print("Transaction removed from DB")
 //        }
         
-        NotificationCenter.default.addObserver(self, selector: #selector(handleLocalChange(notification:)), name: .didUpdateTransactions, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didAddTransactionInDB, object: nil)
 //        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didRemoveTransactionInDB, object: nil)
     }

@@ -1090,6 +1090,9 @@
                                             <segment title="All"/>
                                             <segment title="Expenses"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="segmentChanged:" destination="Ucf-zc-7FT" eventType="valueChanged" id="U11-5R-GFL"/>
+                                        </connections>
                                     </segmentedControl>
                                 </subviews>
                             </stackView>
@@ -1220,6 +1223,7 @@
                     <tabBarItem key="tabBarItem" title="Transactions" image="star.circle.fill" catalog="system" id="qx3-el-nva"/>
                     <navigationItem key="navigationItem" id="8Mw-e5-Tat"/>
                     <connections>
+                        <outlet property="segment" destination="uYv-h6-eQe" id="91t-Pf-m7l"/>
                         <outlet property="tableView" destination="grx-ly-SuG" id="ELc-Jg-Sdd"/>
                         <segue destination="fw3-Rr-BPW" kind="show" identifier="DetailTransaction" id="NpQ-wJ-iFN"/>
                     </connections>
@@ -1228,7 +1232,7 @@
             </objects>
             <point key="canvasLocation" x="2981.5999999999999" y="0.0"/>
         </scene>
-        <!--PlanningVC-->
+        <!--Planning-->
         <scene sceneID="weT-1F-Oo9">
             <objects>
                 <viewController id="5Um-Zf-qs4" customClass="PlanningVC" customModule="Financial_Assistant" customModuleProvider="target" sceneMemberID="viewController">
@@ -1250,6 +1254,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QLR-f1-HQP"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Planning" image="doc.text" catalog="system" id="3Nx-Wv-PB3"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pw4-aX-ps3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1928,7 +1933,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Wallets" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Wallets" image="circle.grid.2x2" catalog="system" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="avaliableLbl" destination="eNJ-OK-92U" id="hA9-lT-kG3"/>
                         <outlet property="tableView" destination="3jt-HA-Txj" id="i8c-Dt-7G2"/>
@@ -2261,6 +2266,7 @@
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="Ucf-zc-7FT" kind="relationship" relationship="viewControllers" id="RQY-aZ-geJ"/>
                         <segue destination="HA4-aT-qIM" kind="relationship" relationship="viewControllers" id="8Fy-jG-LK3"/>
+                        <segue destination="5Um-Zf-qs4" kind="relationship" relationship="viewControllers" id="oSl-NI-hIx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -2270,7 +2276,8 @@
     </scenes>
     <resources>
         <image name="FAIconTrans" width="1024" height="1024"/>
-        <image name="second" width="30" height="30"/>
+        <image name="circle.grid.2x2" catalog="system" width="64" height="56"/>
+        <image name="doc.text" catalog="system" width="56" height="64"/>
         <image name="speedometer" catalog="system" width="64" height="60"/>
         <image name="star.circle.fill" catalog="system" width="64" height="60"/>
         <image name="star.fill" catalog="system" width="64" height="58"/>

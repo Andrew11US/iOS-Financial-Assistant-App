@@ -11,6 +11,9 @@ import UIKit
 class TransactionsVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segment: UISegmentedControl!
+    
+    var tempTransactions: [Transaction] = transactions
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,17 +21,31 @@ class TransactionsVC: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-//        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
-//            self.tableView.reloadData()
-//        }
         NotificationCenter.default.addObserver(self, selector: #selector(handleLocalChange(notification:)), name: .didUpdateTransactions, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didAddTransactionInDB, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didRemoveTransactionInDB, object: nil)
+        //        StorageManager.shared.listenForChanges(location: FDChild.transactions.rawValue, event: .childChanged) {
+        //            self.tableView.reloadData()
+        //        }
+        
+        //        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didAddTransactionInDB, object: nil)
+        //        NotificationCenter.default.addObserver(self, selector: #selector(handleDatabaseChange(notification:)), name: .didRemoveTransactionInDB, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        tempTransactions = transactions
         self.tableView.reloadData()
+    }
+    
+    @IBAction func segmentChanged(_ sender: Any) {
+        if segment.selectedSegmentIndex == 0 {
+            tempTransactions = transactions.filter { $0.originalAmount > 0 }
+        } else if segment.selectedSegmentIndex == 1 {
+            tempTransactions = transactions
+        } else {
+            tempTransactions = transactions.filter { $0.originalAmount < 0 }
+        }
+        tempTransactions = tempTransactions.sorted { $0.dateCreated > $1.dateCreated }
+        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,7 +72,7 @@ class TransactionsVC: UIViewController {
 
 extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return transactions.count
+        return tempTransactions.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,7 +87,7 @@ extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionCell", for: indexPath) as? TransactionCell {
             
-            let transaction = transactions[indexPath.row]
+            let transaction = tempTransactions[indexPath.row]
             cell.configureCell(transaction: transaction)
             return cell
         } else {
@@ -79,6 +96,10 @@ extension TransactionsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard segment.selectedSegmentIndex == 1 else {
+            print("Currenty using filtered transactions!")
+            return
+        }
         let trans = (transactions[indexPath.row], indexPath.row)
         
         DispatchQueue.main.async {
