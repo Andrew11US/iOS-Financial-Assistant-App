@@ -13,7 +13,6 @@ import Foundation
 enum TransactionType: String, CaseIterable {
     case income
     case expense
-    case transfer
 }
 
 // Wallet type

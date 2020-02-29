@@ -178,10 +178,6 @@ class AddTransactionVC: UIViewController {
     
     @IBAction func addBtnTapped(_ sender: Any) {
         resignTextFields()
-
-        if type.isEmpty {
-            type = TransactionType.income.rawValue
-        }
         
         guard appFlags[AppFlags.statistics.rawValue]! else {
             print("Error!, statistics data has not been downloaded!")
@@ -190,7 +186,6 @@ class AddTransactionVC: UIViewController {
         
         if !InternetConnectionManager.isConnected() {
             print("Connection is offline!")
-//            self.showNoConnection(view: self.connectionView, constraint: self.connectionViewHeight, to: 60, interaction: false)
             animate(view: connectionView, constraint: connectionViewHeight, to: 60)
         } else if amount == 0.0 {
             print("Amount can not be 0!")
@@ -213,11 +208,23 @@ class AddTransactionVC: UIViewController {
                 return
             }
             
-            if segmentControl.selectedSegmentIndex == 0 {
-                Statistics.update(month: &month, income: unifiedAmount)
-            } else {
-                Statistics.update(month: &month, expense: unifiedAmount)
+            if type.isEmpty {
+                type = TransactionType.income.rawValue
             }
+            
+            if category != "transfer" {
+                if segmentControl.selectedSegmentIndex == 0 {
+                    Statistics.update(month: &month, income: unifiedAmount)
+                } else {
+                    Statistics.update(month: &month, expense: unifiedAmount)
+                }
+                statistics[monthIndex] = month
+                currentMonth.0 = month
+                StorageManager.shared.updateObject(at: FDChild.statistics.rawValue, key: month.id, data: month.getDictionary())
+            } else {
+                print("Transfer: statistics are not counted!")
+            }
+            
             
             let key = StorageManager.shared.getAutoKey(at: FDChild.transactions.rawValue)
             let transaction = Transaction(id: key, name: name, type: type, category: category, originalAmount: amount, unifiedAmount: unifiedAmount, wallet: wallet)
@@ -226,72 +233,17 @@ class AddTransactionVC: UIViewController {
             wallet.balance += transaction.originalAmount
             wallet.unifiedBalance = wallet.balance * tempRate
             wallets[walletIndex] = wallet
-            statistics[monthIndex] = month
-            currentMonth.0 = month
             
             print("Wallet new balance: ", wallet.balance)
             print("New unified balance: ", wallet.unifiedBalance)
             self.createNotification(name: .didUpdateTransactions)
-//            self.createNotification(name: .didUpdateStatistics)
             
             StorageManager.shared.pushObject(at: FDChild.transactions.rawValue, key: key, data: transaction.getDictionary())
             StorageManager.shared.updateObject(at: FDChild.wallets.rawValue, key: wallet.id, data: wallet.getDictionary())
-            StorageManager.shared.updateObject(at: FDChild.statistics.rawValue, key: month.id, data: month.getDictionary())
             
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
-//    private func monitorConnection(interval: TimeInterval) {
-//        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-//            if !InternetConnectionManager.isConnected() {
-//                print("Connection is offline!")
-//                if self.connectionViewHeight.constant != 60 {
-//                    self.animate(view: self.connectionView, constraint: self.connectionViewHeight, to: 60)
-//                }
-//            } else {
-//                if self.connectionViewHeight.constant != 0 {
-//                    self.animate(view: self.connectionView, constraint: self.connectionViewHeight, to: 0)
-//                }
-//            }
-//        }
-//    }
-    
-    // popView animations
-//    func animateUp(view: UIView, constraint: NSLayoutConstraint) {
-//        // Optimized for iPhone SE 4-inch screen and Up
-//        constraint.constant = 550
-//        UIView.animate(withDuration: 0.3) {
-//            self.view.layoutIfNeeded()
-//            view.superview?.subviews[0].isUserInteractionEnabled = false
-//        }
-//    }
-    
-//    func animateDown(view: UIView, constraint: NSLayoutConstraint) {
-//        constraint.constant = 0
-//        UIView.animate(withDuration: 0.3) {
-//            self.view.layoutIfNeeded()
-//            view.superview?.subviews[0].isUserInteractionEnabled = true
-//        }
-//    }
-    
-//    func showBadInput(bad: Bool, view: UIView) {
-//        if bad {
-//            view.layer.borderWidth = 2.0
-//            view.layer.borderColor = UIColor.red.cgColor
-//        } else {
-//            view.layer.borderWidth = 0
-//            view.layer.borderColor = UIColor.clear.cgColor
-//        }
-//    }
-    
-//    func showNoConnection(view: UIView, constraint: NSLayoutConstraint, to: Int, interaction: Bool) {
-//        constraint.constant = CGFloat(to)
-//        UIView.animate(withDuration: 0.3) {
-//            self.view.layoutIfNeeded()
-//            view.superview?.subviews[0].isUserInteractionEnabled = interaction
-//        }
-//    }
     
     func resignTextFields() {
         self.nameTextField.resignFirstResponder()
