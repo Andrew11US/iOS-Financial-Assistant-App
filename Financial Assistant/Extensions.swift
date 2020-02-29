@@ -25,6 +25,13 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    var getShort: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "us_US")
+        formatter.dateFormat = "dd MMM YYYY"
+        return formatter.string(from: self)
+    }
+    
     var getYear: String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "us_US")

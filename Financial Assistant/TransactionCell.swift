@@ -32,7 +32,7 @@ class TransactionCell: UITableViewCell {
     func configureCell(transaction: Transaction) {
         
         self.walletLogo.image = UIImage(named: "FAIconTrans") // << Fix later!!!
-        self.date.text = transaction.dateCreated // << make reformatting!!!
+        self.date.text = transaction.dateCreated.createDate?.getShort
         self.name.text = transaction.name.capitalized
         self.category.text = transaction.category.capitalized
         self.walletName.text = transaction.walletName.capitalized
