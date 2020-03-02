@@ -40,6 +40,12 @@ class OverviewVC: UIViewController {
                 self.createNotification(name: .didUpdateWallets)
                 Statistics.calculateTotal()
                 self.totalBalanceLbl.text = "\(availableAmount.currencyFormat) \(self.userCache.code)"
+                
+                if wallets.count > 0 {
+                    self.addBtn.isEnabled = true
+                } else {
+                    self.addBtn.isEnabled = false
+                }
             }
         }
         
@@ -87,11 +93,6 @@ class OverviewVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        if wallets.count > 0 {
-            addBtn.isEnabled = true
-        } else {
-            addBtn.isEnabled = false
-        }
         self.totalBalanceLbl.text = "\(availableAmount.currencyFormat) \(self.userCache.code)"
     }
     

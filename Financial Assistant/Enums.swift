@@ -43,11 +43,10 @@ enum WalletType: String, CaseIterable {
 enum TransactionCategory {
     
     enum Income: String, CaseIterable {
-        case ads
+        case advertisements
         case appStore
         case business
         case cashback
-        case course
         case dividends
         case freelance
         case gift
@@ -78,11 +77,11 @@ enum TransactionCategory {
         case beauty
         case cellphone
         case clothing
-        case commute
         case dentist
         case drugstore
+        case electronics
         case entertainment
-        case fee
+        case fees
         case fitness
         case gift
         case groceries
@@ -90,13 +89,17 @@ enum TransactionCategory {
         case health
         case hobby
         case insurance
+        case internet
         case investment
         case lease
         case owed
         case parking
+        case pets
         case study
         case subscription
         case tax
+        case toys
+        case transport
         case travel
         case utilities
         case visa

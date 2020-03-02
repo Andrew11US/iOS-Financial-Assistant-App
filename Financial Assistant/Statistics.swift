@@ -88,6 +88,7 @@ public struct Statistics {
     }
     
     static func calculateTotal() {
+        availableAmount = 0
         for w in wallets {
             availableAmount += w.unifiedBalance
         }
