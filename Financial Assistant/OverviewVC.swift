@@ -40,12 +40,6 @@ class OverviewVC: UIViewController {
                 self.createNotification(name: .didUpdateWallets)
                 Statistics.calculateTotal()
                 self.totalBalanceLbl.text = "\(availableAmount.currencyFormat) \(self.userCache.code)"
-                
-                if wallets.count > 0 {
-                    self.addBtn.isEnabled = true
-                } else {
-                    self.addBtn.isEnabled = false
-                }
             }
         }
         
