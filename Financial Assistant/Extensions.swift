@@ -62,6 +62,13 @@ extension String {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         return formatter.date(from: self)
     }
+    
+    var monthToDate: Date? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "eu_EU")
+        formatter.dateFormat = "MMM"
+        return formatter.date(from: self)
+    }
 }
 
 //  Extends Double with properties that add currency code or symbol prior to the Double value

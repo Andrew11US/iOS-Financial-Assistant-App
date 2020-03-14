@@ -18,6 +18,8 @@ class StatisticsVC: UIViewController {
     @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var eraceBtn: CustomButton!
     @IBOutlet weak var tableView: UITableView!
+    
+    var tempStatistics = statistics.sorted(by: {$0.month.monthToDate > $1.month.monthToDate})
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,9 @@ class StatisticsVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        tempStatistics = statistics.sorted(by: {$0.month.monthToDate > $1.month.monthToDate})
         showGraph()
+        tableView.reloadData()
     }
     
     @IBAction func eraceStatisticsTapped(sender: UIButton) {
@@ -52,21 +56,21 @@ class StatisticsVC: UIViewController {
     func showGraph(){
         var lineChartEntry  = [ChartDataEntry]()
         
-        for (key, value) in statistics.enumerated() {
+        for (key, value) in statistics.sorted(by: {$0.month.monthToDate > $1.month.monthToDate}).reversed().enumerated() {
             let item = ChartDataEntry(x: Double(key), y: value.balance)
             lineChartEntry.append(item)
         }
 
         let line = LineChartDataSet(entries: lineChartEntry, label: "Balance")
-        line.colors = [UIColor.systemRed]
-        line.circleRadius = 5.0
+        line.colors = [UIColor.appPurple]
+        line.circleRadius = 4.0
         line.circleHoleRadius = 0
         line.lineWidth = 3.0
-        line.circleColors = [UIColor.black]
+        line.circleColors = [UIColor.appPurple]
         line.mode = .cubicBezier
         
-        let gradientColors = [ChartColorTemplates.colorFromString("#00ff0000").cgColor,
-                              ChartColorTemplates.colorFromString("#ffff0000").cgColor]
+        let gradientColors = [UIColor.white.cgColor,
+                              UIColor.appPurple.cgColor]
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
         
         line.fillAlpha = 1
@@ -100,7 +104,7 @@ class StatisticsVC: UIViewController {
 
 extension StatisticsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return statistics.count
+        return tempStatistics.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -115,7 +119,7 @@ extension StatisticsVC: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StatisticsCell", for: indexPath) as? StatisticsCell {
             
-            let month = statistics[indexPath.row]
+            let month = tempStatistics[indexPath.row]
             cell.configureCell(month: month)
             return cell
         } else {
