@@ -14,6 +14,8 @@ class StatisticsCell: UITableViewCell {
     @IBOutlet weak var incomeLbl: UILabel!
     @IBOutlet weak var expenseLbl: UILabel!
     @IBOutlet weak var balanceLbl: UILabel!
+    
+    let userCache = StorageManager.shared.getUserCache()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,9 +30,15 @@ class StatisticsCell: UITableViewCell {
     
     func configureCell(month: StatisticMonth) {
         self.monthLbl.text = month.month
-        self.incomeLbl.text = month.incomes.currencyFormat
-        self.expenseLbl.text = month.expenses.currencyFormat
-        self.balanceLbl.text = month.balance.currencyFormat
+        self.incomeLbl.text = "\(month.incomes.currencyFormat) \(userCache.code)"
+        self.expenseLbl.text = "\(month.expenses.currencyFormat) \(userCache.code)"
+        self.balanceLbl.text = "\(month.balance.currencyFormat) \(userCache.code)"
+        
+        if month.balance < 0 {
+            self.balanceLbl.textColor = .appRed
+        } else {
+            self.balanceLbl.textColor = .appGreen
+        }
     }
 
 }

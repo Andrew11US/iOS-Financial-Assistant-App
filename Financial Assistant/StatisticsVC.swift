@@ -54,23 +54,39 @@ class StatisticsVC: UIViewController {
     }
     
     func showGraph(){
+        var balance = 0.0
         var lineChartEntry  = [ChartDataEntry]()
+        if statistics.count < 3 {
+            lineChartEntry.append(ChartDataEntry(x: 0, y: 0))
+        }
         
         for (key, value) in statistics.sorted(by: {$0.month.monthToDate > $1.month.monthToDate}).reversed().enumerated() {
-            let item = ChartDataEntry(x: Double(key), y: value.balance)
+            let item = ChartDataEntry(x: Double(key+1), y: value.balance)
             lineChartEntry.append(item)
+            balance += value.balance
         }
-
+        
+        if statistics.count < 2 {
+            lineChartEntry.append(ChartDataEntry(x: Double(statistics.count+1), y: 0))
+        }
+        
         let line = LineChartDataSet(entries: lineChartEntry, label: "Balance")
-        line.colors = [UIColor.appPurple]
+        line.colors = [UIColor(hexString: "7C87CF")]
         line.circleRadius = 4.0
         line.circleHoleRadius = 0
         line.lineWidth = 3.0
-        line.circleColors = [UIColor.appPurple]
+        line.circleColors = [UIColor(hexString: "7C87CF")]
         line.mode = .cubicBezier
         
-        let gradientColors = [UIColor.white.cgColor,
-                              UIColor.appPurple.cgColor]
+        var gradientColors = [CGColor]()
+        if balance > 0 {
+            gradientColors = [UIColor.white.cgColor,
+            UIColor(hexString: "7C87CF").cgColor]
+        } else {
+            gradientColors = [UIColor(hexString: "7C87CF").cgColor,
+                              UIColor.white.cgColor]
+        }
+        
         let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
         
         line.fillAlpha = 1
