@@ -14,6 +14,7 @@ target 'Financial Assistant' do
   pod 'Alamofire', '~> 5.0'
   pod 'pop'
   pod "CenteredCollectionView"
+  pod 'Charts'
 
   target 'Financial AssistantTests' do
     inherit! :search_paths

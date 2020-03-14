@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Charts
 
 class StatisticsVC: UIViewController {
     
@@ -14,7 +15,9 @@ class StatisticsVC: UIViewController {
     @IBOutlet weak var incomeLbl: UILabel!
     @IBOutlet weak var expenceLbl: UILabel!
     @IBOutlet weak var balanceLbl: UILabel!
+    @IBOutlet weak var chartView: LineChartView!
     @IBOutlet weak var eraceBtn: CustomButton!
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +29,17 @@ class StatisticsVC: UIViewController {
         super.viewWillAppear(true)
         
         if appFlags[AppFlags.statistics.rawValue]! {
-            showStatistics()
+//            showStatistics()
+//            showGraph()
         } else {
             print("Error when loading statistics!")
 //            eraceBtn.isEnabled = false
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        showGraph()
     }
     
     @IBAction func eraceStatisticsTapped(sender: UIButton) {
@@ -38,6 +47,42 @@ class StatisticsVC: UIViewController {
 //        StorageManager.shared.deleteObject(location: FDChild.statistics.rawValue, id: currentMonth.0!.id)
 //        statistics.remove(at: currentMonth.1!)
 //        currentMonth.0 = nil
+    }
+    
+    func showGraph(){
+        var lineChartEntry  = [ChartDataEntry]()
+        
+        for (key, value) in statistics.enumerated() {
+            let item = ChartDataEntry(x: Double(key), y: value.balance)
+            lineChartEntry.append(item)
+        }
+
+        let line = LineChartDataSet(entries: lineChartEntry, label: "Balance")
+        line.colors = [UIColor.systemRed]
+        line.circleRadius = 5.0
+        line.circleHoleRadius = 0
+        line.lineWidth = 3.0
+        line.circleColors = [UIColor.black]
+        line.mode = .cubicBezier
+        
+        let gradientColors = [ChartColorTemplates.colorFromString("#00ff0000").cgColor,
+                              ChartColorTemplates.colorFromString("#ffff0000").cgColor]
+        let gradient = CGGradient(colorsSpace: nil, colors: gradientColors as CFArray, locations: nil)!
+        
+        line.fillAlpha = 1
+        line.fill = Fill(linearGradient: gradient, angle: 90)
+        line.drawFilledEnabled = true
+
+        let data = LineChartData()
+        data.addDataSet(line)
+        
+
+        chartView.data = data
+        chartView.animate(yAxisDuration: 2)
+        chartView.leftAxis.enabled = false
+        chartView.rightAxis.enabled = false
+        chartView.xAxis.enabled = false
+        chartView.legend.enabled = false
     }
     
     @objc func handleLocalChange(notification: Notification) {
@@ -51,14 +96,30 @@ class StatisticsVC: UIViewController {
         balanceLbl.text = currentMonth.0?.balance.currencyFormat
     }
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension StatisticsVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return statistics.count
     }
-    */
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "StatisticsCell", for: indexPath) as? StatisticsCell {
+            
+            let month = statistics[indexPath.row]
+            cell.configureCell(month: month)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
 }
